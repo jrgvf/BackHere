@@ -2,10 +2,27 @@ source 'https://rubygems.org'
 
 # Support for MongoDB
 gem 'mongoid', '~> 5.0.0'
-# Faraday for communication with API
-gem 'faraday', '~> 0.9.2'
 # Multitenancy for MongoID
 gem 'mongoid-multitenancy', '~> 1.1', '>= 1.1.2'
+# Session Storage With MongoID
+gem "mongo_session_store-rails4"
+# For simplify search text with MongoID
+# gem 'mongoid_search', '~> 0.3.2'
+# For a use Slug with MongoID
+# gem 'mongoid_slug', '~> 4.0'
+# For version control of models
+# gem 'mongoid-history', '~> 0.5.0'
+# For use paperclip with MongoID
+# gem "mongoid-paperclip", :require => "mongoid_paperclip"
+# gem 'aws-sdk', '~> 1.3.4'
+# For matchers of MongoID
+# gem 'mongoid-rspec', '3.0.0'
+# For verify relations changes
+# gem 'mongoid_relations_dirty_tracking', github: 'versative/mongoid_relations_dirty_tracking'
+# For DRY!
+gem 'flay'
+# Faraday for communication with API
+gem 'faraday', '~> 0.9.2'
 # Devise for Generate users access
 gem 'devise', '~> 3.5', '>= 3.5.2'
 # For Permissions
@@ -28,6 +45,10 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 # gem 'select2-rails', '~> 4.0'
 # For generate xlsx files
 # gem 'axlsx', '~> 2.0', '>= 2.0.1'
+# For generate resume to tests
+gem 'simplecov', :require => false, :group => :test
+# For use FontAwesome
+gem 'font-awesome-sass', '~> 4.4.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
