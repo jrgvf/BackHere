@@ -1,7 +1,16 @@
 {
   "RSpec": {
     "coverage": {
+      "/home/jrgvf/back-here/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/jrgvf/back-here/app/models/account.rb": [
+        1,
+        1,
+        null
+      ]
     },
-    "timestamp": 1447283443
+    "timestamp": 1447384680
   }
 }
