@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins, only: :sessions
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :sellers
   # The priority is based upon order of creation: first created -> highest priority.
