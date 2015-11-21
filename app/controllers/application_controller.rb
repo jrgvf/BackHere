@@ -1,11 +1,14 @@
 class ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
-
-  layout :layout_by_resource
-
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+
+  layout :layout_by_resource
+
+  devise_group :user, contains: [:user, :seller, :admin]
+
+  before_action :prevent_another_sign_in
 
   # For rescue exceptions of CanCan AccessDenied
   rescue_from CanCan::AccessDenied do |exception|
@@ -23,6 +26,21 @@ class ApplicationController < ActionController::Base
     else
       "application"
     end
+  end
+
+  def prevent_another_sign_in
+    if devise_controller? and current_user.present? and another_class?
+      redirect_to "/"
+      flash.now[:notice] = "You're signed_in another user."
+    end
+  end
+
+  def another_class?
+    !current_user.is_a?(resource_class)
+  end
+
+  def resource_class
+    resource_name.capitalize.to_s.constantize
   end
 
 end

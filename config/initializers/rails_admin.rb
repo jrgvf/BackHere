@@ -16,7 +16,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = ["Account", "Seller"]
+  config.included_models = ["Account", "Seller", "User"]
 
   config.model 'Seller' do
     field :account do
