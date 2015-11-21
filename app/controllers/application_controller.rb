@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  devise_group :user, contains: [:user, :seller, :admin]
+  devise_group :person, contains: [:user, :seller, :admin]
+
+  before_action :set_current_tenant
 
   before_action :prevent_another_sign_in
 
@@ -28,15 +30,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_current_tenant
+    Mongoid::Multitenancy.current_tenant = nil
+    Mongoid::Multitenancy.current_tenant = current_seller.account unless current_seller.nil?
+  end
+
   def prevent_another_sign_in
-    if devise_controller? and current_user.present? and another_class?
-      redirect_to "/"
-      flash.now[:notice] = "You're signed_in another user."
+    if devise_controller? and current_person.present? and another_class?
+      redirect_to root_path
+      flash.keep[:notice] = "You're signed_in another user."
     end
   end
 
   def another_class?
-    !current_user.is_a?(resource_class)
+    !current_person.is_a?(resource_class)
   end
 
   def resource_class
