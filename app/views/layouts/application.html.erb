@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BackHere</title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<%= yield %>
+  <div class="container-fluid">
+    <div class="col-sm-9 col-md-10 main">
+      
+      <%= flash_messages %>
+      <%= yield %>
+      
+    </div><!-- col-sm-9 col-md-10 main -->
+  </div><!-- container-fluid -->
 
 </body>
 </html>

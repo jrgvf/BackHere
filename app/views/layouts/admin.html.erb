@@ -7,14 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="admin">
-
-<div class="container">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  
-  <%= yield %>
-  
-</div>
+  <div class="container">
+    
+    <%= flash_messages %>
+    <%= yield %>
+    
+  </div>
 
 </body>
 </html>
