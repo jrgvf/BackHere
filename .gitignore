@@ -13,4 +13,8 @@
 /tmp
 
 # Ignore all logfiles of debugger
-.byebug_history
+*.byebug_history
+
+# Ignore uploaded images and precompiled assets
+public/uploads/
+public/assets/
