@@ -16,6 +16,17 @@ Bundler.require(*Rails.groups)
 
 module BackHere
   class Application < Rails::Application
+
+    # For don't show any logs on Console
+    Mongoid.logger.level = Logger::INFO
+    Mongo::Logger.logger.level = Logger::INFO
+
+    config.mongoid.logger = Logger.new($stdout, :warn)
+    
+    config.to_prepare do
+      Devise::SessionsController.layout 'admin_lte_2_login'
+    end
+      
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
