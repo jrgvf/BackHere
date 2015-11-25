@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+  ruby '2.2.0'
   gem 'rails', '4.2.0'                                                                              # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 # Gems for General Use
@@ -61,6 +62,11 @@ end
 group :development do
   gem 'flay'                                                                                        # For DRY!
   gem 'better_errors', '~> 2.1', '>= 2.1.1'                                                         # For show better errors
+end
+
+# Gems For Production
+group :production do
+  gem 'rails_12factor', '>= 0.0.2'
 end
 
 # Other Gems Suggest of Rails
