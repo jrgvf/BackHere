@@ -2,9 +2,9 @@
 // listed below.
 //
 //= require jquery
-//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap
 //= require creative/jquery.easing.min
 //= require creative/jquery.fittext
 //= require creative/cbpAnimatedHeader

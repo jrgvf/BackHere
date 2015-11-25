@@ -32,7 +32,7 @@ gem 'rails_admin', '~> 0.7.0'
 # For create forms
 gem 'simple_form', '~> 3.2'
 # For style
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
+# gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 # For encode and decode String safety for html
 # gem 'htmlentities', '~> 4.3', '>= 4.3.4'
 # For sanitizer html
@@ -109,3 +109,4 @@ group :development do
 
 end
 
+gem 'adminlte2-rails'

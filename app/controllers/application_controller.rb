@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+  # before_action :authenticate_user!
+
+  # layout 'admin_lte_2'
+
   include CanCan::ControllerAdditions
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
