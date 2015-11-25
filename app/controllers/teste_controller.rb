@@ -1,6 +1,6 @@
 class TesteController < ApplicationController
-  layout 'admin_lte_2'
-  
+  skip_before_filter :set_current_tenant
+ 
   def index
   end
 end

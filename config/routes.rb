@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'teste/index'
+  get 'adminlte' => 'teste#index'
 
   root 'home#index'
   get 'home/index'
