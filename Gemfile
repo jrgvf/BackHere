@@ -12,6 +12,7 @@ source 'https://rubygems.org'
   gem 'sdoc', '~> 0.4.0', group: :doc                                                               # bundle exec rake doc:rails generates the API under doc/api.
   gem 'jbuilder', '~> 2.0'                                                                          # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
   gem 'simplecov', :require => false, :group => :test                                               # For generate resume to tests
+  gem 'newrelic_rpm'
   # gem 'axlsx', '~> 2.0', '>= 2.0.1'                                                               # For generate xlsx files
   # gem 'aws-sdk', '~> 1.3.4'                                                                       # SDK with custom features of AWS
 
