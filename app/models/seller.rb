@@ -1,5 +1,6 @@
 class Seller
   include Mongoid::Document
+  include Mongoid::Timestamps
   include Mongoid::Multitenancy::Document
 
   belongs_to :account

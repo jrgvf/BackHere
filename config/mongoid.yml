@@ -121,10 +121,10 @@ development:
     # scope_overwrite_exception: false
 
     # Use Active Support's time zone in conversions. (default: true)
-    # use_activesupport_time_zone: true
+    use_activesupport_time_zone: true
 
     # Ensure all times are UTC in the app side. (default: false)
-    # use_utc: false
+    use_utc: false
 test:
   clients:
     default:
@@ -135,6 +135,8 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+        use_activesupport_time_zone: true
+        use_utc: false
 
 # mongoid 5.x
 #
@@ -153,3 +155,5 @@ production:
        # We recommend 15 because it allows for plenty of time
        # in most operating environments.
        connect_timeout: 15
+       use_activesupport_time_zone: true
+       use_utc: false

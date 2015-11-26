@@ -2,4 +2,6 @@
 
 # Rails.application.config.session_store :cookie_store, key: '_back-here_session'
 # For Session Storage With MongoID
-Rails.application.config.session_store :mongoid_store
+Rails.application.config.session_store :mongoid_store , {
+  expire_after: 2.hours
+}

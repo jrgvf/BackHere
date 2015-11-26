@@ -1,5 +1,9 @@
 RailsAdmin.config do |config|
 
+  # For support Paginate and show list of sessions in Rails_Admin
+  MongoidStore::Session.send(:include, Kaminari::MongoidExtension::Document)
+  MongoidStore::Session.send(:include, RailsAdmin::Adapters::Mongoid::Extension)
+
   ### Popular gems integration
 
   ## == Devise ==
@@ -16,7 +20,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = ["Account", "Seller", "User"]
+  config.included_models = ["Account", "Seller", "User", "MongoidStore::Session"]
 
   config.model 'Seller' do
     field :account do
@@ -35,7 +39,7 @@ RailsAdmin.config do |config|
     bulk_delete
     show
     edit
-    delete
+    delete 
     show_in_app
 
     ## With an audit adapter, you can add:
