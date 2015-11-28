@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-  #ruby '2.2.0'
+  #ruby '2.2.0'                                                                                     # A Ruby version for Heroku
   
   gem 'rails', '4.2.0'                                                                              # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
@@ -12,15 +12,15 @@ source 'https://rubygems.org'
   gem 'sdoc', '~> 0.4.0', group: :doc                                                               # bundle exec rake doc:rails generates the API under doc/api.
   gem 'jbuilder', '~> 2.0'                                                                          # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
   gem 'simplecov', :require => false, :group => :test                                               # For generate resume to tests
-  gem 'newrelic_rpm'
+  gem 'newrelic_rpm'                                                                                # Gem for support NewRelic
   # gem 'axlsx', '~> 2.0', '>= 2.0.1'                                                               # For generate xlsx files
   # gem 'aws-sdk', '~> 1.3.4'                                                                       # SDK with custom features of AWS
 
 
 # Gems For MongoDB Support
-  gem 'mongoid', '~> 5.0.0'
-  gem 'mongoid-multitenancy', '~> 1.1', '>= 1.1.2'
-  gem "mongo_session_store-rails4"
+  gem 'mongoid', '~> 5.0.0'                                                                         # For integration with MongoDB
+  gem 'mongoid-multitenancy', '~> 1.1', '>= 1.1.2'                                                  # For Multitenanty with Mongoid
+  gem "mongo_session_store-rails4"                                                                  # For store Sessions into MongoDB
   # gem 'mongoid_search', '~> 0.3.2'                                                                # For simplify search text with MongoID
   # gem 'mongoid_slug', '~> 4.0'                                                                    # For a use Slug with MongoID
   # gem 'mongoid-history', '~> 0.5.0'                                                               # For version control of models
