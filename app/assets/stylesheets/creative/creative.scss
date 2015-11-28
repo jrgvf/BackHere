@@ -97,6 +97,10 @@ aside {
     color: #eb3812;
 }
 
+.navbar-brand > img {
+  display: inline-flex;
+}
+
 .navbar-default .nav > li>a,
 .navbar-default .nav>li>a:focus {
     text-transform: uppercase;
@@ -178,7 +182,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: asset-data-url("creative/header.jpg");
+    background-image: asset-data-url("header-relationship2.jpg");
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
