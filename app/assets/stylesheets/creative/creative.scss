@@ -176,6 +176,16 @@ aside {
     }
 }
 
+input.form-control {
+    height: auto;
+}
+.form-group input, .form-group textarea {
+    padding: 20px;
+}
+.form-group textarea.form-control {
+    height: 236px;
+}
+
 header {
     position: relative;
     width: 100%;
