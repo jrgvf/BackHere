@@ -13,6 +13,7 @@ source 'https://rubygems.org'
   gem 'jbuilder', '~> 2.0'                                                                          # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
   gem 'simplecov', :require => false, :group => :test                                               # For generate resume to tests
   gem 'newrelic_rpm'                                                                                # Gem for support NewRelic
+  gem "figaro"                                                                                      # Gem for support for ENV
   # gem 'axlsx', '~> 2.0', '>= 2.0.1'                                                               # For generate xlsx files
   # gem 'aws-sdk', '~> 1.3.4'                                                                       # SDK with custom features of AWS
 
