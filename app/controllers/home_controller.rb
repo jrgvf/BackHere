@@ -12,6 +12,7 @@ class HomeController < ApplicationController
     @home_message = HomeMessage.new(home_message_params)
     respond_to do |format|
       if @home_message.save
+        HomeMessageMailer.home_message(@home_message).deliver_now
         format.json { render json: @home_message }
       else
         format.json { render json: errors_response(@home_message.errors.full_messages), status: :unprocessable_entity }
