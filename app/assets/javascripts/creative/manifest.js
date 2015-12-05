@@ -14,6 +14,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap
+//= require bootbox
+//= require creative/home_message
 //= require creative/jquery.easing.min
 //= require creative/jquery.fittext
 //= require creative/cbpAnimatedHeader

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
 
+  post 'home_message', to: 'home#create_home_message'
+
   devise_for :users
   devise_for :admins, only: :sessions
   devise_for :sellers, only: :sessions
