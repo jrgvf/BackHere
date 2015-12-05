@@ -2,7 +2,7 @@ $(document).ready(function() {
   return $("#home_message").on("ajax:success", function(e, data, status, xhr) {
     bootbox.alert('Mensagem enviada com sucesso!');
   }).on("ajax:error", function(e, xhr, status, error) {
-    bootbox.alert("Tem algo errado ai... <br /><br />Veja bem...<br /><br />" + xhr.responseText);
+    bootbox.alert("Veja bem...<br /><br />" + xhr.responseText);
   });
 });
 
