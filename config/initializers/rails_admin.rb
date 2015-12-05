@@ -4,13 +4,6 @@ RailsAdmin.config do |config|
   MongoidStore::Session.send(:include, Kaminari::MongoidExtension::Document)
   MongoidStore::Session.send(:include, RailsAdmin::Adapters::Mongoid::Extension)
 
-  # For config format of datetime
-  config.models do
-    fields_of_type :datetime do
-      strftime_format "%Y-%m-%d"
-    end
-  end
-
   ### Popular gems integration
 
   ## == Devise ==
