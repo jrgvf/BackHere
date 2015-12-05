@@ -16,6 +16,7 @@ class HomeController < ApplicationController
           HomeMessageMailer.home_message(@home_message).deliver_now
         rescue Exception => e
           @home_message.destroy
+          logger.error "#{e} | #{ENV['ELASTIC_MAIL_USER']}"
           format.json { render json: "Aconteceu algum problema e a mensagem não foi enviada. <br /><br /> Tente novamente em alguns instantes."}
         end
         format.json { render json: @home_message }
