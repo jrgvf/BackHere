@@ -4,6 +4,13 @@ RailsAdmin.config do |config|
   MongoidStore::Session.send(:include, Kaminari::MongoidExtension::Document)
   MongoidStore::Session.send(:include, RailsAdmin::Adapters::Mongoid::Extension)
 
+  # For config format of datetime
+  config.models do
+    fields_of_type :datetime do
+      strftime_format "%Y-%m-%d"
+    end
+  end
+
   ### Popular gems integration
 
   ## == Devise ==
@@ -20,7 +27,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = ["Account", "Seller", "User", "MongoidStore::Session"]
+  config.included_models = ["Account", "Seller", "User", "HomeMessage", "MongoidStore::Session"]
 
   config.model 'Seller' do
     field :account do
@@ -29,6 +36,14 @@ RailsAdmin.config do |config|
     field :email
     field :password
     field :password_confirmation
+  end
+
+  config.model 'HomeMessage' do
+    field :created_at
+    field :name
+    field :email
+    field :fone
+    field :message
   end
 
   config.actions do
