@@ -9,7 +9,18 @@ class HomeMessage
 
   validates_presence_of :name, :email, :message
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
-  validates :fone, numericality: true, length: { minimum: 10, maximum: 12 }
-  validates_uniqueness_of :message, scope: :email
+  validates :fone, numericality: true, length: { minimum: 10, maximum: 12 }, allow_blank:true
+  validates_uniqueness_of :message, scope: [:email, :name]
+
+  validate :unique_errors
+
+  private
+
+    def unique_errors
+      errors.messages.each do |field, erro|
+        erro.uniq!
+        erro.pop while erro.count > 1
+      end
+    end
 
 end

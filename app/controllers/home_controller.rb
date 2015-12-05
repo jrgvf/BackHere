@@ -2,6 +2,8 @@ class HomeController < ApplicationController
   layout "home"
 
   skip_before_filter :set_current_tenant
+
+  before_action :sanitize_params, only: :create_home_message
   
   def index
   end
@@ -21,8 +23,15 @@ class HomeController < ApplicationController
 
   def errors_response errors_messages
     response = String.new
-    errors_messages.each { |msg| response += msg + "; <br />"}
+    errors_messages.each { |msg| response += msg + " <br />"}
     response
+  end
+
+  def sanitize_params
+    params.require(:home_message).each { |param, value| value.strip! }
+    params.require(:home_message)[:fone].gsub!(/[\W,_]/,'')
+    params.require(:home_message)[:name].downcase!
+    params.require(:home_message)[:email].downcase!
   end
 
   def home_message_params

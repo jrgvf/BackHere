@@ -1,0 +1,24 @@
+pt-BR:
+  mongoid:
+    errors:
+      models:
+        home_message:
+          attributes:
+            name:
+              blank: "precisa ser preenchido."
+            email:
+              blank: "precisa ser preenchido."
+              invalid: "precisa ser válido."
+            message:
+              blank: "precisa ser preenchida."
+              taken: "já foi enviada anteriormente."
+            fone:
+              not_a_number: "informado deve conter apenas números."
+              too_short: "informado é muito curto."
+              too_long: "informado é muito longo."
+    attributes:
+      home_message: 
+        name: "O nome"
+        email: "O email"
+        message: "A mensagem"
+        fone: "O telefone"
