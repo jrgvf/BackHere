@@ -14,6 +14,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap
+//= require icheck
+//= require use-icheck
 //= require bootbox
 //= require app
 //= require turbolinks

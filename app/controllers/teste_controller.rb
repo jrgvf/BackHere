@@ -1,5 +1,7 @@
 class TesteController < ApplicationController
-  skip_before_filter :set_current_tenant
+  before_action :authenticate_seller!
+
+  # skip_before_filter :set_current_tenant
  
   def index
   end
