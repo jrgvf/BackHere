@@ -6,8 +6,7 @@ class HomeController < ApplicationController
   before_action :sanitize_params, only: :create_home_message
   
   def index
-    return redirect_to adminlte_path unless current_seller.nil?
-    return redirect_to rails_admin_path unless current_admin.nil?
+    define_root
   end
 
   def create_home_message
@@ -29,6 +28,14 @@ class HomeController < ApplicationController
 
   private
 
+    def define_root
+      if current_person.present?
+        return redirect_to adminlte_path if current_person.is_a?(Seller)
+        return redirect_to rails_admin_path if current_person.is_a?(Admin)
+        return if current_person.is_a?(User)
+      end
+    end
+      
     def errors_response errors_messages
       response = String.new
       errors_messages.each { |msg| response += msg + " <br />"}
