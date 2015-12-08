@@ -17,7 +17,6 @@ body {
 footer {
     padding: 25px 0;
     text-align: center;
-    line-height: 40px;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     a {
         color: #fff;
@@ -26,9 +25,6 @@ footer {
     a:focus {
         color: #222;
         text-decoration: none;
-    }
-    span.copyright {
-        text-transform: uppercase;
     }
 }
 
@@ -67,6 +63,13 @@ p {
     margin-bottom: 20px;
     font-size: 16px;
     line-height: 1.5;
+}
+
+.information {
+  background-color:#fff;
+  padding: 0;
+  font-size:1em;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .bg-primary {
@@ -201,7 +204,7 @@ input.form-control {
     padding: 20px;
 }
 .form-group textarea.form-control {
-    height: 236px;
+    height: 216px;
 }
 
 header {
@@ -468,6 +471,13 @@ fieldset[disabled] .btn-primary.active {
     color: #f05f40;
     background-color: #fff;
 }
+
+ a.badge:hover,
+ a.badge:focus {
+     color: #f05f40;
+     text-decoration: none;
+     cursor: pointer;
+  }
 
 .btn {
     border: 0;

@@ -80,7 +80,7 @@ pt-BR:
       message: "Mensagem"
     actions:
       dashboard:
-        title: "Administração do Site"
+        title: "Administração da aplicação"
         menu: "Dashboard"
         breadcrumb: "Dashboard"
       index:

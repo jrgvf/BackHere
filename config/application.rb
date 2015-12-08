@@ -24,7 +24,7 @@ module BackHere
     config.mongoid.logger = Logger.new($stdout, :warn)
     
     config.to_prepare do
-      Devise::SessionsController.layout 'admin_lte_2_login'
+      Devise::SessionsController.layout 'backhere_login'
     end
 
     config.serve_static_files = true

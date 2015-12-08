@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout "home"
+  layout "backhere_home"
 
   skip_before_filter :set_current_tenant
 

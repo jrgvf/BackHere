@@ -25,11 +25,15 @@ module ApplicationHelper
           concat content_tag(:span, 'Close', class: 'sr-only')
           concat content_tag(:i, '', class: "fa fa-power-off", 'aria-hidden' => true)
         end)
-        concat content_tag(:i, '', class: "fa fa-#{bootstrap_icon_for(msg_type)}")
-        concat " - #{message}"
+        add_icon(msg_type) unless opts[:sign_in] == true
+        concat "#{message}"
       end)
     end
     nil
   end
 
+  def add_icon msg_type
+    concat content_tag(:i, '', class: "fa fa-#{bootstrap_icon_for(msg_type)}")
+    concat " - "
+  end
 end
