@@ -6,6 +6,8 @@ class HomeController < ApplicationController
   before_action :sanitize_params, only: :create_home_message
   
   def index
+    return redirect_to adminlte_path unless current_seller.nil?
+    return redirect_to rails_admin_path unless current_admin.nil?
   end
 
   def create_home_message

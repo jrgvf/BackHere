@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   def prevent_another_sign_in
     if devise_controller? and current_person.present? and another_class?
       redirect_to root_path
-      flash.keep[:alert] = "You're signed_in another user."
+      flash.keep[:alert] = "Você já está logado."
     end
   end
 

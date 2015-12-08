@@ -98,6 +98,11 @@ GEM
     haml (4.0.7)
       tilt
     i18n (0.7.0)
+    icheck-rails (1.0.2.2)
+      jquery-rails
+      rails (>= 3.1.0)
+      sass-rails
+    ionicons-rails (2.0.0)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -294,6 +299,8 @@ DEPENDENCIES
   figaro
   flay
   font-awesome-sass (~> 4.4.0)
+  icheck-rails
+  ionicons-rails
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks (~> 2.1)

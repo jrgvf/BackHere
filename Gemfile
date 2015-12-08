@@ -41,6 +41,8 @@ source 'https://rubygems.org'
   gem 'turbolinks'                                                                                  # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
   gem 'jquery-turbolinks', '~> 2.1'                                                                 # For resolve problem with turbolinks and jquery
   gem 'bootbox-rails', '~> 0.5.0'                                                                   # For easy and custom Prompt
+  gem 'icheck-rails'                                                                                # For use iCheck in Rails
+  gem 'ionicons-rails'                                                                              # For use Ion Icons in Rails
   # gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'                                                    # For use Bootstrap (Unnecessary because adminlte2 use bootstrap)
   # gem 'htmlentities', '~> 4.3', '>= 4.3.4'                                                        # For encode and decode String safety for htm
   # gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.2'                                                # For sanitizer html

@@ -37,6 +37,8 @@ pt-BR:
         other: "%{count} segundos"
   views:
   admin:
+    loading: "Carregando..."
+    toggle_navigation: "Redirecionando..."
     home:
       name: Home
     pagination:
@@ -58,6 +60,7 @@ pt-BR:
       up: "Cima"
       down: "Baixo"
       navigation: "Navegação"
+      navigation_static_label: "Links"
       log_out: "Terminar Sessão"
       ago: "atrás"
     flash:
