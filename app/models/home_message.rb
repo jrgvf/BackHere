@@ -12,7 +12,7 @@ class HomeMessage
   validates :fone, numericality: true, length: { minimum: 10, maximum: 12 }, allow_blank:true
   validates_uniqueness_of :message, scope: [:email, :name]
 
-  validate :unique_errors
+  validate :verify_email, :unique_errors
 
   private
 
@@ -21,6 +21,11 @@ class HomeMessage
         erro.uniq!
         erro.pop while erro.count > 1
       end
+    end
+
+    def verify_email
+      result = EmailChecker.check_email(email) if email.present? && errors[:email].empty?
+      errors.add(:email, "precisa ser válido.") if result.present? && result["result"] == "invalid"
     end
 
 end
