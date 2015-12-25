@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :admins, only: :sessions
   devise_for :sellers, only: :sessions
+  resource :sellers, only: [:edit, :update]
 
   mount RailsAdmin::Engine => '/backhere/admin', as: 'rails_admin'
 

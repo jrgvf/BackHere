@@ -1,0 +1,66 @@
+<% provide(:title, 'Editar Perfil') %>
+<% provide(:header, 'Editar Perfil') %>
+<% provide(:description, 'Aqui é possível alterar algumas informações do seu perfil.') %>
+<% provide(:levels, 'Perfil, Editar') %>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Olá <%= @seller.name %>!</h3>
+  </div><!-- /.box-header -->
+
+  <%= render partial: 'layouts/form_errors', locals: { obj: @seller } %>
+  
+  <!-- form start -->
+  <%= form_for(@seller, :url => { :action => "update" }, role: "form") do |f| %>
+    <div class="box-body">
+
+      <div class="form-group hide">
+        <%= f.text_field :id, class: "form-control", readonly: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name, "Nome" %>
+        <%= f.text_field :name, class: "form-control", readonly: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :position, "Função" %>
+        <%= f.text_field :position, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :avatar, "Imagem do perfil" %></br>
+        <% if @seller.avatar %>
+          <%= image_tag @seller.reload.avatar.url(:profile) %>
+          <p class="help-block">Imagem do perfil atual.</p>
+        <% end %>
+        <%= f.file_field :avatar %>
+        <p class="help-block">Escolha a nova imagem para o perfil.</p>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password, "Nova senha" %>
+        <i>(Caso não deseje alterar a senha deixe esse campo em branco)</i>
+        <%= f.password_field :password, :autocomplete => "off", class: "form-control", placeholder: "Digite a nova senha." %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirmação da nova senha" %>
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Redigite a nova senha." %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :current_password, "Senha atual" %>
+        <i>(Precisamos do senha atual para confirmar a atualização)</i>
+        <%= f.password_field :current_password, class: "form-control", placeholder: "Digite a senha atual." %>
+      </div>
+
+      <div class="box-footer">
+        <%= link_to '<i class="fa fa-backward"> Voltar</i>'.html_safe , root_path, class: 'btn btn-primary' %>
+        <%= button_tag( class: "btn btn-primary") do %>
+          <i class="fa fa-refresh"> Atualizar</i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div><!-- /.box -->

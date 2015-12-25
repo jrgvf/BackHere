@@ -138,7 +138,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Editar Perfil</a>
+                <%= link_to 'Editar Perfil', edit_sellers_path, class: "btn btn-default btn-flat" %>
               </div>
               <div class="pull-right">
                 <%= link_to 'Logout', destroy_seller_session_path, method: :delete, class: "btn btn-default btn-flat" %>
