@@ -119,7 +119,8 @@
             <li class="user-header">
               <%= profile_image %>
               <p>
-                <%= "#{current_user.name} - #{current_user.position}" %>
+                <%= current_user.name %></br>
+                <%= current_user.position %>
                 <small><%= current_user.created_at.to_s(:member_since) %></small>
               </p>
             </li>

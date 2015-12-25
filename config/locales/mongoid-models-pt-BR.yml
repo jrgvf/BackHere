@@ -2,6 +2,17 @@ pt-BR:
   mongoid:
     errors:
       models:
+        seller:
+          attributes:
+            password:
+              too_short: "informada é muito curta."
+            current_password:
+              blank: "precisa ser preenchida."
+              invalid: "informada é inválida."
+            avatar_content_type:
+              invalid: "informado é inválido."
+            position:
+              too_long: "informado é muito longo."
         home_message:
           attributes:
             name:
@@ -17,6 +28,12 @@ pt-BR:
               too_short: "informado é muito curto."
               too_long: "informado é muito longo."
     attributes:
+      seller:
+        current_password: "A senha atual"
+        avatar: "A foto do perfil"
+        avatar_content_type: "O formato da foto do perfil"
+        password: "A senha"
+        position: "A função"
       home_message: 
         name: "O nome"
         email: "O email"
