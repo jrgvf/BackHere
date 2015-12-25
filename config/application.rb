@@ -17,6 +17,8 @@ Bundler.require(*Rails.groups)
 module BackHere
   class Application < Rails::Application
 
+    config.autoload_paths << Rails.root.join('lib')
+
     # For don't show any logs on Console
     Mongoid.logger.level = Logger::INFO
     Mongo::Logger.logger.level = Logger::INFO

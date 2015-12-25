@@ -15,7 +15,7 @@ source 'https://rubygems.org'
   gem 'newrelic_rpm'                                                                                # Gem for support NewRelic
   gem "figaro"                                                                                      # Gem for support for ENV
   # gem 'axlsx', '~> 2.0', '>= 2.0.1'                                                               # For generate xlsx files
-  # gem 'aws-sdk', '~> 1.3.4'                                                                       # SDK with custom features of AWS
+  gem 'aws-sdk', '~> 1.3.4'                                                                         # SDK with custom features of AWS
 
 
 # Gems For MongoDB Support
@@ -25,7 +25,7 @@ source 'https://rubygems.org'
   # gem 'mongoid_search', '~> 0.3.2'                                                                # For simplify search text with MongoID
   # gem 'mongoid_slug', '~> 4.0'                                                                    # For a use Slug with MongoID
   # gem 'mongoid-history', '~> 0.5.0'                                                               # For version control of models
-  # gem "mongoid-paperclip", :require => "mongoid_paperclip"                                        # For use paperclip with MongoID
+  gem "mongoid-paperclip", :require => "mongoid_paperclip"                                          # For use paperclip with MongoID
   # gem 'mongoid-rspec', '3.0.0'                                                                    # For matchers of MongoID
   # gem 'mongoid_relations_dirty_tracking', github: 'versative/mongoid_relations_dirty_tracking'    # For verify relations changes
 

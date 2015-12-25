@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   layout 'backhere_seller'
 
@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  devise_group :person, contains: [:user, :seller, :admin]
+  devise_group :user, contains: [:user, :seller, :admin]
 
   before_action :set_current_tenant
 
@@ -30,14 +30,14 @@ class ApplicationController < ActionController::Base
   end
 
   def prevent_another_sign_in
-    if devise_controller? and current_person.present? and another_class?
+    if devise_controller? and current_user.present? and another_class?
       redirect_to root_path
       flash.keep[:alert] = "Você já está logado."
     end
   end
 
   def another_class?
-    !current_person.is_a?(resource_class)
+    !current_user.is_a?(resource_class)
   end
 
   def resource_class

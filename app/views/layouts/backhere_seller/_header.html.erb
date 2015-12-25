@@ -110,21 +110,21 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <!-- The user image in the navbar-->
-            <img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image"/>
+            <%= profile_image_small %>
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-            <span class="hidden-xs">Alexander Pierce</span>
+            <span class="hidden-xs"><%= current_user.name %></span>
           </a>
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
             <li class="user-header">
-              <img src="/assets/user2-160x160.jpg" class="img-circle" alt="User Image" />
+              <%= profile_image %>
               <p>
-                Alexander Pierce - Web Developer
-                <small>Member since Nov. 2012</small>
+                <%= "#{current_user.name} - #{current_user.position}" %>
+                <small><%= current_user.created_at.to_s(:member_since) %></small>
               </p>
             </li>
             <!-- Menu Body -->
-            <li class="user-body">
+            <!-- <li class="user-body">
               <div class="col-xs-4 text-center">
                 <a href="#">Followers</a>
               </div>
@@ -134,11 +134,11 @@
               <div class="col-xs-4 text-center">
                 <a href="#">Friends</a>
               </div>
-            </li>
+            </li> -->
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a href="#" class="btn btn-default btn-flat">Editar Perfil</a>
               </div>
               <div class="pull-right">
                 <%= link_to 'Logout', destroy_seller_session_path, method: :delete, class: "btn btn-default btn-flat" %>

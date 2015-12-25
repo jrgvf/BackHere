@@ -26,9 +26,14 @@ RailsAdmin.config do |config|
     field :account do
       associated_collection_cache_all true
     end
+    field :name
+    field :position
     field :email
     field :password
     field :password_confirmation
+    edit do
+      field :avatar
+    end
   end
 
   config.model 'HomeMessage' do

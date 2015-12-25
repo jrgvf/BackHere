@@ -10,6 +10,38 @@ module ApplicationHelper
     end
   end
 
+   # Returns the full breadcrumb on a per-page basis.
+  def full_breadcrumb(levels = [])
+    concat(content_tag(:li) do
+      concat(content_tag(:a, href: root_path) do
+        concat content_tag(:i, " BackHere", class: "fa fa-dashboard")
+      end)
+    end)
+    levels = levels.split(',')
+    levels.each do |level|
+      if levels[-1] == level
+        concat(content_tag(:li, class: "active") do
+          concat level
+        end)
+      else
+        concat(content_tag(:li) do
+          concat level
+        end)
+      end
+    end
+    nil
+  end
+
+  def profile_image
+    concat(image_tag(current_user.avatar.url(:profile), class: "img-circle", alt:"User Image"))
+    nil
+  end
+
+  def profile_image_small
+    concat(image_tag(current_user.avatar.url(:profile), class: "user-image", alt:"User Image"))
+    nil
+  end
+
   def bootstrap_class_for flash_type
     { success: "alert-success", error: "alert-danger", alert: "alert-warning", notice: "alert-info" }[flash_type.to_sym] || "alert-info"
   end

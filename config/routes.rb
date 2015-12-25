@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
 
-  get 'adminlte' => 'teste#index'
-
   root 'home#index'
   get 'home/index'
-
   post 'home_message', to: 'home#create_home_message'
+
+  get 'dashboard' => 'account#dashboard'
 
   devise_for :users
   devise_for :admins, only: :sessions
   devise_for :sellers, only: :sessions
+
   mount RailsAdmin::Engine => '/backhere/admin', as: 'rails_admin'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

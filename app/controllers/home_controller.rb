@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   layout "backhere_home"
 
   skip_before_filter :set_current_tenant
+  skip_before_filter :authenticate_user!
 
   before_action :sanitize_params, only: :create_home_message
   
@@ -29,10 +30,10 @@ class HomeController < ApplicationController
   private
 
     def define_root
-      if current_person.present?
-        return redirect_to adminlte_path if current_person.is_a?(Seller)
-        return redirect_to rails_admin_path if current_person.is_a?(Admin)
-        return if current_person.is_a?(User)
+      if current_user.present?
+        return redirect_to dashboard_path if current_user.is_a?(Seller)
+        return redirect_to rails_admin_path if current_user.is_a?(Admin)
+        return if current_user.is_a?(User)
       end
     end
       

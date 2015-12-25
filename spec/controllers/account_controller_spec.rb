@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe TesteController, type: :controller do
+RSpec.describe AccountController, type: :controller do
 
-  describe "GET #index" do
+  describe "GET #dashboard" do
     it "returns http success" do
-      get :index
+      get :dashboard
       expect(response).to have_http_status(:success)
     end
   end

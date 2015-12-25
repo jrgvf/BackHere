@@ -1,0 +1,8 @@
+<section class="content-header">
+  <h1><%= (yield(:header)) %>
+    <small><%= (yield(:description)) %></small>
+  </h1>
+  <ol class="breadcrumb">
+    <%= full_breadcrumb(yield(:levels))%>
+  </ol>
+</section>

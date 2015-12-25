@@ -19,42 +19,23 @@
   <div class="wrapper">
 
     <%= render partial: 'layouts/backhere_seller/header' %>
-
     <%= render partial: 'layouts/backhere_seller/sidebar' %>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
       <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          Page Header
-          <small>Optional description</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-          <li class="active">Here</li>
-        </ol>
-      </section>
-
+      <%= render partial: 'layouts/backhere_seller/content_header' %>
+      
       <!-- Main content -->
-      <section class="content">
-        
+      <section class="content">        
         <%= flash_messages %>
-
-        <%= yield %>
-        
+        <%= yield %>        
       </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-      <!-- To the right -->
-      <div class="pull-right hidden-xs">
-        Painel do lojista
-      </div>
-      <!-- Default to the left -->
-      <strong>Copyright &copy; 2015 <a href="#">BackHere</a>.</strong> All rights reserved.
-    </footer>
+    <%= render partial: 'layouts/backhere_seller/main_footer' %>
 
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
