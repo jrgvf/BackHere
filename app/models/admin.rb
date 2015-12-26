@@ -1,6 +1,7 @@
 class Admin
   include Mongoid::Document
   include Mongoid::Timestamps
+  include CurrentUserHelper
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :recoverable, :registerable and :omniauthable

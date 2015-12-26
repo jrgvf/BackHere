@@ -2,6 +2,15 @@ pt-BR:
   mongoid:
     errors:
       models:
+        account:
+          attributes:
+            name:
+              blank: "precisa ser informado."
+            email:
+              blank: "precisa ser informado."
+              invalid: "é inválido."
+            permissions:
+              invalid: "é inválida, por favor verifique."
         seller:
           attributes:
             password:
@@ -28,6 +37,11 @@ pt-BR:
               too_short: "informado é muito curto."
               too_long: "informado é muito longo."
     attributes:
+      account:
+        name: "Nome"
+        email: "Email"
+        permissions: "Permissões"
+        sellers: "Users"
       seller:
         current_password: "A senha atual"
         avatar: "A foto do perfil"

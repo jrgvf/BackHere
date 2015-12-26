@@ -1,9 +1,5 @@
 RailsAdmin.config do |config|
 
-  # For support Paginate and show list of sessions in Rails_Admin
-  MongoidStore::Session.send(:include, Kaminari::MongoidExtension::Document)
-  MongoidStore::Session.send(:include, RailsAdmin::Adapters::Mongoid::Extension)
-
   ### Popular gems integration
 
   ## == Devise ==
@@ -13,18 +9,24 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_admin)
 
   ## == Cancan ==
-  # config.authorize_with :cancan
+  config.authorize_with :cancan
 
   ## == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = ["Account", "Seller", "User", "HomeMessage", "MongoidStore::Session"]
+  config.included_models = ["Account", "Permission", "Seller", "User", "HomeMessage"]
+  
+  # For support Paginate and show list of sessions in Rails_Admin
+  # MongoidStore::Session.send(:include, Kaminari::MongoidExtension::Document)
+  # MongoidStore::Session.send(:include, RailsAdmin::Adapters::Mongoid::Extension)
+  
+  # config.included_models << "MongoidStore::Session"
 
   config.model 'Seller' do
     field :account do
-      associated_collection_cache_all true
+      read_only true
     end
     field :name
     field :position

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  root 'home#index'
   get 'home/index'
   post 'home_message', to: 'home#create_home_message'
 
@@ -10,6 +9,16 @@ Rails.application.routes.draw do
   devise_for :admins, only: :sessions
   devise_for :sellers, only: :sessions
   resource :sellers, only: [:edit, :update]
+
+  authenticated :seller do
+    root 'account#dashboard', as: :authenticated_seller_root
+  end
+
+  authenticated :admin do
+    root 'rails_admin/main#dashboard', as: :authenticated_admin_root
+  end
+
+  root 'home#index'
 
   mount RailsAdmin::Engine => '/backhere/admin', as: 'rails_admin'
 

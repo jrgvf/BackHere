@@ -7,7 +7,6 @@ class HomeController < ApplicationController
   before_action :sanitize_params, only: :create_home_message
   
   def index
-    define_root
   end
 
   def create_home_message
@@ -28,29 +27,21 @@ class HomeController < ApplicationController
   end
 
   private
-
-    def define_root
-      if current_user.present?
-        return redirect_to dashboard_path if current_user.is_a?(Seller)
-        return redirect_to rails_admin_path if current_user.is_a?(Admin)
-        return if current_user.is_a?(User)
-      end
-    end
       
-    def errors_response errors_messages
-      response = String.new
-      errors_messages.each { |msg| response += msg + " <br />"}
-      response
-    end
+  def errors_response errors_messages
+    response = String.new
+    errors_messages.each { |msg| response += msg + " <br />"}
+    response
+  end
 
-    def sanitize_params
-      params.require(:home_message).each { |param, value| value.strip! }
-      params.require(:home_message)[:fone].gsub!(/[\W,_]/,'')
-      params.require(:home_message)[:name].downcase!
-      params.require(:home_message)[:email].downcase!
-    end
+  def sanitize_params
+    params.require(:home_message).each { |param, value| value.strip! }
+    params.require(:home_message)[:fone].gsub!(/[\W,_]/,'')
+    params.require(:home_message)[:name].downcase!
+    params.require(:home_message)[:email].downcase!
+  end
 
-    def home_message_params
-      params.require(:home_message).permit(:name, :email, :fone, :message)
-    end
+  def home_message_params
+    params.require(:home_message).permit(:name, :email, :fone, :message)
+  end
 end

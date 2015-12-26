@@ -7,7 +7,6 @@ source 'https://rubygems.org'
 # Gems for General Use
   gem 'faraday', '~> 0.9.2'                                                                         # Faraday for communication with API
   gem 'devise', '~> 3.5', '>= 3.5.2'                                                                # Devise for Generate users access
-  gem 'cancancan', '~> 1.10'                                                                        # For Permissions
   gem 'rails_admin', '~> 0.7.0'                                                                     # For Admin Control
   gem 'sdoc', '~> 0.4.0', group: :doc                                                               # bundle exec rake doc:rails generates the API under doc/api.
   gem 'jbuilder', '~> 2.0'                                                                          # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -28,8 +27,12 @@ source 'https://rubygems.org'
   gem "mongoid-paperclip", :require => "mongoid_paperclip"                                          # For use paperclip with MongoID
   # gem 'mongoid-rspec', '3.0.0'                                                                    # For matchers of MongoID
   # gem 'mongoid_relations_dirty_tracking', github: 'versative/mongoid_relations_dirty_tracking'    # For verify relations changes
+  
+# For use CanCan for manage permissions
+  gem 'cancancan', '~> 1.10'                                                                        # For Permissions
 
 # Gems For Assets
+  gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'                                                    # For use Bootstrap (Unnecessary because adminlte2 use bootstrap)
   gem 'simple_form', '~> 3.2'                                                                       # For create forms
   gem 'font-awesome-sass', '~> 4.4.0'                                                               # For use FontAwesome
   gem 'adminlte2-rails'                                                                             # For use AdminTLE Template ~> https://almsaeedstudio.com/
@@ -43,7 +46,6 @@ source 'https://rubygems.org'
   gem 'bootbox-rails', '~> 0.5.0'                                                                   # For easy and custom Prompt
   gem 'icheck-rails'                                                                                # For use iCheck in Rails
   gem 'ionicons-rails'                                                                              # For use Ion Icons in Rails
-  # gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'                                                    # For use Bootstrap (Unnecessary because adminlte2 use bootstrap)
   # gem 'htmlentities', '~> 4.3', '>= 4.3.4'                                                        # For encode and decode String safety for htm
   # gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.2'                                                # For sanitizer html
   # gem 'nprogress-rails', '~> 0.1.6.7'                                                             # For progress bar using ajax

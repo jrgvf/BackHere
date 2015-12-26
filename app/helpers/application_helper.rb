@@ -33,13 +33,21 @@ module ApplicationHelper
   end
 
   def profile_image
-    concat(image_tag(current_user.avatar.url(:profile), class: "img-circle", alt:"User Image"))
+    concat_profile_image "img-circle"
     nil
   end
 
   def profile_image_small
-    concat(image_tag(current_user.avatar.url(:profile), class: "user-image", alt:"User Image"))
+    concat_profile_image "user-image"
     nil
+  end
+
+  def concat_profile_image img_class
+    if current_user.avatar.present?
+      concat(image_tag(current_user.avatar.url(:profile), class: img_class, alt:"User Image"))
+    else
+      concat(image_tag("default_user.png", class: img_class, alt:"User Image"))
+    end
   end
 
   def bootstrap_class_for flash_type

@@ -23,7 +23,7 @@ module BackHere
     Mongoid.logger.level = Logger::INFO
     Mongo::Logger.logger.level = Logger::INFO
 
-    config.mongoid.logger = Logger.new($stdout, :warn)
+    # config.mongoid.logger = Logger.new($stdout, :warn)
     
     config.to_prepare do
       Devise::SessionsController.layout 'backhere_login'

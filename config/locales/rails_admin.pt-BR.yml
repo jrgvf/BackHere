@@ -132,6 +132,7 @@ pt-BR:
         menu: "Histórico"
         breadcrumb: "Histórico"
     form:
+      new_model: "Novo(a) %{name}"
       cancel: "Cancelar"
       basic_info: "Informação Básica"
       required: "Obrigatórios"
