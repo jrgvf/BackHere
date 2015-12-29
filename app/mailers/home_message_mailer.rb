@@ -8,6 +8,6 @@ class HomeMessageMailer < ApplicationMailer
   def home_message(home_message)
     @home_message = home_message
 
-    mail to: "jrgvf@cin.ufpe.br", subject: "BackHere - New Home Message by #{home_message.email}"
+    mail to: ENV['BACKHERE_MAIL'], subject: "BackHere - New Home Message by #{home_message.email}"
   end
 end
