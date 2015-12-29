@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+  # Set active class of sidebar
+  def active_class(*link_path)
+    link_path.each { |path| return "active" if request.fullpath.include?(path) }
+    nil
+  end
+
+  def root_active_class
+    return "active" if request.fullpath == root_path
+    nil
+  end
+
   # Returns the full title on a per-page basis.
   def full_title(page_title = '')
     base_title = "BackHere!"

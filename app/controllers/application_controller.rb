@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_current_tenant, :prevent_another_sign_in, :prevent_admin_access_platform
 
+  helper_method :current_account
+
   devise_group :user, contains: [:user, :seller, :admin]
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -15,6 +17,10 @@ class ApplicationController < ActionController::Base
       # format.html { redirect_to main_app.root_url, alert: exception.message }
       format.html { redirect_to :back, alert: exception.message }
     end
+  end
+
+  def current_account
+    @current_account = current_user.account unless current_user.nil?
   end
 
   protected

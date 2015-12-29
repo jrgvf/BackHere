@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :admins, only: :sessions
   devise_for :sellers, only: :sessions
-  resource :sellers, only: [:edit, :update]
+  resources :sellers, only: [:edit, :update]
+
+  get 'platforms', to: 'account#index_platforms'
+  
+  resources :magentos, except: [:index, :show]
+
 
   authenticated :seller do
     root 'account#dashboard', as: :authenticated_seller_root

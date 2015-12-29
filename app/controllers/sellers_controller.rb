@@ -20,7 +20,7 @@ class SellersController < ApplicationController
   private
 
     def find_seller
-      @seller = Seller.find(params[:seller][:id])
+      @seller = Seller.find(params[:id])
     end
 
     def seller_params
