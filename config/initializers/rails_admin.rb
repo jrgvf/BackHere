@@ -16,7 +16,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = ["Account", "Permission", "Seller", "User", "HomeMessage"]
+  config.included_models = ["Account", "Permission", "Seller", "User", "HomeMessage", "Platform", "Magento"]
   
   # For support Paginate and show list of sessions in Rails_Admin
   # MongoidStore::Session.send(:include, Kaminari::MongoidExtension::Document)
