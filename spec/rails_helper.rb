@@ -3,9 +3,8 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'spec_helper'
 require 'rspec/rails'
-require 'capybara/rspec'
+require 'spec_helper'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -25,6 +24,9 @@ require 'capybara/rspec'
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
+  # For support Devise in tests
+  config.include Devise::TestHelpers, type: :controller
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.

@@ -56,6 +56,7 @@ source 'https://rubygems.org'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'                                                                       # For create tests
   gem 'capybara'                                                                                    # For create testes using browser
+  gem 'selenium-webdriver', '~> 2.48', '>= 2.48.1'                                                  # For support use  js: true in tests
   gem 'timecop', '~> 0.8.0'                                                                         # For freeze time in tests
   gem 'factory_girl_rails', '~> 4.5'                                                                # For create factores
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'                                                      # For clear database in tests

@@ -1,18 +1,14 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
-
-  layout 'backhere_seller'
-
   include CanCan::ControllerAdditions
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  layout 'backhere_seller'
+  
   protect_from_forgery with: :exception
+
+  before_action :authenticate_user!
+  before_action :set_current_tenant, :prevent_another_sign_in, :prevent_admin_access_platform
 
   devise_group :user, contains: [:user, :seller, :admin]
 
-  before_action :set_current_tenant, :prevent_another_sign_in, :prevent_admin_access_platform
-
-  # For rescue exceptions of CanCan AccessDenied
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { render nothing: true, status: :forbidden }
@@ -42,15 +38,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def admin_action?
-    params["controller"].present? && params["controller"].include?("rails_admin")
-  end
+  def admin_action?; params["controller"].present? && params["controller"].include?("rails_admin") end
 
-  def another_class?
-    !current_user.is_a?(resource_class)
-  end
+  def another_class?; !current_user.is_a?(resource_class) end
 
-  def resource_class
-    resource_name.capitalize.to_s.constantize
-  end
+  def resource_class; resource_name.capitalize.to_s.constantize end
+
 end
