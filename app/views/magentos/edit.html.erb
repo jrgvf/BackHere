@@ -1,0 +1,11 @@
+<% provide(:title, 'Editar Magento') %>
+<% provide(:header, 'Editar Magento') %>
+<% provide(:description, "Preencha as informações necessárias para editar o #{@magento.name.capitalize}.") %>
+<% provide(:levels, 'Plataformas, Magento') %>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Edição das informações do <%= @magento.name.capitalize %></h3>
+  </div><!-- /.box-header -->
+  <%= render @magento %>
+</div><!-- /.box -->

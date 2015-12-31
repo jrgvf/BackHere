@@ -16,6 +16,10 @@ class Permission
     ["Magento", "BetaTest"]
   end
 
+  def action_enum
+    ["manage", "create", "edit", "destroy"]
+  end
+
   def model_exists?
     !subject.blank? && Rails.const_defined?(subject.to_sym)
   end

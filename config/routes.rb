@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   get 'platforms', to: 'account#index_platforms'
   
-  resources :magentos, except: [:index, :show]
+  resources :magentos, except: [:index, :show] do
+    get 'update_specific_version', to: 'magentos#update_specific_version'
+  end
 
 
   authenticated :seller do

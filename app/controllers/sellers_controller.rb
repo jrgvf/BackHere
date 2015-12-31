@@ -13,7 +13,7 @@ class SellersController < ApplicationController
       redirect_to root_path
     else
       flash.now[:error] = "Não foi possível atualizar o perfil."
-      render "edit"
+      render :edit
     end
   end
 

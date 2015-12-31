@@ -2,6 +2,20 @@ pt-BR:
   mongoid:
     errors:
       models:
+        magento:
+          attributes:
+            name:
+              blank: "precisa ser informado."
+            url:
+              blank: "precisa ser informada."
+            api_user:
+              blank: "precisa ser informado."
+            api_key:
+              blank: "precisa ser informada."
+            api_url:
+              blank: "precisa ser informada."
+            version:
+              blank: "precisa selecionar uma versão."
         account:
           attributes:
             name:
@@ -37,6 +51,14 @@ pt-BR:
               too_short: "informado é muito curto."
               too_long: "informado é muito longo."
     attributes:
+      magento:
+        name: "Nome"
+        url: "URL"
+        api_user: "Usuário da API"
+        api_key: "Senha da API"
+        api_url: "URL da API"
+        version: "Versão Macro"
+        specific_version: "Versão Específica"
       account:
         name: "Nome"
         email: "Email"

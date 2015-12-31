@@ -9,6 +9,8 @@ class Platform
   field :url,                  type: String
   field :specific_version,     type: String
 
+  validates_presence_of :name, :url
+
   def platform_name
     raise NotImplementedError 
   end

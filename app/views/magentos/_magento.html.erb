@@ -1,0 +1,43 @@
+<%= render partial: 'layouts/form_errors', locals: { obj: magento } %>  
+<!-- form start -->
+<%= form_for(magento, role: "form") do |f| %>
+  <div class="box-body">
+
+    <div class="form-group">
+      <%= f.label :name, "Nome" %>
+      <%= f.text_field :name, class: "form-control", placeholder: "Informe o nome que você quer dar ao Magento" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :url, "Url" %>
+      <%= f.text_field :url, class: "form-control", placeholder: "Informe a url do seu Magento. Ex: http://www.magento-teste.com.br/" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :version, "Versão Macro" %>
+      <%= f.select(:version, magento.version_enum, { include_blank: "Selecione uma versão" }, { class: "form-control" }) %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :api_user, "Usuário" %>
+      <%= f.text_field :api_user, class: "form-control", placeholder: "Informe o usuário da api" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :api_key, "Senha" %>
+      <%= f.text_field :api_key, class: "form-control", placeholder: "Informe a senha da api" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :api_url, "Url da api" %>
+      <%= f.text_field :api_url, class: "form-control", placeholder: "Informe a url da api" %>
+    </div>
+
+    <div class="box-footer">
+      <%= link_to '<i class="fa fa-backward"> Voltar</i>'.html_safe , platforms_path, class: 'btn btn-primary' %>
+      <%= button_tag( class: "btn btn-primary") do %>
+        <i class="fa fa-check-square-o"> <%= magento.persisted? ? "Salvar" : "Cadastrar" %></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>
