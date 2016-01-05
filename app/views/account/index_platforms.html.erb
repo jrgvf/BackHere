@@ -8,10 +8,10 @@
     <h3 class="box-title">Lista de plataformas</h3>
 
     <div style="float:right" class="btn-group">
-      <button type="button" class="btn btn-info btn-flat dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn btn-danger btn-flat dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Cadastrar Plataforma <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" role="menu">
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
         <%= render partial: "available_platform", collection: @available_platforms %>
       </ul>
     </div>
