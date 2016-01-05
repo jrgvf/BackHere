@@ -47,6 +47,8 @@ source 'https://rubygems.org'
   gem 'bootbox-rails', '~> 0.5.0'                                                                   # For easy and custom Prompt
   gem 'icheck-rails'                                                                                # For use iCheck in Rails
   gem 'ionicons-rails'                                                                              # For use Ion Icons in Rails
+  gem 'jquery-slimscroll-rails'                                                                     # For use SlimScroll in Rails
+  gem 'jquery-ui-rails'                                                                             # For use JQueryUI in Rails
   # gem 'htmlentities', '~> 4.3', '>= 4.3.4'                                                        # For encode and decode String safety for htm
   # gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.2'                                                # For sanitizer html
   # gem 'nprogress-rails', '~> 0.1.6.7'                                                             # For progress bar using ajax

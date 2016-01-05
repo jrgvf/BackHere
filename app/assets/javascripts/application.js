@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
 //= require icheck
-//= require use-icheck
+//= require jquery.slimscroll.min
 //= require bootbox
-//= require app
 //= require turbolinks
 //= require_tree ./backhere
