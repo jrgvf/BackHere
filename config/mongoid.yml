@@ -114,7 +114,7 @@ development:
 
     # Raise an error when performing a #find and the document is not found.
     # (default: true)
-    # raise_not_found_error: true
+    raise_not_found_error: false
 
     # Raise an error when defining a scope with the same name as an
     # existing method. (default: false)
@@ -137,6 +137,8 @@ test:
         max_pool_size: 1
         use_activesupport_time_zone: true
         use_utc: false
+  opions:
+    raise_not_found_error: false
 
 # mongoid 5.x
 #
@@ -157,3 +159,5 @@ production:
        connect_timeout: 15
        use_activesupport_time_zone: true
        use_utc: false
+  options:
+    raise_not_found_error: false

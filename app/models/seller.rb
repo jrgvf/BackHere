@@ -3,7 +3,7 @@ class Seller
   include Mongoid::Paperclip
   include Mongoid::Timestamps
   include Mongoid::Multitenancy::Document
-  include CurrentUserHelper
+  include Backhere::CurrentUserHelper
 
   belongs_to :account
   # For define tenant
