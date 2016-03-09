@@ -18,8 +18,16 @@ class MagentoAdapter
   def magento_info
     try_execute_call do
       login unless logged_in?
-      response = client.call(:magento_info, message: { sessionId: self.session_key})
+      response = client.call(:magento_info, message: { sessionId: self.session_key })
       response.body[:magento_info_response][:info]
+    end
+  end
+
+  def customer_list
+    try_execute_call do
+      login unless logged_in?
+      response = client.call(:customer_customer_list, message: { sessionId: self.session_key })
+      response.body[:customer_customer_list_response][:store_view][:item]
     end
   end
 
@@ -56,16 +64,16 @@ class MagentoAdapter
       debugger
       if should_retry
         should_retry = false
-        # Logger!
+        # TO DO: Logger!
         sleep(10)
         retry
       else
-        # Logger!
+        # TO DO: Logger!
         raise exception
       end
     rescue Exception => exception
       debugger
-      # Logger!
+      # TO DO: Logger!
       raise exception
     end
   end

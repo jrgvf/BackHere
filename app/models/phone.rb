@@ -1,16 +1,25 @@
 class Phone
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Backhere::VerifiableObject
 
-  embedded_in :customer
-
-  field :country_code,    type: String,     default: '+55'
-  field :region_code,     type: String
-  field :number,          type: String
+  field :country_code,    type: Integer,     default: 55
+  field :region_code,     type: Integer
+  field :number,          type: Integer
   field :is_valid,        type: Boolean,    default: false
   field :verified,        type: Boolean,    default: false
 
-  validates_presence_of :country_code, :region_code, :number
+  validates :country_code, presence: true, numericality: { only_integer: true }
+  validates :region_code, presence: true, numericality: { only_integer: true }
+  validates :number, presence: true, numericality: { only_integer: true }
+
+  embedded_in :customer
+
+  def is_valid?
+    self[:is_valid]
+  end
+
+  def verified?
+    self[:verified]
+  end
 
 end

@@ -25,4 +25,8 @@ class Magento < Platform
     "#{response[:magento_version]} - #{response[:magento_edition]}"
   end
 
+  def fetch_customers
+    response = magento_adapter.customer_list
+  end
+
 end

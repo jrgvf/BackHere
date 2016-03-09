@@ -9,13 +9,12 @@ class Customer
   field :remote_id,         type: String
   field :name,              type: String
 
-  validates_presence_of :remote_id, :name
-
   embeds_many :emails, cascade_callbacks: true
   embeds_many :phones, cascade_callbacks: true
 
   accepts_nested_attributes_for :emails, :phones
 
+  validates_presence_of :remote_id, :name
 
   ##
   # Create a dynamic attributes for customer.
