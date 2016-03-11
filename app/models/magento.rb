@@ -1,15 +1,20 @@
 class Magento < Platform
-  include Mongoid::Document
 
+  field :url,                  type: String
   field :api_user,             type: String
   field :api_key,              type: String
   field :api_url,              type: String
   field :version,              type: String
+  field :specific_version,     type: String
 
-  validates_presence_of :api_user, :api_key, :api_url, :version
+  validates_presence_of :url, :api_user, :api_key, :api_url, :version
 
   def platform_name
     "Magento"  
+  end
+
+  def synchronizer
+    MagentoSynchronizer.new(self)
   end
 
   def version_enum
@@ -26,7 +31,7 @@ class Magento < Platform
   end
 
   def fetch_customers
-    response = magento_adapter.customer_list
+    magento_adapter.customer_list
   end
 
 end

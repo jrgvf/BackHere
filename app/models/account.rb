@@ -9,12 +9,21 @@ class Account
   has_many :sellers, dependent: :destroy
   accepts_nested_attributes_for :sellers, allow_destroy: true
 
+  has_many :platforms
+  accepts_nested_attributes_for :sellers, allow_destroy: true
+
   embeds_many :permissions
   accepts_nested_attributes_for :permissions, allow_destroy: true
 
   validates_presence_of :name, :default_email
   validates_format_of :default_email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
   validate :verify_email
+
+  rails_admin do
+    configure :platforms do
+      read_only true
+    end
+  end
 
   def blocked?
     blocked

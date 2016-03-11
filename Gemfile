@@ -16,7 +16,11 @@ source 'https://rubygems.org'
   gem "figaro"                                                                                      # Gem for support for ENV
   # gem 'axlsx', '~> 2.0', '>= 2.0.1'                                                               # For generate xlsx files
   gem 'aws-sdk', '~> 1.3.4'                                                                         # SDK with custom features of AWS
-
+  gem 'sidekiq'                                                                                     # For use Sidekiq
+  gem "sidekiq-cron"                                                                                # Scheduler for Sidekiq
+  gem 'sinatra', :require => nil                                                                    # For Sidekiq Web UI
+  gem 'redis'                                                                                       # For use Redis
+  gem "hiredis"                                                                                     # Driver for Redis communication
 
 # Gems For MongoDB Support
   gem 'mongoid', '~> 5.0.0'                                                                         # For integration with MongoDB

@@ -10,6 +10,22 @@ class MagentoAdapter
     @session_key = nil
   end
 
+  ##
+  # Build a complex_filters used for a SOAP Call
+  #
+  # @param [ Array of Hashs { key, operator, value } ] filters_infos - The Array of Hashs of complex filters.
+  #
+  # @example magento_adapter.build_complex_filters([{ key: 'updated_at', operator: 'gt', value: '1992-01-30' }])
+  #
+  # @return [ complex filter structure ] - Result of build complex filters.
+  def build_complex_filters(filters_infos = [])
+    complex_filters = Array.new
+    filters_infos.each do |filter_info|
+      complex_filters << { key: filter_info[:key], value: { key: filter_info[:operator], value: filter_info[:value] } }
+    end
+    { 'complex_filter' => [{ 'item' => complex_filters }] }
+  end
+
   def login
     response = client.call(:login, message: { username: self.api_user, apiKey: self.api_key } )
     self.session_key = response.body[:login_response][:login_return]
@@ -26,8 +42,9 @@ class MagentoAdapter
   def customer_list
     try_execute_call do
       login unless logged_in?
-      response = client.call(:customer_customer_list, message: { sessionId: self.session_key })
-      response.body[:customer_customer_list_response][:store_view][:item]
+      filter_info = magento.last_customer_update ? [{ key: 'updated_at', operator: 'gt', value: magento.last_customer_update}] : Array.new
+      response = client.call(:customer_customer_list, message: { sessionId: self.session_key, filters: build_complex_filters(filter_info) })
+      Array.wrap(response.body[:customer_customer_list_response][:store_view][:item])
     end
   end
 

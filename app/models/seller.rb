@@ -5,9 +5,10 @@ class Seller
   include Mongoid::Multitenancy::Document
   include Backhere::CurrentUserHelper
 
-  belongs_to :account
   # For define tenant
   tenant(:account)
+
+  belongs_to :account
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :recoverable and :omniauthable

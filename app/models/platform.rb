@@ -4,19 +4,24 @@ class Platform
   include Mongoid::Multitenancy::Document
 
   tenant(:account)
+  belongs_to :account
 
-  field :name,                 type: String
-  field :url,                  type: String
-  field :specific_version,     type: String
+  field :name,                    type: String
+  field :last_customer_update,    type: DateTime
+  field :time_zone,               type: String,     default: 'Brasilia'
 
-  validates_presence_of :name, :url
+  validates_presence_of :name
 
   def platform_name
-    raise NotImplementedError 
+    raise NotImplementedError
   end
 
-  def name
-    self[:name]
+  def fetch_customers
+    raise NotImplementedError
+  end
+
+  def synchronizer
+    raise NotImplementedError
   end
 
 end

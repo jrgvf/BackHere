@@ -30,6 +30,8 @@ module BackHere
     end
 
     config.serve_static_files = true
+
+    config.relative_url_root = '/'
       
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

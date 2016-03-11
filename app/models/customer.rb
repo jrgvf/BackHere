@@ -7,27 +7,36 @@ class Customer
   tenant(:account)
 
   field :remote_id,         type: String
-  field :name,              type: String
+  field :first_name,        type: String
+  field :last_name,         type: String
 
   embeds_many :emails, cascade_callbacks: true
   embeds_many :phones, cascade_callbacks: true
 
   accepts_nested_attributes_for :emails, :phones
 
-  validates_presence_of :remote_id, :name
+  validates_presence_of :remote_id, :first_name, :last_name
 
   ##
-  # Create a dynamic attributes for customer.
+  # Mount a customer name
+  #
+  # @return [ String ] - Result of concat first_name with last_name
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  ##
+  # Fill a dynamic attributes for customer.
   #
   # @param [ Hash { Symbol => String } ] dynamic_attributes - The Hash of dynamic attributes.
   #
-  # @example customer.create_dynamic_attributes({ :first_name => "Jorge", :last_name => "Rodrigues" })
+  # @example customer.fill_dynamic_attributes({ :first_name => "Jorge", :last_name => "Rodrigues" })
   #
   # @return [ Boolean ] - Result of save object before actions.
-  def create_dynamic_attributes(dynamic_attributes = {})
+  def fill_dynamic_attributes(dynamic_attributes = {})
     dynamic_attributes.reject! { |attribute, value| black_listed_attributes.include?(attribute) }
     dynamic_attributes.each { |attribute, value| self[attribute] = value }
-    self.save
+    true
   end
 
   ##
@@ -40,7 +49,7 @@ class Customer
   # @return [ Boolean ] - Result of save object before actions.
   def remove_attributes(attributes = [])
     attributes.each { |attribute| self.remove_attribute(attribute) }
-    self.save
+    self.save!
   end
 
   private
@@ -55,10 +64,11 @@ class Customer
   # @return [ Array ] - Array with names of attributes for reject.
   def black_listed_attributes(other_attributes = [])
     black_list = [
+      :remote_id,
+      :first_name,
+      :last_name,
       :emails,
       :phones,
-      :email,
-      :phone,
       :_id
     ]
     black_list | other_attributes

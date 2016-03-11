@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
 
   get 'home/index'
   post 'home_message', to: 'home#create_home_message'
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
 
   authenticated :admin do
     root 'rails_admin/main#dashboard', as: :authenticated_admin_root
+    mount Sidekiq::Web => '/backhere/sidekiq'
   end
 
   root 'home#index'
