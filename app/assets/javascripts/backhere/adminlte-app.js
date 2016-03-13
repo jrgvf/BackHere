@@ -292,6 +292,7 @@ function _init() {
           // $(".sidebar-menu").slimScroll({destroy: true}).height("auto");
           //Add slimscroll
           $(".sidebar-menu").slimscroll({
+            destroy: true,
             height: ($(window).height() - $(".main-header").height() - $(".user-panel").height() - $(".sidebar-footer").height()) * 0.8 + "px",
             color: "rgba(0,0,0,0.2)",
             size: "3px"
@@ -391,13 +392,14 @@ function _init() {
   $.AdminLTE.tree = function (menu) {
     var _this = this;
     var animationSpeed = $.AdminLTE.options.animationSpeed;
-    $(document).on('click', menu + ' li a', function (e) {
+    var previousActive = $('.sidebar').find('ul.sidebar-menu').find('li.active');
+    $(menu).on('click', 'li a', function (e) {
       //Get the clicked link and the next element
       var $this = $(this);
       var checkElement = $this.next();
 
       //Check if the next element is a menu and is visible
-      if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible'))) {
+      if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible')) && (!$('body').hasClass('sidebar-collapse'))) {
         //Close the menu
         checkElement.slideUp(animationSpeed, function () {
           checkElement.removeClass('menu-open');
@@ -405,6 +407,7 @@ function _init() {
           //_this.layout.fix();
         });
         checkElement.parent("li").removeClass("active");
+        previousActive.addClass('active');
       }
       //If the menu is not visible
       else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
