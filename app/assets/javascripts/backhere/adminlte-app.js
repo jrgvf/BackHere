@@ -725,6 +725,7 @@ function _init() {
     return this.each(function () {
 
       if (typeof $.fn.iCheck != 'undefined') {
+        console.log(this);
         $('input', this).on('ifChecked', function () {
           var ele = $(this).parents("li").first();
           ele.toggleClass("done");

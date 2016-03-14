@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   devise_for :sellers, only: :sessions
   resources :sellers, only: [:edit, :update]
 
+  resources :tasks, only: [:index, :create, :new, :show]
+
   get 'platforms', to: 'account#index_platforms'
   
   resources :magentos, except: [:index, :show] do

@@ -8,6 +8,7 @@ class Task
 
   field :platform_id,       type: String
   field :status,            type: Symbol,   default: :pending
+  field :type,              type: Symbol
   field :started_at,        type: DateTime
   field :finished_at,       type: DateTime
   field :success_messages,  type: Array,    default: Array.new
@@ -15,7 +16,7 @@ class Task
   field :failure_messages,  type: Array,    default: Array.new
   field :executed_by,       type: String,   default: "DefaultWorker"
 
-  validates_presence_of :platform_id, :executed_by
+  validates_presence_of :platform_id, :executed_by, :type
 
   def self.type
     raise NotImplementedError
@@ -23,6 +24,14 @@ class Task
 
   def self.same_type?(other_type)
     self.type == other_type
+  end
+
+  def self.visible?
+    raise NotImplementedError
+  end
+
+  def self.task_name
+    raise NotImplementedError
   end
 
   def execute

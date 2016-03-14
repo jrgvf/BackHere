@@ -1,0 +1,42 @@
+<% provide(:title, 'Tarefas') %>
+<% provide(:header, 'Criar') %>
+<% provide(:description, 'Criar uma nova tarefa a ser executada.') %>
+<% provide(:levels, 'Tarefas, Criar') %>
+
+<div class="box box-info">
+  <div class="box-header with-border">
+    <h3 class="box-title">Lista de plataformas cadastradas e tarefas executáveis</h3>
+  </div><!-- /.box-header -->
+  <div class="box-body">
+    <%= form_tag(tasks_path, :method => :post ) do %>
+     <div class="row">     
+        <div class="col-xs-4">
+          <h3 class="box-title">Plataformas</h3>
+            <% @platforms.each do |platform| %>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <%= check_box_tag 'platform_ids[]', platform.id, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'blue' %>
+                </span>
+                <span class="form-control"><%= platform.name %></span>
+              </div><!-- /input-group -->
+            <% end %>
+        </div><!-- /.col-xs-4 -->
+        <div class="col-xs-4">
+          <h3 class="box-title">Tarefas</h3>
+          <% @available_tasks.each do |task| %>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <%= radio_button_tag :type, task.type, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'blue' %>
+              </span>
+              <span class="form-control"><%= task.task_name %></span>
+            </div><!-- /input-group -->
+          <% end %>
+        </div><!-- /.col-xs-4 -->
+        <div class="col-xs-4">
+          <h3 class="box-title">-</h3>
+          <%= submit_tag "Criar", class: 'btn btn-primary' %>
+        </div><!-- /.col-xs-4 -->
+      </div><!-- /.row -->
+    <% end %>
+  </div><!-- /.box-body -->
+</div><!-- /.box -->
