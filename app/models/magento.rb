@@ -13,6 +13,10 @@ class Magento < Platform
     "Magento"  
   end
 
+  def worker
+    "MagentoWorker"
+  end
+
   def synchronizer
     MagentoSynchronizer.new(self)
   end

@@ -17,16 +17,16 @@ $(function(){
   icheck();
 });
 
-$(function(){
-  $('input').on('ifClicked', function(event){
-    if($(this).parent().hasClass("checked")){
-      $(this).iCheck('uncheck');
-    }
-    // } else {
-    //   $('div.checked input[name=platform]').each(function(){
-    //     $(this).iCheck('uncheck');
-    //   })
-    //   $(this).iCheck('check');
-    // }
-  });
-});
+// $(function(){
+//   $('input').on('ifClicked', function(event){
+//     if($(this).parent().hasClass("checked")){
+//       $(this).iCheck('uncheck');
+//     }
+//     } else {
+//       $('div.checked input[name=platform]').each(function(){
+//         $(this).iCheck('uncheck');
+//       })
+//       $(this).iCheck('check');
+//     }
+//   });
+// });

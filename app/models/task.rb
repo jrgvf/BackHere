@@ -7,16 +7,19 @@ class Task
   tenant(:account)
 
   field :platform_id,       type: String
+  field :platform_name,     type: String
   field :status,            type: Symbol,   default: :pending
   field :type,              type: Symbol
+  field :full_task,         type: Boolean,  default: false
+  field :is_visible,        type: Boolean,  default: true
+  field :executed_by,       type: String
   field :started_at,        type: DateTime
   field :finished_at,       type: DateTime
   field :success_messages,  type: Array,    default: Array.new
   field :error_messages,    type: Array,    default: Array.new
   field :failure_messages,  type: Array,    default: Array.new
-  field :executed_by,       type: String,   default: "DefaultWorker"
 
-  validates_presence_of :platform_id, :executed_by, :type
+  validates_presence_of :platform_id, :platform_name, :executed_by, :type
 
   def self.type
     raise NotImplementedError
@@ -26,12 +29,20 @@ class Task
     self.type == other_type
   end
 
+  def visible?
+    self[:is_visible]
+  end
+
   def self.visible?
     raise NotImplementedError
   end
 
   def self.task_name
     raise NotImplementedError
+  end
+
+  def task_name
+    Task.task_name
   end
 
   def execute

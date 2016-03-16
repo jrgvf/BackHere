@@ -12,6 +12,10 @@ class ClientTask < Task
     "Importar dados. (Clientes e Pedidos)"
   end
 
+  def task_name
+    ClientTask.task_name
+  end
+
   def execute
     self.update_attributes!(started_at: DateTime.now.in_time_zone('Brasilia'), status: :running)
     execution_result = ExecutionResult.new

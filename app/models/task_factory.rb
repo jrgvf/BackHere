@@ -18,8 +18,4 @@ class TaskFactory
     false
   end
 
-  def self.define_executed_by(platform)
-    
-  end
-
 end

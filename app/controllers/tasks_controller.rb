@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
 
   def index
+    @tasks = Task.where(is_visible: true).order_by(created_at: :desc).paginate(page: params[:page], per_page: 2)
   end
 
   def new
@@ -9,9 +10,28 @@ class TasksController < ApplicationController
   end
 
   def create
-    debugger
+    if invalid_params?
+      flash.keep[:error] = "Deve ser selecionada qual tarefa deseja executar e ao menos uma plataforma."
+      return redirect_to new_task_path
+    end
 
-    @task = TaskFactory.build(task_params[:type], task_params)
+    params[:platform_ids].each do |platform_id|
+      platform = Platform.find(platform_id)
+      task = TaskFactory.build(type, task_params(platform, platform.worker))
+
+      if task && !task.save
+        flash.keep[:error] = "(#{platform.name}) Não foi possível criar a tarefa."
+        return redirect_to new_task_path
+      end
+    end
+
+    if params[:platform_ids].count > 1
+      flash.keep[:success] = "Tarefas criadas com sucesso."
+      redirect_to tasks_path
+    else
+      flash.keep[:success] = "Tarefa criada com sucesso."
+      redirect_to tasks_path
+    end
   end
 
   def show    
@@ -19,8 +39,18 @@ class TasksController < ApplicationController
 
   private
 
-  def task_params
-    params.permit(:platform_ids, :type)
+  def task_params(platform, worker)
+    params.permit(:type, :full_task).merge(platform_id: platform.id.to_s, platform_name: platform.name, executed_by: worker)
+  end
+
+  def type
+    params[:type].to_sym
+  end
+
+  def invalid_params?
+    result = params[:platform_ids].blank?
+    result = params[:type].blank? unless result
+    result
   end
 
 end

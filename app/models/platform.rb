@@ -24,4 +24,8 @@ class Platform
     raise NotImplementedError
   end
 
+  def worker
+    "DefaultWorker"
+  end
+
 end
