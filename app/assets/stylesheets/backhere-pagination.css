@@ -1,0 +1,47 @@
+.backhere_pagination {
+  text-align: center;
+  padding: 2em 0.3em 0.3em 0.3em;
+  cursor: default;
+
+  a, span, em {
+    padding: 0.5em 1em; }
+
+  .disabled {
+    color: #777;
+    border: 1px solid #ddd;
+    cursor: not-allowed;
+    background-color: #fff }
+
+  .current {
+    font-style: normal;
+    font-weight: bold;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    z-index: 2; }
+
+  a {
+    border: 1px solid #ddd;
+    color: #666;
+    background: #fafafa;
+    text-decoration: none; }
+
+  a:hover, a:focus {
+    background: #F0F8FF;
+    color: #337ab7; }
+
+  .previous_page, .next_page {
+    border-width: 2px; }
+
+  .previous_page {
+    margin-right: 1em; }
+
+  .next_page {
+    margin-left: 1em; }    
+}
+
+.backhere_page_info {
+  text-align: center;
+  cursor: default;
+  color: #aaaaaa;
+  padding-top: 0.8em; }

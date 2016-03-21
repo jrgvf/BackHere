@@ -8,6 +8,8 @@
     <div class="box">
       <div class="box-header">
         <h3 class="box-title">Tarefas</h3>
+
+        <!-- This is for another moment for filter tasks -->
         <!-- <div class="box-tools">
           <div class="input-group" style="width: 150px;">
             <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
@@ -16,11 +18,12 @@
             </div>
           </div>
         </div> -->
+
       </div><!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <tr>
-            <th>#</th>
+            <th></th>
             <th>Nome</th>
             <th>Plataforma</th>
             <th>Status</th>
@@ -37,12 +40,15 @@
               <td><%= time_tag task.created_at %></td>
               <td><%= time_tag task.started_at unless task.started_at.nil? %></td>
               <td><%= time_tag task.finished_at unless task.finished_at.nil? %></td>
+              <td><%= link_to fa_icon("search-plus", class: "fa-lg"), task_path(task) %></td>
             </tr>
           <% end %>
         </table>
       </div><!-- /.box-body -->
-      <%= page_entries_info @tasks %>
-      <%= will_paginate @tasks %>
+      <%= will_paginate @tasks, class: 'backhere_pagination' %>
+      <div class="backhere_page_info">
+        <%= page_entries_info @tasks %>
+      </div><!-- backhere_page_info -->
     </div><!-- /.box -->
-  </div>
-</div>
+  </div><!-- col-xs-12 -->
+</div><!-- row -->

@@ -33,15 +33,13 @@
         <%= link_to '<i class="fa fa-dashboard"></i><span> Dashboard</span>'.html_safe, dashboard_path %>
       </li>
       <li class="<%= active_class(platforms_path) %>">
-        <%= link_to '<i class="fa fa-laptop"></i><span> Plataformas</span>'.html_safe, platforms_path %>
+        <%= link_to fa_icon("laptop", text: content_tag(:span, 'Plataformas')), platforms_path %>
       </li>
-
-      <li><a href="#"><i class='fa fa-link'></i> <span>Another Link</span></a></li>
       <li class="treeview">
-        <a href="#"><i class='fa fa-tasks'></i> <span>Tarefas</span> <i class="fa fa-angle-left pull-right"></i></a>
+        <a href="#"><%= fa_icon("tasks", text: content_tag(:span, 'Tarefas')) %> <%= fa_icon("angle-left", class:'pull-right') %></a>
         <ul class="treeview-menu">
-          <li><%= link_to 'Criar', new_task_path %></li>
-          <li><a href="#">Histórico</a></li>
+          <li><%= link_to fa_icon("plus-square", text: 'Criar'), new_task_path %></li>
+          <li><%= link_to fa_icon("history", text: 'Histórico'), tasks_path %></li>
         </ul>
       </li>
     </ul>
@@ -49,10 +47,7 @@
     <!-- Sidebar Footer -->
     <ul class="sidebar-footer hide">
       <li class="header center">
-        <span class="fa-stack fa-lg">
-          <i class="fa fa-circle fa-stack-2x"></i>
-          <i class="fa fa-angle-double-down fa-stack-1x fa-inverse"></i>
-        </span>
+        <%= fa_stacked_icon "angle-double-down inverse", base: "circle", class: "fa-lg" %>
       </li>
     </ul>
     <!-- /.Sidebar Footer -->

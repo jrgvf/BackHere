@@ -8,3 +8,4 @@ production:
 :queues:
   - [default, 1]
   - [magento, 2]
+  - [cron_jobs, 3]

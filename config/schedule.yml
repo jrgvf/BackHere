@@ -1,0 +1,10 @@
+##
+# Use Exemple
+# my_first_job:
+#   cron: "*/1 * * * *"
+#   class: "DefaultWorker"
+#   queue: cron_jobs
+
+task_trigger:
+  cron: "*/1 * * * *"
+  class: "TaskTrigger"

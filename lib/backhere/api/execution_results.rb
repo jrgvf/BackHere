@@ -10,15 +10,13 @@ module Backhere
         end
 
         def all_successful?
-          result = true
-          results.each { |result| result = false unless result.success? }
-          result
+          results.each { |result| return false unless result.success? }
+          true
         end
 
         def has_error?
-          result = false
-          results.each { |result| result = true if result.error? }
-          result
+          results.each { |result| return true if result.error? }
+          false
         end
 
         def success_messages

@@ -1,0 +1,94 @@
+<%= form_tag(task_path(task), class:"form-horizontal" ) do %>
+  <div class="box-body">
+    <div class="form-group">
+      <%= label_tag nil, "Plataforma:", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-5">
+        <%= text_field_tag nil, task.platform_name, class: "form-control", readonly: true %>
+      </div><!-- col-sm-5 -->
+    </div><!-- form-group -->
+    <div class="form-group">
+      <%= label_tag nil, "Status:", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-5">
+        <%= status_flag(task.status) %>
+      </div><!-- col-sm-5 -->
+    </div><!-- form-group -->
+    <div class="form-group">
+      <%= label_tag nil, "Criada em:", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-5">
+        <%= time_tag task.created_at, class: "form-control", readonly: true %>
+      </div><!-- col-sm-5 -->
+    </div><!-- form-group -->
+    <div class="form-group">
+      <%= label_tag nil, "Iniciada em:", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-5">
+        <% if task.started_at %>
+          <%= time_tag task.started_at, class: "form-control", readonly: true %>
+        <% else %>
+          <%= text_field_tag nil, "Não iniciada.", class: "form-control", readonly: true %>
+        <% end %>
+      </div><!-- col-sm-5 -->
+    </div><!-- form-group -->
+    <div class="form-group">
+      <%= label_tag nil, "Finalizada em:", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-5">
+        <% if task.finished_at %>
+          <%= time_tag task.finished_at, class: "form-control", readonly: true %>
+        <% else %>
+          <%= text_field_tag nil, "Não Finalizada.", class: "form-control", readonly: true %>
+        <% end %>
+      </div><!-- col-sm-5 -->
+    </div><!-- form-group -->
+    <div class="form-group">
+      <%= label_tag nil, "Completa?", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-5">
+        <%= text_field_tag nil, task.full_task?, class: "form-control", readonly: true %>
+      </div><!-- col-sm-5 -->
+    </div><!-- form-group -->
+  </div><!-- /.box-body -->
+
+<% end %>
+
+<div class="backhere-slide-toggle">
+  <div class="box-header">
+    <%= fa_stacked_icon "angle-double-left inverse", base: "circle", class: "fa-lg slide-toggle-button" %><h3 class="box-title">(<%= task.success_messages.count %>) Atualizados com sucesso.</h3>
+  </div><!-- box-header -->
+  <div class="box-body table-responsive">
+    <table class="table table-bordered table-hover">
+      <% task.success_messages.each do |success_message| %>
+        <tr>
+          <td><%= success_message %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div><!-- /.box-body -->
+</div>
+
+<div class="backhere-slide-toggle">
+  <div class="box-header">
+    <%= fa_stacked_icon "angle-double-left inverse", base: "circle", class: "fa-lg slide-toggle-button" %><h3 class="box-title">(<%= task.error_messages.count %>) Erros ocorreram.</h3>
+  </div><!-- box-header -->
+  <div class="box-body table-responsive">
+    <table class="table table-bordered table-hover">
+      <% task.error_messages.each do |error_message| %>
+        <tr>
+          <td><%= error_message %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div><!-- /.box-body -->
+</div>
+
+<div class="backhere-slide-toggle">
+  <div class="box-header">
+    <%= fa_stacked_icon "angle-double-left inverse", base: "circle", class: "fa-lg slide-toggle-button" %><h3 class="box-title">(<%= task.failure_messages.count %>) Falhas ocorreram.</h3>
+  </div><!-- box-header -->
+  <div class="box-body table-responsive">
+    <table class="table table-bordered table-hover">
+      <% task.failure_messages.each do |failure_message| %>
+        <tr>
+          <td><%= failure_message %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div><!-- /.box-body -->
+</div>

@@ -17,7 +17,7 @@ class ClientTask < Task
   end
 
   def execute
-    self.update_attributes!(started_at: DateTime.now.in_time_zone('Brasilia'), status: :running)
+    self.update_attributes!(started_at: DateTime.now.in_time_zone('Brasilia'), status: :processing)
     execution_result = ExecutionResult.new
 
     platform = Platform.find(platform_id)

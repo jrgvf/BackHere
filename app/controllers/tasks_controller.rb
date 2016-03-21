@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
+  before_action :find_task, only: [:show]
 
   def index
-    @tasks = Task.where(is_visible: true).order_by(created_at: :desc).paginate(page: params[:page], per_page: 2)
+    @tasks = Task.where(is_visible: true).order_by(created_at: :desc).paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -23,6 +24,8 @@ class TasksController < ApplicationController
         flash.keep[:error] = "(#{platform.name}) Não foi possível criar a tarefa."
         return redirect_to new_task_path
       end
+
+      TaskTrigger.try_execute(task)
     end
 
     if params[:platform_ids].count > 1
@@ -38,6 +41,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def find_task
+    @task = Task.find(params[:id])
+  end
 
   def task_params(platform, worker)
     params.permit(:type, :full_task).merge(platform_id: platform.id.to_s, platform_name: platform.name, executed_by: worker)

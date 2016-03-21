@@ -22,6 +22,8 @@
 @import 'icheck/square/_all';
 @import 'ionicons';
 
+@import 'backhere-pagination';
+
 .center {
   text-align: center;
 }
@@ -47,5 +49,14 @@
     background: #1a2226;
     padding: 10px 25px 10px 5px;
     font-size: 12px;
+  }
+}
+
+.slide-toggle-button {
+  margin: 0em 2em 0em 2em;
+  cursor: pointer;
+
+  i.fa-circle {
+    color: #3c8dbc;
   }
 }

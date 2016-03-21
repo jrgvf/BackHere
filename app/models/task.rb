@@ -6,6 +6,7 @@ class Task
 
   tenant(:account)
 
+  field :job_id,            type: String
   field :platform_id,       type: String
   field :platform_name,     type: String
   field :status,            type: Symbol,   default: :pending
@@ -23,6 +24,10 @@ class Task
 
   def self.type
     raise NotImplementedError
+  end
+
+  def full_task?
+    self[:full_task] ? "Sim" : "Não"
   end
 
   def self.same_type?(other_type)

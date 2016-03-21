@@ -21,8 +21,8 @@
 
 pt-BR:
   will_paginate:
-    previous_label: "&#8592; Anterior"
-    next_label: "Pr&oacute;ximo &#8594;"
+    previous_label: "Anterior"
+    next_label: "Pr&oacute;xima"
     page_gap: "&hellip;"
     page_entries_info:
       single_page_html:
