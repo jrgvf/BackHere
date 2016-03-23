@@ -1,2 +1,2 @@
-web: bundle exec passenger start -p $PORT --max-pool-size 3
+web: bundle exec rails server -p $PORT
 worker: bundle exec sidekiq -C config/sidekiq.yml

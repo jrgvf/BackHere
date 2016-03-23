@@ -192,9 +192,6 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
-    passenger (5.0.26)
-      rack
-      rake (>= 0.8.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -405,7 +402,6 @@ DEPENDENCIES
   mongoid-multitenancy (~> 1.1, >= 1.1.2)
   mongoid-paperclip
   newrelic_rpm
-  passenger
   pry-byebug (~> 3.3)
   pry-rails (~> 0.3.4)
   rails (= 4.2.0)
