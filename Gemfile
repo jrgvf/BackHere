@@ -84,7 +84,7 @@ end
 # Gems For Production
 group :production do
   gem 'rails_12factor', '>= 0.0.2'
-  # gem "passenger"
+  gem "passenger"
 end
 
 # Other Gems Suggest of Rails
