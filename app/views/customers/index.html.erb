@@ -1,0 +1,38 @@
+<% provide(:title, 'Clientes') %>
+<% provide(:header, 'Clientes') %>
+<% provide(:description, 'Lista de clientes.') %>
+<% provide(:levels, 'Clientes') %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Clientes</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>Identificador</th>
+            <th>Nome</th>
+            <th>Importado em:</th>
+            <th>Atualizado em:</th>
+            <th></th>
+          </tr>
+          <% @customers.each_with_index do |customer, index| %>
+            <tr>
+              <td><%= customer.remote_id %></td>
+              <td><%= customer.name.capitalize %></td>
+              <td><%= time_tag customer.created_at %></td>
+              <td><%= time_tag customer.updated_at %></td>
+              <td><%= link_to fa_icon("search-plus", class: "fa-lg"), customer_path(customer) %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div><!-- /.box-body -->
+      <%= will_paginate @customers, class: 'backhere_pagination' %>
+      <div class="backhere_page_info">
+        <%= page_entries_info @customers %>
+      </div><!-- backhere_page_info -->
+    </div><!-- /.box -->
+  </div><!-- col-xs-12 -->
+</div><!-- row -->

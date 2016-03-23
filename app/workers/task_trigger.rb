@@ -5,7 +5,7 @@ class TaskTrigger
 
   def self.try_execute(task)
     return if task.nil? || already_processing?(task)
-    task.job_id = Sidekiq::Client.enqueue(task.executed_by, task.id.to_s)
+    task.job_id = Sidekiq::Client.enqueue_to(platform_queue(task.platform_id), TaskWorker, task.id.to_s)
     task.status = :queued
     task.save
   end
@@ -23,7 +23,7 @@ class TaskTrigger
       Mongoid::Multitenancy.with_tenant(account) do
         tasks_waiting.each do |task|
           next if already_processing?(task)
-          task.job_id = Sidekiq::Client.enqueue(task.executed_by, task.id.to_s)
+          task.job_id = Sidekiq::Client.enqueue_to(platform_queue(task.platform_id), TaskWorker, task.id.to_s)
           task.status = :queued
           task.save
         end

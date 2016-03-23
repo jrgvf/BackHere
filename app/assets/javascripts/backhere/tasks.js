@@ -11,10 +11,10 @@ $(function() {
 
     if(icon.hasClass('fa-angle-double-down')) {
       icon.removeClass('fa-angle-double-down');
-      icon.addClass('fa-angle-double-left');
+      icon.addClass('fa-angle-double-right');
     } else {
       icon.addClass('fa-angle-double-down');
-      icon.removeClass('fa-angle-double-left');
+      icon.removeClass('fa-angle-double-right');
     }
   };
 

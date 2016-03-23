@@ -18,7 +18,7 @@ class TasksController < ApplicationController
 
     params[:platform_ids].each do |platform_id|
       platform = Platform.find(platform_id)
-      task = TaskFactory.build(type, task_params(platform, platform.worker))
+      task = TaskFactory.build(type, task_params(platform))
 
       if task && !task.save
         flash.keep[:error] = "(#{platform.name}) Não foi possível criar a tarefa."
@@ -46,8 +46,8 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  def task_params(platform, worker)
-    params.permit(:type, :full_task).merge(platform_id: platform.id.to_s, platform_name: platform.name, executed_by: worker)
+  def task_params(platform)
+    params.permit(:type, :full_task).merge(platform_id: platform.id.to_s, platform_name: platform.name)
   end
 
   def type

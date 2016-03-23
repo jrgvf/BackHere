@@ -17,6 +17,10 @@ class Customer
 
   validates_presence_of :remote_id, :first_name, :last_name
 
+  def dynamic_attributes
+    self.attributes.symbolize_keys.reject { |attribute, value| black_listed_attributes.include?(attribute) }
+  end
+
   ##
   # Mount a customer name
   #
@@ -69,6 +73,9 @@ class Customer
       :last_name,
       :emails,
       :phones,
+      :account_id,
+      :created_at,
+      :updated_at,  
       :_id
     ]
     black_list | other_attributes

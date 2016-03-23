@@ -1,7 +1,7 @@
-class DefaultWorker
+class TaskWorker
   include Sidekiq::Worker
 
-  sidekiq_options :retry => 5, :queue => :default
+  sidekiq_options :retry => 2
 
   # The current retry count is yielded. The return value of the block must be 
   # an integer. It is used as the delay, in seconds. 
@@ -11,11 +11,17 @@ class DefaultWorker
 
   def perform(task_id)
     task = Task.find(task_id)
-    return if task.nil?
+    return if task.nil? || finished_status.include?(task.status)
 
     Mongoid::Multitenancy.with_tenant(task.account) do
       task.execute
     end
   end
+
+  private
+
+    def finished_status
+      [:successfully_finished, :finished_with_error, :finished_with_failure]
+    end
 
 end

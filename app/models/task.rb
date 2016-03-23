@@ -13,14 +13,13 @@ class Task
   field :type,              type: Symbol
   field :full_task,         type: Boolean,  default: false
   field :is_visible,        type: Boolean,  default: true
-  field :executed_by,       type: String
   field :started_at,        type: DateTime
   field :finished_at,       type: DateTime
   field :success_messages,  type: Array,    default: Array.new
   field :error_messages,    type: Array,    default: Array.new
   field :failure_messages,  type: Array,    default: Array.new
 
-  validates_presence_of :platform_id, :platform_name, :executed_by, :type
+  validates_presence_of :platform_id, :platform_name, :type
 
   def self.type
     raise NotImplementedError
@@ -52,10 +51,6 @@ class Task
 
   def execute
     raise NotImplementedError
-  end
-
-  def executed_by
-    self[:executed_by].constantize
   end
 
   private

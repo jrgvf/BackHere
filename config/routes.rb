@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :tasks, only: [:index, :create, :new, :show]
 
+  resources :customers, only: [:index, :show]
+
   get 'platforms', to: 'account#index_platforms'
   
   resources :magentos, except: [:index, :show] do

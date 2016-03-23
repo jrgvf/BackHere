@@ -1,0 +1,41 @@
+<% provide(:title, 'Clientes') %>
+<% provide(:header, "#{@customer.name.capitalize}") %>
+<% provide(:description, "Detalhes sobre o cliente #{@customer.name.capitalize}") %>
+<% provide(:levels, "Clientes, #{@customer.name.capitalize}") %>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Detalhes</h3>
+  </div><!-- /.box-header -->
+  <%= form_tag(customer_path(@customer), class:"form-horizontal" ) do %>
+    <div class="box-body">
+      <div class="form-group">
+        <%= label_tag nil, "Nome:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @customer.name, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Identificador:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @customer.remote_id, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Importado em:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= time_tag @customer.created_at, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Atualizado em:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= time_tag @customer.updated_at, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      
+      <%= render partial: 'dynamic_attributes', locals: { attributes: @customer.dynamic_attributes } %>
+
+    </div><!-- /.box-body -->
+  <% end %>
+</div><!-- /.box -->

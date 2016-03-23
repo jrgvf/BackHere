@@ -13,8 +13,8 @@ class Magento < Platform
     "Magento"  
   end
 
-  def worker
-    "MagentoWorker"
+  def sidekiq_queue
+    :magento
   end
 
   def synchronizer

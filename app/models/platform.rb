@@ -24,8 +24,13 @@ class Platform
     raise NotImplementedError
   end
 
-  def worker
-    "DefaultWorker"
+  def sidekiq_queue
+    :default
+  end
+
+  def self.platform_queue(platform_id)
+    platform = Platform.find(platform_id)
+    platform.present? ? platform.sidekiq_queue : :default
   end
 
 end

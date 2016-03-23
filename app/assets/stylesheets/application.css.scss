@@ -53,10 +53,14 @@
 }
 
 .slide-toggle-button {
-  margin: 0em 2em 0em 2em;
+  margin-right: 1em;
   cursor: pointer;
 
   i.fa-circle {
     color: #3c8dbc;
   }
+}
+
+.form-control[readonly] {
+  cursor: default;
 }
