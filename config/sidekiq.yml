@@ -1,9 +1,9 @@
 ---
-:concurrency: 17
+:concurrency: 27
 staging:
-  :concurrency: 17
+  :concurrency: 27
 production:
-  :concurrency: 17
+  :concurrency: 27
 :queues:
   - [default, 1]
   - [magento, 2]
