@@ -6,5 +6,5 @@
 #   queue: cron_jobs
 
 task_trigger:
-  cron: "*/1 * * * *"
+  cron: "*/5 * * * *"
   class: "TaskTrigger"
