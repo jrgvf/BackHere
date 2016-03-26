@@ -1,0 +1,21 @@
+<div class="backhere-slide-toggle">
+  <div class="box-header">
+    <%= fa_stacked_icon "angle-double-right inverse", base: "circle", class: "fa-lg slide-toggle-button" %><h3 class="box-title">(<%= emails.count %>) Emails.</h3>
+  </div><!-- box-header -->
+  <div class="box-body table-responsive">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th>Email</th>
+        <th>Verificado?</th>
+        <th>Válido?</th>
+      </tr>
+      <% emails.each do |email| %>
+        <tr>
+          <td><%= email.address %></td>
+          <td class="center"><%= boolean_icon(email.verified) %></td>
+          <td class="center"><%= boolean_icon(email.is_valid) if email.verified? %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div><!-- /.box-body -->
+</div>

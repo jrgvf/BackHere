@@ -16,12 +16,6 @@
         </div><!-- col-sm-5 -->
       </div><!-- form-group -->
       <div class="form-group">
-        <%= label_tag nil, "Identificador:", class: 'col-sm-2 control-label' %>
-        <div class="col-sm-5">
-          <%= text_field_tag nil, @customer.remote_id, class: "form-control", readonly: true %>
-        </div><!-- col-sm-5 -->
-      </div><!-- form-group -->
-      <div class="form-group">
         <%= label_tag nil, "Importado em:", class: 'col-sm-2 control-label' %>
         <div class="col-sm-5">
           <%= time_tag @customer.created_at, class: "form-control", readonly: true %>
@@ -33,8 +27,35 @@
           <%= time_tag @customer.updated_at, class: "form-control", readonly: true %>
         </div><!-- col-sm-5 -->
       </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Identificador externo:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @customer.remote_id, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Convidado:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, boolean_text(@customer.is_guest), class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Documento:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @customer.document, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
       
       <%= render partial: 'dynamic_attributes', locals: { attributes: @customer.dynamic_attributes } %>
+
+      <div class="col-sm-9">
+        <div class="col-sm-6">
+          <%= render partial: 'emails', locals: { emails: @customer.emails } %>
+        </div>
+        <div class="col-sm-6">
+          <%= render partial: 'phones', locals: { phones: @customer.phones } %>
+        </div>
+      </div>
 
     </div><!-- /.box-body -->
   <% end %>

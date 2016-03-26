@@ -4,28 +4,28 @@ class TaskTrigger
   sidekiq_options :retry => 1, :queue => :cron_jobs
 
   def self.try_execute(task)
-    return if task.nil? || already_processing?(task)
+    return if task.nil? || already_processing?(task, [:paused])
     task.job_id = Sidekiq::Client.enqueue_to(Platform.queue(task.platform_id), TaskWorker, task.id.to_s)
     task.status = :queued
     task.save
   end
 
-  def self.already_processing?(task)
-    TaskTrigger.new().already_processing?(task)
+  def self.already_processing?(task, others_statuses = [])
+    TaskTrigger.new().already_processing?(task, others_statuses)
   end
 
-  def already_processing?(task)
-    Task.where(account: task.account, type: task.type, :status.in => running_status).count > 0
+  def already_processing?(task, others_statuses = [])
+    Task.where(account: task.account, type: task.type, :status.in => (blocked_statuses | others_statuses)).count > 0
   end
 
   def perform
     Account.each do |account|
       Mongoid::Multitenancy.with_tenant(account) do
-        tasks_waiting.each do |task|
+        waiting_tasks.each do |task|
           next if already_processing?(task)
           task.job_id = Sidekiq::Client.enqueue_to(Platform.queue(task.platform_id), TaskWorker, task.id.to_s)
           task.status = :queued
-          task.save
+          task.save!
         end
       end
     end
@@ -33,16 +33,16 @@ class TaskTrigger
 
   private
 
-    def tasks_waiting
-      Task.where(:status.in => waiting_status)
+    def waiting_tasks
+      Task.where(:status.in => standby_statuses)
     end
 
-    def running_status
+    def blocked_statuses
       [:queued, :processing]
     end
 
-    def waiting_status
-      [:pending]
+    def standby_statuses
+      [:pending, :paused]
     end
 
 end

@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap
+//= require bootstrap-datepicker
 //= require icheck
 //= require jquery.slimscroll.min
 //= require bootbox

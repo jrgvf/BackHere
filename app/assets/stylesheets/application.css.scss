@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require bootstrap
+ *= require bootstrap-datepicker
  *= require jquery-ui
  *= require_self
  */
@@ -63,4 +64,14 @@
 
 .form-control[readonly] {
   cursor: default;
+}
+
+.platform-table {
+  padding: 4em 1em 1em 1em;
+}
+
+.remove-border {
+  .input-group-addon, .form-control {
+    border: none;
+  }
 }

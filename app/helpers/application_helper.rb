@@ -77,7 +77,7 @@ module ApplicationHelper
           concat content_tag(:i, '', class: "fa fa-power-off", 'aria-hidden' => true)
         end)
         add_icon(msg_type) unless opts[:sign_in] == true
-        concat "#{message}"
+        concat content_tag(:span, " #{message}")
       end)
     end
     nil
@@ -87,6 +87,8 @@ module ApplicationHelper
     options = case status
       when :pending
         { class: "default", name: "Pendente" }
+      when :paused
+        { class: "info", name: "Pausada" }
       when :queued
         { class: "info", name: "Na fila" }
       when :processing
@@ -104,6 +106,18 @@ module ApplicationHelper
 
   def add_icon msg_type
     concat content_tag(:i, '', class: "fa fa-#{bootstrap_icon_for(msg_type)}")
-    concat " - "
+  end
+
+  def boolean_text(boolean)
+    boolean ? " Sim" : " Não"
+  end
+
+  def boolean_color(boolean)
+    boolean ? "green" : "red"
+  end
+
+  def boolean_icon(boolean)
+    concat content_tag(:i, '', class: "fa fa-#{boolean ? "check" : "ban"} fa-lg", style: "color: #{boolean_color(boolean)}")
+    nil
   end
 end

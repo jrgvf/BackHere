@@ -9,8 +9,9 @@ class Platform
   field :name,                    type: String
   field :last_customer_update,    type: DateTime
   field :time_zone,               type: String,     default: 'Brasilia'
+  field :start_date,              type: Date
 
-  validates_presence_of :name
+  validates_presence_of :name, :start_date
 
   def platform_name
     raise NotImplementedError

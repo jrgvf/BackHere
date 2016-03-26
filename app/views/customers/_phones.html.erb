@@ -1,0 +1,21 @@
+<div class="backhere-slide-toggle">
+  <div class="box-header">
+    <%= fa_stacked_icon "angle-double-right inverse", base: "circle", class: "fa-lg slide-toggle-button" %><h3 class="box-title">(<%= phones.count %>) Telefones.</h3>
+  </div><!-- box-header -->
+  <div class="box-body table-responsive">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th>Número</th>
+        <th>Verificado?</th>
+        <th>Válido?</th>
+      </tr>
+      <% phones.each do |phone| %>
+        <tr>
+          <td><%= phone.full_phone %></td>
+          <td class="center"><%= boolean_icon(phone.verified) %></td>
+          <td class="center"><%= boolean_icon(phone.is_valid) if phone.verified? %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div><!-- /.box-body -->
+</div>

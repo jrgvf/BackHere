@@ -34,8 +34,8 @@ class Magento < Platform
     "#{response[:magento_version]} - #{response[:magento_edition]}"
   end
 
-  def fetch_customers
-    magento_adapter.customer_list
+  def fetch_customers(full_task, page)
+    magento_adapter.customer_list(full_task, page)
   end
 
 end

@@ -6,18 +6,15 @@
             </div>
             <div class="col-md-4">
                 <ul class="list-inline">
-                    <li><a href=""><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li><a href=""><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li><a href=""><i class="fa fa-linkedin"></i></a>
-                    </li>
+                    <li><%= link_to fa_icon("twitter"), "" %></li>
+                    <li><%= link_to fa_icon("facebook"), "https://www.facebook.com/appbackhere/?ref=hl", target: "_blank" %></li>
+                    <li><%= link_to fa_icon("linkedin"), "" %></li>
                 </ul>
             </div>
             <div class="col-md-4">
-                <ul class="list-inline">
+                <!-- <ul class="list-inline">
                     <li><%= link_to 'Seller Login', new_seller_session_path, class: 'btn btn-default badge wow tada'%></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>

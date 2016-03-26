@@ -1,6 +1,6 @@
 class MagentoAdapter
 
-  attr_accessor :magento, :api_url, :api_user, :api_key, :session_key
+  attr_accessor :magento, :api_url, :api_user, :api_key, :session_key, :sync_date, :page, :offset, :date_time_now
 
   def initialize(magento)
     @magento    = magento
@@ -8,6 +8,62 @@ class MagentoAdapter
     @api_user   = magento.api_user
     @api_key    = magento.api_key
     @session_key = nil
+  end
+
+  def login
+    response = client.call(:login, message: { username: self.api_user, apiKey: self.api_key } )
+    self.session_key = response.body[:login_response][:login_return]
+  end
+
+  def magento_info
+    try_execute_call do
+      login unless logged_in?
+      response = client.call(:magento_info, message: { sessionId: self.session_key })
+      response.body[:magento_info_response][:info]
+    end
+  end
+
+  def customer_list(full_task, page)
+    try_execute_call do
+      login unless logged_in?
+
+      initialize_variables(full_task, page)
+
+      response = client.call(:customer_customer_list, message: { sessionId: self.session_key, filters: build_complex_filters(filter_info) })
+      { remote_customers: Array.wrap(response.body[:customer_customer_list_response][:store_view][:item]), continue: (end_date < self.date_time_now) }
+    end
+  end
+
+  private
+
+  def initialize_variables(full_task, page)
+    self.sync_date       = complete?(full_task) ? DateTime.parse(self.magento.start_date.to_s) : self.magento.last_customer_update
+    self.page            = page
+    self.offset          = complete?(full_task) ? 60 : 1
+    self.date_time_now   = DateTime.now.in_time_zone(self.magento.time_zone)
+    define_pagination_filter
+  end
+
+  def complete?(full_task)
+    full_task || self.magento.last_customer_update.blank?
+  end
+
+  def filter_info
+    @filter_info
+  end
+
+  def define_pagination_filter
+    @filter_info = [{ key: 'updated_at', operator: 'from', value: start_date.strftime("%Y-%m-%d %H:%M:%S") }, { key: 'updated_at', operator: 'to', value: end_date.strftime("%Y-%m-%d %H:%M:%S") }]
+  end
+
+  def start_date
+    self.sync_date + ((self.page - 1) * self.offset).days
+  end
+
+  def end_date
+    date = self.sync_date + (self.page * self.offset).days
+    date = self.date_time_now if date > self.date_time_now
+    date #date.strftime("%Y-%m-%d %H:%M:%S %Z")
   end
 
   ##
@@ -25,30 +81,6 @@ class MagentoAdapter
     end
     { 'complex_filter' => [{ 'item' => complex_filters }] }
   end
-
-  def login
-    response = client.call(:login, message: { username: self.api_user, apiKey: self.api_key } )
-    self.session_key = response.body[:login_response][:login_return]
-  end
-
-  def magento_info
-    try_execute_call do
-      login unless logged_in?
-      response = client.call(:magento_info, message: { sessionId: self.session_key })
-      response.body[:magento_info_response][:info]
-    end
-  end
-
-  def customer_list
-    try_execute_call do
-      login unless logged_in?
-      filter_info = magento.last_customer_update ? [{ key: 'updated_at', operator: 'gt', value: magento.last_customer_update}] : Array.new
-      response = client.call(:customer_customer_list, message: { sessionId: self.session_key, filters: build_complex_filters(filter_info) })
-      Array.wrap(response.body[:customer_customer_list_response][:store_view][:item])
-    end
-  end
-
-  private
 
   def client
     @client ||= Savon.client do |cli|

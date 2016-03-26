@@ -8,22 +8,21 @@ class Synchronizer
     @account = platform.account
   end
 
-  def create_or_update_local_customers
+  def create_or_update_local_customers(full_task, options)
     begin
       start_date = DateTime.now.in_time_zone(platform.time_zone)
       results = Array.new
+      page = options[:page]
 
-      remote_customers = platform.fetch_customers
-      translated_customers = translate_customers_to_local(remote_customers)
-
+      fetch_result = platform.fetch_customers(full_task, page)
+      translated_customers = translate_customers_to_local(fetch_result[:remote_customers])
       create_or_update_customers(results, translated_customers)
-
-      platform.update_attributes!({ last_customer_update: start_date })
     rescue StandardError => e
       debugger
       # TODO: Logger
       results << Result.new(:error, e.message)
     end
+    options[:continue] = fetch_result[:continue]
     results
   end
 

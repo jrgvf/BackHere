@@ -6,3 +6,5 @@ Rails.application.initialize!
 
 # Custom Formats for DateTime.to_s
 Time::DATE_FORMATS[:member_since] = "Membro desde %b. %Y"
+
+Date::DATE_FORMATS[:default] = '%d/%m/%Y'

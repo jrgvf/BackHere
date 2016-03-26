@@ -39,6 +39,7 @@ source 'https://rubygems.org'
 
 # Gems For Assets
   gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'                                                      # For use Bootstrap (Unnecessary because adminlte2 use bootstrap)
+  gem 'bootstrap-datepicker-rails'                                                                  # For use DatePicker
   gem 'simple_form', '~> 3.2'                                                                       # For create forms
   gem 'font-awesome-sass', '~> 4.4.0'                                                               # For use FontAwesome
   gem 'adminlte2-rails'                                                                             # For use AdminTLE Template ~> https://almsaeedstudio.com/

@@ -25,10 +25,10 @@ class MagentosController < ApplicationController
 
   def update
     if @magento.update_attributes(magento_params)
-      flash.keep[:success] = "#{@magento.name.capitalize} editado com sucesso."
+      flash.keep[:info] = "[#{@magento.name.capitalize}] Editado com sucesso."
       redirect_to platforms_path
     else
-      flash.now[:error] = "Não foi possível editar o #{@magento.name.capitalize}."
+      flash.now[:error] = "Não foi possível salvar as modificações."
       render :edit
     end
   end
@@ -63,6 +63,6 @@ class MagentosController < ApplicationController
 
   def find_magento_by_magento_id; @magento = Magento.find(params[:magento_id]) end
 
-  def magento_params; params.require(:magento).permit(:name, :url, :version, :api_user, :api_key, :api_url ) end
+  def magento_params; params.require(:magento).permit(:name, :url, :version, :api_user, :api_key, :api_url, :start_date ) end
 
 end

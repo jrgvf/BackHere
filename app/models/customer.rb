@@ -9,13 +9,24 @@ class Customer
   field :remote_id,         type: String
   field :first_name,        type: String
   field :last_name,         type: String
+  field :document,          type: String
+  field :is_guest,          type: Boolean,    default: false 
 
   embeds_many :emails, cascade_callbacks: true
   embeds_many :phones, cascade_callbacks: true
 
   accepts_nested_attributes_for :emails, :phones
 
-  validates_presence_of :remote_id, :first_name, :last_name
+  validates_presence_of :first_name, :last_name
+
+  validates :remote_id, uniqueness: { case_sensitive: false }, allow_blank: true
+  validates_presence_of :remote_id, unless: :is_guest?
+
+  validates :document, uniqueness: { case_sensitive: false }, allow_blank: true
+
+  def is_guest?
+    self[:is_guest]
+  end
 
   def dynamic_attributes
     self.attributes.symbolize_keys.reject { |attribute, value| black_listed_attributes.include?(attribute) }
@@ -75,7 +86,9 @@ class Customer
       :phones,
       :account_id,
       :created_at,
-      :updated_at,  
+      :updated_at,
+      :is_guest,
+      :document,
       :_id
     ]
     black_list | other_attributes

@@ -9,12 +9,16 @@ module Backhere
       end
 
       def create_or_update_customer(remote_customer)
+        new_customer = false
+
         emails = remote_customer.delete(:emails)
         phones = remote_customer.delete(:phones)        
         customer = Customer.find_by(remote_id: remote_customer[:remote_id])
+        customer ||= Customer.find_by(first_name: remote_customer[:first_name], last_name: remote_customer[:last_name], is_guest: true)
 
         if customer.nil?
           customer = Customer.new(default_attributes(remote_customer))
+          new_customer = true
         else
           customer.first_name = remote_customer[:first_name]
           customer.last_name = remote_customer[:last_name]
@@ -25,7 +29,7 @@ module Backhere
         build_phones(customer, phones)
 
         if customer.save
-          Backhere::Api::ExecutionResults::Result.new(:success, "Cliente #{customer.name} importado com sucesso.")
+          Backhere::Api::ExecutionResults::Result.new(:success, "Cliente #{customer.name} #{ new_customer ? "importado" : "atualizado" } com sucesso.")
         else
           Backhere::Api::ExecutionResults::Result.new(:failure, customer.errors.full_messages.join('; '))
         end

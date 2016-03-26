@@ -22,4 +22,8 @@ class Phone
     self[:verified]
   end
 
+  def full_phone
+    "+#{country_code} (#{region_code}) #{number}"
+  end
+
 end

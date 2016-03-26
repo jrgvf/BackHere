@@ -11,8 +11,10 @@ class Task
   field :platform_name,     type: String
   field :status,            type: Symbol,   default: :pending
   field :type,              type: Symbol
+  field :iteration_index,   type: Integer,  default: 1
   field :full_task,         type: Boolean,  default: false
   field :is_visible,        type: Boolean,  default: true
+  field :continue,          type: Boolean,  default: true
   field :started_at,        type: DateTime
   field :finished_at,       type: DateTime
   field :success_messages,  type: Array,    default: Array.new
@@ -55,8 +57,15 @@ class Task
 
   private
 
+  def update_messages(execution_result)
+    self.success_messages += execution_result.success_messages
+    self.error_messages += execution_result.error_messages
+    self.failure_messages += execution_result.failure_messages
+    self.save!
+  end
+
   def update_finished_task(execution_result)
-    finished_at = DateTime.now.in_time_zone('Brasilia')
+    finished_at = DateTime.now.in_time_zone(Platform.find(self.platform_id).time_zone)
 
     if execution_result.all_successful?
       status = :successfully_finished
@@ -68,9 +77,6 @@ class Task
 
     self.finished_at = finished_at
     self.status = status
-    self.success_messages += execution_result.success_messages
-    self.error_messages += execution_result.error_messages
-    self.failure_messages += execution_result.failure_messages
-    self.save!     
+    update_messages(execution_result)
   end
 end
