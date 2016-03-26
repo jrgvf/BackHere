@@ -70,7 +70,15 @@
   padding: 4em 1em 1em 1em;
 }
 
-.remove-border {
+.task-index-responsive {
+  min-height: .01%;
+  overflow-x: auto;
+  padding-bottom: 5em;
+
+  .input-group {
+    padding-bottom: 1em;
+  }
+  
   .input-group-addon, .form-control {
     border: none;
   }

@@ -3,7 +3,7 @@ $(function() {
 
   $('.slide-toggle-button').on('click', function() {
     changeAngle(this);
-    slideTable(this, 1000);
+    slideTable(this, 500);
   });
   
   function changeAngle (button, icon) {

@@ -12,7 +12,7 @@ class TasksController < ApplicationController
 
   def create
     if invalid_params?
-      flash.keep[:error] = "Deve ser selecionada qual tarefa deseja executar e ao menos uma plataforma."
+      flash.keep[:alert] = "Deve ser selecionada qual tarefa deseja executar e ao menos uma plataforma."
       return redirect_to new_task_path
     end
 

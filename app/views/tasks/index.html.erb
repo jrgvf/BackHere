@@ -21,34 +21,41 @@
 
       </div><!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
-        <table class="table table-hover">
-          <tr>
-            <th></th>
-            <th>Nome</th>
-            <th>Plataforma</th>
-            <th>Status</th>
-            <th>Criada em:</th>
-            <th>Iniciada em:</th>
-            <th>Finalizada em:</th>
-          </tr>
-          <% @tasks.each_with_index do |task, index| %>
+        <div class="col-sm-12">
+          <table class="table table-hover">
             <tr>
-              <td><%= @tasks.offset + index + 1%></td>
-              <td><%= task.task_name %></td>
-              <td><%= task.platform_name %></td>
-              <td><%= status_flag(task.status) %></td>
-              <td><%= time_tag task.created_at %></td>
-              <td><%= time_tag task.started_at unless task.started_at.nil? %></td>
-              <td><%= time_tag task.finished_at unless task.finished_at.nil? %></td>
-              <td><%= link_to fa_icon("search-plus", class: "fa-lg"), task_path(task) %></td>
+              <th></th>
+              <th></th>
+              <th>Status</th>
+              <th>Nome</th>
+              <th>Plataforma</th>
+              <th>Criada em:</th>
+              <th>Iniciada em:</th>
+              <th>Finalizada em:</th>
             </tr>
-          <% end %>
-        </table>
+            <% @tasks.each_with_index do |task, index| %>
+              <tr>
+                <td><%= @tasks.offset + index + 1%></td>
+                <td><%= link_to fa_icon("search-plus", class: "fa-lg"), task_path(task) %></td>
+                <td><%= status_flag(task.status) %></td>
+                <td><%= task.task_name %></td>
+                <td><%= task.platform_name %></td>
+                <td><%= time_tag task.created_at %></td>
+                <td><%= time_tag task.started_at unless task.started_at.nil? %></td>
+                <td><%= time_tag task.finished_at unless task.finished_at.nil? %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div><!-- col-sm-12 -->
       </div><!-- /.box-body -->
-      <%= will_paginate @tasks, class: 'backhere_pagination' %>
-      <div class="backhere_page_info">
-        <%= page_entries_info @tasks %>
-      </div><!-- backhere_page_info -->
+      <div class="row">
+        <div class="col-sm-12">
+          <%= will_paginate @tasks, class: 'backhere_pagination' %>
+          <div class="backhere_page_info">
+            <%= page_entries_info @tasks %>
+          </div><!-- backhere_page_info -->
+        </div><!-- col-sm-12 -->
+      </div><!-- row -->
     </div><!-- /.box -->
   </div><!-- col-xs-12 -->
 </div><!-- row -->
