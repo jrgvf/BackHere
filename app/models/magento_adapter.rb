@@ -101,7 +101,7 @@ class MagentoAdapter
     begin
       yield
     rescue Savon::SOAPFault => exception
-      debugger
+      debugger unless Rails.env.production?
       if session_expired?(exception) && should_retry
         should_retry = false
         self.session_key = nil
@@ -110,7 +110,7 @@ class MagentoAdapter
         raise exception
       end
     rescue Savon::Error => exception
-      debugger
+      debugger unless Rails.env.production?
       if should_retry
         should_retry = false
         # TO DO: Logger!
@@ -121,7 +121,7 @@ class MagentoAdapter
         raise exception
       end
     rescue Exception => exception
-      debugger
+      debugger unless Rails.env.production?
       # TO DO: Logger!
       raise exception
     end
