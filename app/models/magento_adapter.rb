@@ -94,7 +94,10 @@ class MagentoAdapter
 
   def logged_in?; self.session_key.present? end
 
-  def session_expired?(exception); exception.to_hash[:fault][:code][:value].to_s.eql?("5") end
+  def session_expired?(exception)
+    hash_exception = exception.to_hash
+    hash_exception[:fault] && hash_exception[:fault][:code] && exception.to_hash[:fault][:code][:value].to_s.eql?("5")
+  end
 
   def try_execute_call
     should_retry = true
