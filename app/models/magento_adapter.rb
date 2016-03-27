@@ -34,6 +34,26 @@ class MagentoAdapter
     end
   end
 
+  def order_list(full_task, page)
+    try_execute_call do
+      login unless logged_in?
+
+      initialize_variables(full_task, page)
+
+      response = client.call(:sales_order_list, message: { sessionId: self.session_key, filters: build_complex_filters(filter_info) })
+      { remote_orders: Array.wrap(response.body[:sales_order_list_response][:result][:item]), continue: (end_date < self.date_time_now) }
+    end
+  end
+
+  def order_info(increment_id)
+    try_execute_call do
+      login unless logged_in?
+      
+      response = client.call(:sales_order_info, message: { sessionId: self.session_key, orderIncrementId: increment_id })
+      response.body[:sales_order_info_response][:result]
+    end
+  end
+
   private
 
   def initialize_variables(full_task, page)
@@ -41,7 +61,8 @@ class MagentoAdapter
     self.page            = page
     self.offset          = complete?(full_task) ? 60 : 1
     self.date_time_now   = DateTime.now.in_time_zone(self.magento.time_zone)
-    define_pagination_filter
+    attribute_key = complete?(full_task) ? "created_at" : "updated_at"
+    define_pagination_filter(attribute_key)
   end
 
   def complete?(full_task)
@@ -52,8 +73,12 @@ class MagentoAdapter
     @filter_info
   end
 
-  def define_pagination_filter
-    @filter_info = [{ key: 'updated_at', operator: 'from', value: start_date.strftime("%Y-%m-%d %H:%M:%S") }, { key: 'updated_at', operator: 'to', value: end_date.strftime("%Y-%m-%d %H:%M:%S") }]
+  def define_pagination_filter(attribute_key)
+    @filter_info = [{ key: attribute_key, operator: 'from', value: start_date.strftime("%Y-%m-%d %H:%M:%S") }, { key: attribute_key, operator: 'to', value: end_date.strftime("%Y-%m-%d %H:%M:%S") }]
+  end
+
+  def define_order_info_filter(increment_id)
+    @filter_info = [{ key: 'increment_id', operator: 'eq', value: increment_id }]
   end
 
   def start_date
@@ -88,7 +113,7 @@ class MagentoAdapter
       cli.open_timeout 600
       cli.read_timeout 600
       cli.ssl_verify_mode :none
-      cli.soap_version 2
+      # cli.soap_version 2
     end
   end
 

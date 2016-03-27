@@ -27,12 +27,16 @@ class Task
     raise NotImplementedError
   end
 
+  def self.generic_type
+    raise NotImplementedError
+  end
+
   def full_task?
     self[:full_task] ? "Sim" : "Não"
   end
 
   def self.same_type?(other_type)
-    self.type == other_type
+    self.generic_type == other_type
   end
 
   def visible?
@@ -48,7 +52,7 @@ class Task
   end
 
   def task_name
-    Task.task_name
+    self.class.task_name
   end
 
   def execute
@@ -57,6 +61,10 @@ class Task
 
   private
 
+  def started_before
+    self.started_at.present?
+  end
+
   def update_messages(execution_result)
     self.success_messages += execution_result.success_messages
     self.error_messages += execution_result.error_messages
@@ -64,19 +72,34 @@ class Task
     self.save!
   end
 
-  def update_finished_task(execution_result)
-    finished_at = DateTime.now.in_time_zone(Platform.find(self.platform_id).time_zone)
+  def update_finished_task(execution_result, task_date_attribute)
+    update_messages(execution_result)
 
-    if execution_result.all_successful?
+    platform = Platform.find(self.platform_id)
+    finished_at = DateTime.now.in_time_zone(platform.time_zone)
+
+    if all_successful?
       status = :successfully_finished
-    elsif execution_result.has_error?
+      platform.update_attributes!({ task_date_attribute => self.started_at })
+    elsif has_error?
       status = :finished_with_error
     else
       status = :finished_with_failure
+      platform.update_attributes!({ task_date_attribute => self.started_at })
     end
 
     self.finished_at = finished_at
     self.status = status
-    update_messages(execution_result)
+    self.save
+  end
+
+  private
+
+  def all_successful?
+    self.error_messages.count == 0 && self.failure_messages.count == 0
+  end
+
+  def has_error?
+    self.error_messages.count > 0
   end
 end

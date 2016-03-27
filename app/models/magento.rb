@@ -38,4 +38,25 @@ class Magento < Platform
     magento_adapter.customer_list(full_task, page)
   end
 
+  def fetch_orders(full_task, page)
+    order_list = magento_adapter.order_list(full_task, page)
+
+    increments_id = order_list[:remote_orders].map{ |remote_order| remote_order[:increment_id] }
+    remote_orders = increments_id.map{ |increment_id| magento_adapter.order_info(increment_id) }
+
+    remote_orders = merge_order_info(order_list[:remote_orders], remote_orders)
+    
+    { remote_orders: remote_orders, continue: order_list[:continue] }
+  end
+
+  private
+
+  def merge_order_info(result_order_list, result_order_info)
+    merged_orders = Array.new
+    (0...(result_order_list.count)).each do |iterator|
+      merged_orders << result_order_list[iterator].merge(result_order_info[iterator])
+    end
+    merged_orders
+  end
+
 end

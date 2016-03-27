@@ -1,7 +1,11 @@
-class ClientTask < Task
+class CustomerTask < Task
 
   def self.type
-    :client
+    :data_import
+  end
+
+  def self.generic_type
+    :import_customers
   end
 
   def self.visible?
@@ -9,11 +13,7 @@ class ClientTask < Task
   end
 
   def self.task_name
-    "Importar dados. (Clientes e Pedidos)"
-  end
-
-  def task_name
-    ClientTask.task_name
+    "Importar Clientes"
   end
 
   def execute
@@ -29,14 +29,7 @@ class ClientTask < Task
       self.update_attributes!(status: :paused, iteration_index: (options[:page] + 1), continue: options[:continue])
       update_messages(execution_result)
     else
-      platform.update_attributes!({ last_customer_update: started_at })
-      update_finished_task(execution_result)
+      update_finished_task(execution_result, "last_customer_update")
     end
-  end
-
-  private
-
-  def started_before
-    self.started_at.present?
   end
 end

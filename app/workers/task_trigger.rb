@@ -4,18 +4,18 @@ class TaskTrigger
   sidekiq_options :retry => 1, :queue => :cron_jobs
 
   def self.try_execute(task)
-    return if task.nil? || already_processing?(task, [:paused])
+    return if task.nil? || already_processing?(task)
     task.job_id = Sidekiq::Client.enqueue_to(Platform.queue(task.platform_id), TaskWorker, task.id.to_s)
     task.status = :queued
     task.save
   end
 
-  def self.already_processing?(task, others_statuses = [])
-    TaskTrigger.new().already_processing?(task, others_statuses)
+  def self.already_processing?(task)
+    TaskTrigger.new().already_processing?(task)
   end
 
-  def already_processing?(task, others_statuses = [])
-    Task.where(account: task.account, type: task.type, :status.in => (blocked_statuses | others_statuses)).count > 0
+  def already_processing?(task)
+    Task.where(:id.nin => [task.id], account: task.account, type: task.type, :status.in => blocked_statuses).count > 0
   end
 
   def perform
@@ -38,7 +38,7 @@ class TaskTrigger
     end
 
     def blocked_statuses
-      [:queued, :processing]
+      [:queued, :processing, :paused]
     end
 
     def standby_statuses
