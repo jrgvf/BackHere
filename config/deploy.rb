@@ -40,6 +40,8 @@ set :passenger_environment_variables, { :path => '/usr/bin:$PATH' }
 
 set :passenger_restart_command, '/usr/bin/passenger-config restart-app'
 
+set :pty,  false
+
 namespace :deploy do
 
   after :restart, :clear_cache do

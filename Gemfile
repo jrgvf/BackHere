@@ -86,6 +86,7 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
+  gem 'capistrano-sidekiq'
 end
 
 # Gems For Production
