@@ -10,6 +10,8 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
+  config.thread_safe!
+
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
@@ -18,7 +20,7 @@ Rails.application.configure do
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like
   # NGINX, varnish or squid.
-  # config.action_dispatch.rack_cache = true
+  config.action_dispatch.rack_cache = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
@@ -65,7 +67,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Support For Devise
-  config.action_mailer.default_url_options = { host: 'backhere.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'backhereapp.com.br' }
   # For Email
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
@@ -75,7 +77,7 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name => ENV['ELASTIC_MAIL_USER'],
     :password => ENV['ELASTIC_MAIL_PASSWORD'],
-    :domain => 'heroku.com',
+    :domain => 'backhereapp.com.br',
     :enable_starttls_auto => true
   }
 
