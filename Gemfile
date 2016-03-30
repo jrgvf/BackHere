@@ -80,12 +80,18 @@ end
 group :development do
   gem 'flay'                                                                                        # For DRY!
   gem 'better_errors', '~> 2.1', '>= 2.1.1'                                                         # For show better errors
+
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
 end
 
 # Gems For Production
 group :production do
   gem 'rails_12factor', '>= 0.0.2'
-  gem "passenger"
+  # gem "passenger"
 end
 
 # Other Gems Suggest of Rails
