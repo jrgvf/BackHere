@@ -36,9 +36,9 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 set :rvm_ruby_version, '2.2.0'
 
-set :passenger_environment_variables, { :path => '/usr/lib/ruby/vendor_ruby/phusion_passenger/bin:$PATH' }
+set :passenger_environment_variables, { :path => '/usr/bin:$PATH' }
 
-set :passenger_restart_command, '/usr/lib/ruby/vendor_ruby/phusion_passenger/bin/passenger-config restart-app'
+set :passenger_restart_command, '/usr/bin/passenger-config restart-app'
 
 namespace :deploy do
 
