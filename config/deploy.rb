@@ -42,6 +42,8 @@ set :passenger_restart_command, '/usr/bin/passenger-config restart-app'
 
 set :pty,  false
 
+set :sidekiq_monit_use_sudo, false
+
 namespace :deploy do
 
   after :restart, :clear_cache do
