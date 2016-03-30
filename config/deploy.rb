@@ -44,6 +44,8 @@ set :pty,  false
 
 set :sidekiq_monit_use_sudo, false
 
+set :sidekiq_processes, 2
+
 namespace :deploy do
 
   after :restart, :clear_cache do
