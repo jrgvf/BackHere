@@ -1,10 +1,10 @@
 ---
-:concurrency: 27
+:concurrency: 15
 staging:
-  :concurrency: 27
+  :concurrency: 15
 production:
-  :concurrency: 27
+  :concurrency: 15
 :queues:
   - [default, 1]
-  - [magento, 2]
-  - [cron_jobs, 3]
+  - [magento, 3]
+  - [cron_jobs, 1]
