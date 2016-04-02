@@ -15,6 +15,9 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap
+//= require nprogress
+//= require nprogress-turbolinks
+//= require nprogress-ajax
 //= require bootstrap-datepicker
 //= require icheck
 //= require jquery.slimscroll.min

@@ -20,8 +20,8 @@ source 'https://rubygems.org'
   gem "sidekiq-cron"                                                                                # Scheduler for Sidekiq
   gem 'sinatra', :require => nil                                                                    # For Sidekiq Web UI
   gem 'redis'                                                                                       # For use Redis
-  gem "redis-rails"
-  gem 'redis-rack-cache'
+  gem "redis-rails"                                                                                 # For use Redis-Rails
+  gem 'redis-rack-cache'                                                                            # For use Redis Rack Cache
   gem "hiredis"                                                                                     # Driver for Redis communication
 
 # Gems For MongoDB Support
@@ -59,7 +59,7 @@ source 'https://rubygems.org'
   gem 'jquery-ui-rails'                                                                             # For use JQueryUI in Rails
   # gem 'htmlentities', '~> 4.3', '>= 4.3.4'                                                        # For encode and decode String safety for html
   # gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.2'                                                # For sanitizer html
-  # gem 'nprogress-rails', '~> 0.1.6.7'                                                             # For progress bar using ajax
+  gem 'nprogress-rails'                                                                             # For progress bar using ajax
   # gem 'select2-rails', '~> 4.0'                                                                   # For Jquery select field
 
 
