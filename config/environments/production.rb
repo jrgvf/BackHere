@@ -58,10 +58,11 @@ Rails.application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-  
-  config.lograge.keep_original_rails_log = true
 
+  config.lograge.enabled = true  
+  config.lograge.keep_original_rails_log = true
   config.lograge.logger = ActiveSupport::Logger.new "#{Rails.root}/log/lograge_#{Rails.env}.log"
+  config.log_formatter = Lograge::Formatters::Logstash.new
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -108,6 +109,4 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = Lograge::Formatters::Logstash.new
 end
