@@ -19,6 +19,13 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+  # config.action_dispatch.rack_cache = {
+  #   metastore: "#{ENV['REDIS_URL']}/1/metastore",
+  #   entitystore: "#{ENV['REDIS_URL']}/1/entitystore"
+  # }
+
+  config.cache_store = :redis_store
+
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.

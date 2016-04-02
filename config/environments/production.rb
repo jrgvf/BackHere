@@ -20,6 +20,11 @@ Rails.application.configure do
   # NGINX, varnish or squid.
   # config.action_dispatch.rack_cache = true
 
+  # config.action_dispatch.rack_cache = {
+  #   metastore: "#{ENV['REDIS_URL']}/1/metastore",
+  #   entitystore: "#{ENV['REDIS_URL']}/1/entitystore"
+  # }
+
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.serve_static_files = true
@@ -56,6 +61,7 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
+  config.cache_store = :redis_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'

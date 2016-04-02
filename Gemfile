@@ -20,6 +20,8 @@ source 'https://rubygems.org'
   gem "sidekiq-cron"                                                                                # Scheduler for Sidekiq
   gem 'sinatra', :require => nil                                                                    # For Sidekiq Web UI
   gem 'redis'                                                                                       # For use Redis
+  gem "redis-rails"
+  gem 'redis-rack-cache'
   gem "hiredis"                                                                                     # Driver for Redis communication
 
 # Gems For MongoDB Support
