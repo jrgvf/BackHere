@@ -11,21 +11,21 @@
       </div><!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
         <div class="col-sm-12">
-          <table class="table table-hover">
+          <table data-link="row" class="table table-hover rowlink">
             <tr>
-              <th></th>
-              <th>Identificador</th>
               <th>Nome</th>
+              <th>Identificador</th>
               <th>Importado em:</th>
               <th>Atualizado em:</th>
+              <th></th>
             </tr>
             <% @customers.each_with_index do |customer, index| %>
               <tr>
-                <td><%= link_to fa_icon("search-plus", class: "fa-lg"), customer_path(customer) %></td>
-                <td><%= customer.remote_id %></td>
                 <td><%= customer.name.capitalize %></td>
+                <td><%= customer.remote_id %></td>
                 <td><%= time_tag customer.created_at %></td>
                 <td><%= time_tag customer.updated_at %></td>
+                <td class="rowlink-skip"><%= link_to fa_icon("search-plus", class: "fa-lg"), customer_path(customer) %></td>
               </tr>
             <% end %>
           </table>

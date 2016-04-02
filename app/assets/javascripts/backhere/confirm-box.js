@@ -8,12 +8,12 @@ ready = function() {
       className: "my-modal",
       buttons: {
         cancel: {
-          label: "Cancelar",
-          className: "btn-danger"
+          label: '<span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><b>Cancelar</b>',
+          className: "btn-labeled btn-danger"
         },
         ok: {
-          label: "Continuar",
-          className: "btn-primary",
+          label: '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><b>Continuar</b>',
+          className: "btn-labeled btn-primary",
           callback: function() {
             return callback();
           }

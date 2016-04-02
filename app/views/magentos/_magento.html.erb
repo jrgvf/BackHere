@@ -52,7 +52,7 @@
           <span class="input-group-addon">
             <%= fa_icon "calendar" %>
           </span>
-          <%= f.text_field :start_date, class: "form-control datepicker", placeholder: "dd/mm/yyyy" %>
+          <%= f.text_field :start_date, class: "form-control datepicker", placeholder: "Selecione a data de início da operação.", "data-mask" => "dd/mm/yyyy" %>
           <span class="input-group-addon">
             <%= link_to (fa_icon "close", id: 'clear-datepicker'), '#' %>
           </span>

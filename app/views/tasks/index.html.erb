@@ -22,27 +22,27 @@
       </div><!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
         <div class="col-sm-12">
-          <table class="table table-hover">
+          <table data-link="row" class="table table-hover rowlink">
             <tr>
               <th></th>
-              <th></th>
-              <th>Status</th>
-              <th>Nome</th>
               <th>Plataforma</th>
+              <th>Nome</th>
+              <th>Status</th>
               <th>Criada em:</th>
               <th>Iniciada em:</th>
               <th>Finalizada em:</th>
+              <th></th>
             </tr>
             <% @tasks.each_with_index do |task, index| %>
               <tr>
                 <td><%= @tasks.offset + index + 1%></td>
-                <td><%= link_to fa_icon("search-plus", class: "fa-lg"), task_path(task) %></td>
-                <td><%= status_flag(task.status) %></td>
-                <td><%= task.task_name %></td>
                 <td><%= task.platform_name %></td>
+                <td><%= task.task_name %></td>
+                <td><%= status_flag(task.status) %></td>
                 <td><%= time_tag task.created_at %></td>
                 <td><%= time_tag task.started_at unless task.started_at.nil? %></td>
                 <td><%= time_tag task.finished_at unless task.finished_at.nil? %></td>
+                <td class="rowlink-skip"><%= link_to fa_icon("search-plus", class: "fa-lg"), task_path(task) %></td>
               </tr>
             <% end %>
           </table>
