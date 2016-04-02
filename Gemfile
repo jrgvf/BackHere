@@ -15,7 +15,8 @@ source 'https://rubygems.org'
   gem 'newrelic_rpm'                                                                                # Gem for support NewRelic
   gem "figaro"                                                                                      # Gem for support for ENV
   # gem 'axlsx', '~> 2.0', '>= 2.0.1'                                                               # For generate xlsx files
-  gem 'aws-sdk', '~> 1.3.4'                                                                         # SDK with custom features of AWS
+  gem 'aws-sdk-v1'                                                                                  # SDK with custom features of AWS
+  gem 'aws-sdk', '~> 2'                                                                             # SDK with custom features of AWS
   gem 'sidekiq'                                                                                     # For use Sidekiq
   gem "sidekiq-cron"                                                                                # Scheduler for Sidekiq
   gem 'sinatra', :require => nil                                                                    # For Sidekiq Web UI
