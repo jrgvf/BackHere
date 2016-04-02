@@ -47,8 +47,10 @@ class MagentosController < ApplicationController
       begin
         @magento.specific_version = @magento.get_specific_version
         if @magento.save
+          Rails.logger.info.debug("Versão do Magento atualizada.")
           format.json { render json: { specific_version: @magento.specific_version }, status: 200 }
         else
+          Rails.logger.info.debug("Versão do Magento não atualizada.")
           format.json { render json: @magento.errors.full_messages, status: :unprocessable_entity }
         end
       rescue Exception => e
