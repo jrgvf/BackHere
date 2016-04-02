@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap
+//= require jasny-bootstrap.min
 //= require nprogress
 //= require nprogress-turbolinks
 //= require nprogress-ajax

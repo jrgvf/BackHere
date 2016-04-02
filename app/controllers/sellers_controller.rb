@@ -7,6 +7,7 @@ class SellersController < ApplicationController
 
   def update
     if @seller.update_with_password(seller_params)
+      clear_avatar if params[:seller][:avatar].blank?
       # Sign in the user by passing validation in case his password changed
       sign_in @seller, :bypass => true
       flash.keep[:info] = "Perfil atualizado com sucesso."
@@ -25,6 +26,13 @@ class SellersController < ApplicationController
 
     def seller_params
       params.require(:seller).permit(:password, :password_confirmation, :current_password, :avatar, :position)
+    end
+
+    def clear_avatar
+      if @seller.avatar.present?
+        @seller.avatar.clear
+        @seller.save
+      end
     end
 
 end

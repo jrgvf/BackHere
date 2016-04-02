@@ -43,6 +43,10 @@ module ApplicationHelper
     nil
   end
 
+  def fileinput_class(seller)
+    seller.avatar.present? ? "fileinput-exists" : "fileinput-new"
+  end
+
   def profile_image
     concat_profile_image "img-circle"
     nil
@@ -53,12 +57,17 @@ module ApplicationHelper
     nil
   end
 
-  def concat_profile_image img_class
+  def concat_profile_image img_class = ""
     if current_user.avatar.present?
       concat(image_tag(current_user.avatar.url(:profile), class: img_class, alt:"User Image"))
     else
       concat(image_tag("default_user.png", class: img_class, alt:"User Image"))
     end
+  end
+
+  def profile_image_normal
+    concat_profile_image
+    nil
   end
 
   def bootstrap_class_for flash_type
