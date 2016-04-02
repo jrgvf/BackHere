@@ -94,6 +94,7 @@ end
 # Gems For Production
 group :production do
   gem 'rails_12factor', '>= 0.0.2'
+  gem "lograge"
   # gem "passenger"
 end
 
