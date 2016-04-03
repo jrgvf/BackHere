@@ -16,7 +16,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = ["Account", "Permission", "Seller", "User", "HomeMessage", "Platform", "Magento"]
+  config.included_models = ["Account", "Permission", "User", "HomeMessage", "Platform", "Magento"]
 
   config.navigation_static_links = {
     'Sidekiq' => '../../../backhere/sidekiq'
@@ -28,17 +28,16 @@ RailsAdmin.config do |config|
   
   # config.included_models << "MongoidStore::Session"
 
-  config.model 'Seller' do
-    field :account do
-      read_only true
-    end
+  config.model 'User' do
     field :name
     field :position
     field :email
     field :password
     field :password_confirmation
     edit do
-      field :avatar
+      field :avatar do
+        delete_method :delete_avatar
+      end
     end
   end
 

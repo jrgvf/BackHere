@@ -6,11 +6,11 @@ class Account
   field :default_email,     type: String
   field :blocked,           type: Boolean,    default: false
 
-  has_many :sellers, dependent: :destroy
-  accepts_nested_attributes_for :sellers, allow_destroy: true
+  has_many :users, dependent: :destroy
+  accepts_nested_attributes_for :users, allow_destroy: true
 
-  has_many :platforms
-  accepts_nested_attributes_for :sellers, allow_destroy: true
+  has_many :platforms, dependent: :destroy
+  accepts_nested_attributes_for :platforms, allow_destroy: true
 
   embeds_many :permissions
   accepts_nested_attributes_for :permissions, allow_destroy: true

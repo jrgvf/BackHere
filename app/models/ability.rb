@@ -6,16 +6,16 @@ class Ability
       if user.is_admin?
         can :access, :rails_admin
         can :manage, :all
-      elsif user.is_seller?
-        apply_seller_permissions(user) unless user.account.blocked?
+      else
+        apply_permissions(user) unless user.account.blocked?
       end
     end
   end
 
   private
 
-  def apply_seller_permissions seller
-    seller.account.permissions.each do |permission|
+  def apply_permissions user
+    user.account.permissions.each do |permission|
       if permission.model_exists?
         can permission.action.to_sym, permission.subject.constantize
       else
