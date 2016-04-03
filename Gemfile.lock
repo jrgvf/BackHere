@@ -371,6 +371,13 @@ GEM
       redis-namespace (>= 1.5.2)
       rufus-scheduler (>= 2.0.24)
       sidekiq (>= 4.0.0)
+    sidekiq-failures (0.4.5)
+      sidekiq (>= 2.16.0)
+    sidekiq-statistic (1.2.0)
+      sidekiq (>= 3.3.4, < 5)
+    sidekiq-unique-jobs (4.0.17)
+      sidekiq (>= 2.6)
+      thor
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -484,6 +491,9 @@ DEPENDENCIES
   selenium-webdriver (~> 2.48, >= 2.48.1)
   sidekiq
   sidekiq-cron
+  sidekiq-failures
+  sidekiq-statistic
+  sidekiq-unique-jobs
   simple_form (~> 3.2)
   simplecov
   sinatra

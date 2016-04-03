@@ -13,3 +13,7 @@ Sidekiq.configure_client do |config|
 end
 
 Sidekiq.default_worker_options = { 'backtrace' => true }
+
+Sidekiq::Statistic.configure do |config|
+  config.log_file = 'log/sidekiq.log'
+end
