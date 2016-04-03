@@ -1,7 +1,12 @@
 class TaskWorker
   include Sidekiq::Worker
 
-  sidekiq_options :retry => 2
+  sidekiq_options retry: 2,
+    unique: :until_and_while_executing,
+    run_lock_expiration: 24*60*60,
+    unique_expiration: 24*60*60,
+    log_duplicate_payload: true,
+    failures: true
 
   # The current retry count is yielded. The return value of the block must be 
   # an integer. It is used as the delay, in seconds. 
