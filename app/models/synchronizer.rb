@@ -21,7 +21,7 @@ class Synchronizer
     rescue StandardError => e
       debugger unless Rails.env.production?
       # TODO: Logger
-      results << Result.new(:error, e.message)
+      results << Result.new(:error, e.message)last_customer_update
     end
     options[:continue] = fetch_result[:continue]
     results
