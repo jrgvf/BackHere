@@ -16,8 +16,8 @@
     font-style: normal;
     font-weight: bold;
     color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
+    background-color: #f05f40;
+    border-color: #f05f40;
     z-index: 2; }
 
   a {
@@ -28,7 +28,7 @@
 
   a:hover, a:focus {
     background: #F0F8FF;
-    color: #337ab7; }
+    color: #f05f40; }
 
   .previous_page, .next_page {
     border-width: 2px; }
