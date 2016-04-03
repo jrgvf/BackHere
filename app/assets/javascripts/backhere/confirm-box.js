@@ -13,7 +13,7 @@ ready = function() {
         },
         ok: {
           label: '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><b>Continuar</b>',
-          className: "btn-labeled btn-primary",
+          className: "btn-labeled btn-success",
           callback: function() {
             return callback();
           }

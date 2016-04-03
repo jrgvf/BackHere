@@ -34,22 +34,22 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
-            <div class="col-xs-8">
+            <div class="col-sm-8">
               <% if devise_mapping.rememberable? %>
                 <div class="checkbox icheck">
                   <%= f.label :remember_me do %>
-                    <%= f.check_box :remember_me, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'blue' %> Mantenha-me Conectado
+                    <%= f.check_box :remember_me, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %> Mantenha-me Conectado
                   <% end %>
                 </div>
               <% end %>
             </div><!-- /.col -->
-            <div class="col-xs-4">
+            <div class="col-sm-4">
               <%= f.submit 'Log in', class: 'btn btn-primary btn-block btn-flat' %>
             </div><!-- /.col -->
           </div>
         <% end %>
         <div class="row" style="padding-top:2em">
-          <div class="col-xs-4">
+          <div class="col-sm-4">
             <%= link_to fa_icon("reply", text: content_tag(:span, 'Voltar')), root_path, class: 'btn btn-primary' %>
           </div> <!-- /.col -->
         </div>
