@@ -17,6 +17,7 @@ class CustomFailure < Devise::FailureApp
     end
 
     def admin_action?
-      params["controller"].present? && params["controller"].include?("rails_admin")
+      params["controller"].present? && params["controller"].include?("rails_admin") ||
+      params["admin"].present?
     end
   end

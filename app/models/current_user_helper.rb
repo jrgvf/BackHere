@@ -2,10 +2,6 @@ module Backhere
 
   module CurrentUserHelper
 
-    def is_seller?
-      self.is_a?(Seller)
-    end
-
     def is_admin?
       self.is_a?(Admin)
     end

@@ -43,8 +43,8 @@ module ApplicationHelper
     nil
   end
 
-  def fileinput_class(seller)
-    seller.avatar.present? ? "fileinput-exists" : "fileinput-new"
+  def fileinput_class(user)
+    user.avatar.present? ? "fileinput-exists" : "fileinput-new"
   end
 
   def profile_image

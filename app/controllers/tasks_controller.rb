@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+class TasksController < BackHereController
   before_action :find_task, only: [:show]
 
   def index

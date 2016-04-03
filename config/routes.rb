@@ -7,10 +7,9 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'account#dashboard'
 
-  devise_for :users
   devise_for :admins, only: :sessions
-  devise_for :sellers, only: :sessions
-  resources :sellers, only: [:edit, :update]
+  devise_for :users, only: :sessions
+  resources :users, only: [:edit, :update]
 
   resources :tasks, only: [:index, :create, :new, :show]
 
@@ -23,8 +22,8 @@ Rails.application.routes.draw do
   end
 
 
-  authenticated :seller do
-    root 'account#dashboard', as: :authenticated_seller_root
+  authenticated :user do
+    root 'account#dashboard', as: :authenticated_user_root
   end
 
   authenticated :admin do

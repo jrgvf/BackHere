@@ -1,4 +1,4 @@
-class CustomersController < ApplicationController
+class CustomersController < BackHereController
   before_action :find_customer, only: [:show]
 
   def index

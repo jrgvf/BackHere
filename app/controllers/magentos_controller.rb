@@ -1,4 +1,4 @@
-class MagentosController < ApplicationController
+class MagentosController < BackHereController
 
   load_and_authorize_resource
 

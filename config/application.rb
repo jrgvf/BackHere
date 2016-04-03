@@ -18,6 +18,7 @@ module BackHere
   class Application < Rails::Application
 
     config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**/}', '{**/}')]
 
     # For don't show any logs on Console
     Mongoid.logger.level = Logger::INFO
@@ -26,7 +27,7 @@ module BackHere
     # config.mongoid.logger = Logger.new($stdout, :warn)
     
     config.to_prepare do
-      Devise::SessionsController.layout 'backhere_login'
+      Devise::SessionsController.layout 'login'
     end
 
     config.serve_static_files = true

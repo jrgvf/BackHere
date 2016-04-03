@@ -1,8 +1,5 @@
 class HomeController < ApplicationController
-  layout "backhere_home"
-
-  skip_before_filter :set_current_tenant
-  skip_before_filter :authenticate_user!
+  layout "home"
 
   before_action :sanitize_params, only: :create_home_message
   

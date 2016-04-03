@@ -1,4 +1,4 @@
-class AccountController < ApplicationController
+class AccountController < BackHereController
 
   def dashboard
   end
