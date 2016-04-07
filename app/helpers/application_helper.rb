@@ -6,6 +6,32 @@ module ApplicationHelper
     nil
   end
 
+  def build_logo_sidebar_old
+    concat(content_tag(:a, href: root_path, class: "logo") do
+      concat(content_tag(:span, class: "logo-mini") do
+        concat(content_tag(:b, "B"))
+        concat "H"
+      end)
+      concat(content_tag(:span, class: "logo-lg") do
+        concat(content_tag(:b, "Back"))
+        concat "Here"
+      end)
+    end)
+    nil
+  end
+
+  def build_logo_sidebar
+    concat(content_tag(:a, href: root_path, class: "logo") do
+      concat(content_tag(:span, class: "logo-mini") do
+        concat(image_tag("bckhr-mini.png", size: "40x40", alt:"BackHere-logo-mini"))
+      end)
+      concat(content_tag(:span, class: "logo-lg") do
+        concat(image_tag("bckhr-obw.png", size: "90x46", alt:"BackHere-logo"))
+      end)
+    end)
+    nil
+  end
+
   def root_active_class
     return "active" if request.fullpath == root_path
     nil

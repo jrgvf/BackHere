@@ -1,5 +1,7 @@
 RailsAdmin.config do |config|
 
+  config.main_app_name { ['BackHere', 'Admin'] }
+
   ### Popular gems integration
 
   ## == Devise ==
@@ -18,8 +20,9 @@ RailsAdmin.config do |config|
 
   config.included_models = ["Account", "Permission", "User", "HomeMessage", "Platform", "Magento"]
 
+  config.navigation_static_label = "Outros Links"
   config.navigation_static_links = {
-    'Sidekiq' => '../../../backhere/sidekiq'
+    'Sidekiq' => '/sidekiq'
   }
   
   # For support Paginate and show list of sessions in Rails_Admin

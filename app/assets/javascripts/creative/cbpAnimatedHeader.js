@@ -45,11 +45,15 @@
 
 $(function(){
     $(window).scroll(function(){
-        if ($(this).scrollTop() > 300){
+        if ($(this).scrollTop() > 100){
             $('.navbar-default').addClass('navbar-shrink');
+            $('div#bckhr-logo').addClass('logo2');
+            $('div#bckhr-logo').removeClass('logo');
         }
         else{
             $('.navbar-default').removeClass('navbar-shrink');
+            $('div#bckhr-logo').addClass('logo');
+            $('div#bckhr-logo').removeClass('logo2');
         }
     });
 });
