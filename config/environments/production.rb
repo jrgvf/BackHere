@@ -59,10 +59,10 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
-  config.lograge.enabled = true  
-  config.lograge.keep_original_rails_log = true
-  config.lograge.logger = ActiveSupport::Logger.new "#{Rails.root}/log/lograge_#{Rails.env}.log"
-  config.log_formatter = Lograge::Formatters::Logstash.new
+  # config.lograge.enabled = true  
+  # config.lograge.keep_original_rails_log = true
+  # config.lograge.logger = ActiveSupport::Logger.new "#{Rails.root}/log/lograge_#{Rails.env}.log"
+  # config.log_formatter = Lograge::Formatters::Logstash.new
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
