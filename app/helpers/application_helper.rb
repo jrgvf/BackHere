@@ -6,7 +6,7 @@ module ApplicationHelper
     nil
   end
 
-  def build_logo_sidebar_old
+  def build_logo_sidebar
     concat(content_tag(:a, href: root_path, class: "logo") do
       concat(content_tag(:span, class: "logo-mini") do
         concat(content_tag(:b, "B"))
@@ -20,7 +20,7 @@ module ApplicationHelper
     nil
   end
 
-  def build_logo_sidebar
+  def build_logo_sidebar_old
     concat(content_tag(:a, href: root_path, class: "logo") do
       concat(content_tag(:span, class: "logo-mini") do
         concat(image_tag("bckhr-mini.png", size: "40x40", alt:"BackHere-logo-mini"))
