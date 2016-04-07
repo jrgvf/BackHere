@@ -117,7 +117,7 @@ aside {
     padding: 5px 15px;
 }
 
-.logo, .logo2 {
+/*.logo, .logo2 {
   display: inline-flex;
   vertical-align: middle;
   border: 0;
@@ -128,7 +128,7 @@ aside {
   background: image-url("bckhr-black.png");
   background-size: 100px 46px;
   background-repeat: no-repeat;
-}
+}*/
 
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
@@ -198,7 +198,7 @@ aside {
         color: $home-color;
     }
 
-    .logo {
+/*    .logo {
       display: inline-flex;
       vertical-align: middle;
       border: 0;
@@ -222,7 +222,7 @@ aside {
       background: image-url("bckhr-black.png");
       background-size: 100px 46px;
       background-repeat: no-repeat;
-    }
+    }*/
 
     .navbar-default.affix .navbar-header .navbar-brand:hover,
     .navbar-default.affix .navbar-header .navbar-brand:focus {
