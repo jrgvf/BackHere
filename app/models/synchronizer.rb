@@ -18,12 +18,13 @@ class Synchronizer
       translated_customers = translate_customers_to_local(fetch_result[:remote_customers])
 
       create_or_update_customers(results, translated_customers)
+      options[:continue] = fetch_result[:continue]
     rescue StandardError => e
       debugger unless Rails.env.production?
       # TODO: Logger
+      options[:continue] = false
       results << Result.new(:error, e.message)
     end
-    options[:continue] = fetch_result[:continue]
     results
   end
 
@@ -38,7 +39,6 @@ class Synchronizer
 
       create_or_update_orders(results, translated_orders)
       options[:continue] = fetch_result[:continue]
-      
     rescue StandardError => e
       debugger unless Rails.env.production?
       # TODO: Logger
@@ -49,6 +49,10 @@ class Synchronizer
   end
 
   def translate_customers_to_local remote_customers
+    raise NotImplementedError
+  end
+
+  def translate_orders_to_local remote_orders
     raise NotImplementedError
   end
 

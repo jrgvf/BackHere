@@ -32,14 +32,14 @@ class MagentoSynchronizer < Synchronizer
       translated_order[:placed_at]         = remote_order[:created_at]
       translated_order[:total_price]       = remote_order[:grand_total]
       translated_order[:placed_in]         = remote_order[:store_name]
+      translated_order[:payment_method]    = remote_order[:payment][:method] unless remote_order[:payment].blank?
       translated_order[:status]            = extract_status(remote_order)
       translated_order[:shipping]          = extract_shipping_info(remote_order)
       translated_order[:customer]          = extract_customer_info(remote_order)
       translated_order[:shipping_address]  = extract_address(:shipping_address, remote_order)
       translated_order[:billing_address]   = extract_address(:billing_address, remote_order)
       translated_order[:items]             = extract_items(remote_order)
-      translated_order[:payment_method]    = remote_order[:payment][:method] unless remote_order[:payment].blank?
-      translated_order[:status_history]    = extract_status_history(remote_order)
+      translated_order[:trackings]         = extract_trackings(remote_order)
 
       translated_orders << translated_order
     end
@@ -66,25 +66,32 @@ class MagentoSynchronizer < Synchronizer
   def extract_customer_info(remote_order)
     {
       emails:      [remote_order[:customer_email]],
-      group_id:    remote_order[:customer_group_id],
-      is_guest:    remote_order[:customer_is_guest],
-      document:    remote_order[:customer_taxvat],
-      first_name:  remote_order[:firstname],
-      last_name:   remote_order[:lastname],
-      phones:      [remote_order[:telephone]]
+      group_id:     remote_order[:customer_group_id],
+      is_guest:    (remote_order[:customer_is_guest].to_s == "0"),
+      document:     remote_order[:customer_taxvat],
+      first_name:   remote_order[:firstname],
+      last_name:    remote_order[:lastname],
+      phones:       extract_phone([remote_order[:telephone]])
     }
+  end
+
+  def extract_phone(remote_phones)
+    phones = Array.new
+    remote_phones.each do |remote_phone|
+      phones << BrazilianPhone.format(remote_phone.to_s)
+    end
+    phones
   end
 
   def extract_address(type, remote_order)
     {
-      first_name:  remote_order[:firstname],
-      last_name:   remote_order[:lastname],
-      street:      remote_order[:street],
-      city:        remote_order[:city],
-      region:      remote_order[:region],
-      post_code:   remote_order[:postcode],
-      country:     remote_order[:country_id],
-      phone:       remote_order[:telephone]
+      customer_name: (remote_order[:firstname].to_s + remote_order[:lastname].to_s),
+      street:         remote_order[:street],
+      city:           remote_order[:city],
+      region:         remote_order[:region],
+      post_code:      remote_order[:postcode],
+      country:        remote_order[:country_id],
+      phone:          remote_order[:telephone]
     }
   end
 
@@ -94,11 +101,11 @@ class MagentoSynchronizer < Synchronizer
       translated_item = Hash.new
 
       translated_item[:remote_id]          = remote_item[:product_id]
-      translated_item[:type]               = remote_item[:product_type]
-      translated_item[:weight]             = remote_item[:weight]
       translated_item[:sku]                = remote_item[:sku]
       translated_item[:name]               = remote_item[:name]
       translated_item[:quantity]           = remote_item[:qty_ordered]
+      translated_item[:type]               = remote_item[:product_type]
+      translated_item[:weight]             = remote_item[:weight]
       translated_item[:price]              = remote_item[:price]
       translated_item[:original_price]     = remote_item[:original_price]
       translated_item[:discount]           = remote_item[:discount_amount]
@@ -111,13 +118,14 @@ class MagentoSynchronizer < Synchronizer
     translated_items
   end
 
-  def extract_status_history(remote_order)
+  def extract_trackings(remote_order)
     translated_trackings = Array.new
     Array.wrap(remote_order[:status_history][:item]).each do |remote_tracking|
       translated_tracking = Hash.new
 
-      translated_tracking[:tracking_date]  = remote_tracking[:created_at]
-      translated_tracking[:remote_status]  = remote_tracking[:status]
+      translated_tracking[:tracking_date]   = remote_tracking[:created_at]
+      translated_tracking[:remote_status]   = remote_tracking[:status]
+      translated_tracking[:comment]         = remote_tracking[:comment]
 
       translated_trackings << translated_tracking
     end

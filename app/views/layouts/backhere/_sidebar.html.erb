@@ -38,12 +38,15 @@
       <li class="<%= active_class(customers_path) %>">
         <%= link_to fa_icon("group", text: content_tag(:span, 'Clientes')), customers_path %>
       </li>
-      <li class="treeview">
+      <li class="treeview <%= active_class(tasks_path) %>">
         <a href="#"><%= fa_icon("tasks", text: content_tag(:span, 'Tarefas')) %> <%= fa_icon("angle-left", class:'pull-right') %></a>
         <ul class="treeview-menu">
           <li><%= link_to fa_icon("plus-square", text: 'Criar'), new_task_path %></li>
           <li><%= link_to fa_icon("history", text: 'Histórico'), tasks_path %></li>
         </ul>
+      </li>
+      <li class="<%= active_class(status_index_path) %>">
+        <%= link_to fa_icon("tags", text: content_tag(:span, 'Status')), status_index_path %>
       </li>
     </ul>
     <!-- /.sidebar-menu -->

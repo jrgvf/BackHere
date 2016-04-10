@@ -75,3 +75,6 @@ pt-BR:
         email: "O email"
         message: "A mensagem"
         fone: "O telefone"
+      status:
+        label: "Nome"
+        code: "Código"

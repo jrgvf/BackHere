@@ -18,6 +18,9 @@ class TasksController < BackHereController
 
     params[:platform_ids].each do |platform_id|
       platform = Platform.find(platform_id)
+
+      authorize! :manage, platform
+
       task = TaskFactory.build(type, task_params(platform))
 
       if task && !task.save

@@ -77,7 +77,6 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'                                                      # For clear database in tests
   gem 'pry-rails', '~> 0.3.4'                                                                       # For debugger
   gem 'pry-byebug', '~> 3.3'                                                                        # For debugger
-  gem 'web-console', '~> 2.0'                                                                       # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'spring'                                                                                      # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'byebug'                                                                                    # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 end
@@ -86,6 +85,7 @@ end
 group :development do
   gem 'flay'                                                                                        # For DRY!
   gem 'better_errors', '~> 2.1', '>= 2.1.1'                                                         # For show better errors
+  gem 'web-console', '~> 2.0'                                                                       # Access an IRB console on exception pages or by using <%= console %> in views
 
   gem 'capistrano'
   gem 'capistrano-bundler'

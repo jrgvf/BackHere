@@ -10,7 +10,9 @@ class Customer
   field :first_name,        type: String
   field :last_name,         type: String
   field :document,          type: String
-  field :is_guest,          type: Boolean,    default: false 
+  field :is_guest,          type: Boolean,    default: false
+
+  has_many :orders
 
   embeds_many :emails, cascade_callbacks: true
   embeds_many :phones, cascade_callbacks: true

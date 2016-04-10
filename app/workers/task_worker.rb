@@ -20,6 +20,7 @@ class TaskWorker
 
     Mongoid::Multitenancy.with_tenant(task.account) do
       task.execute
+      TaskTrigger.try_execute(task, 10) unless finished_status.include?(task.status)
     end
   end
 
