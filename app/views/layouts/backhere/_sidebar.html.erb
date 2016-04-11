@@ -45,8 +45,8 @@
           <li><%= link_to fa_icon("history", text: 'Histórico'), tasks_path %></li>
         </ul>
       </li>
-      <li class="<%= active_class(status_index_path) %>">
-        <%= link_to fa_icon("tags", text: content_tag(:span, 'Status')), status_index_path %>
+      <li class="<%= active_class(statuses_path) %>">
+        <%= link_to fa_icon("tags", text: content_tag(:span, 'Status')), statuses_path %>
       </li>
     </ul>
     <!-- /.sidebar-menu -->

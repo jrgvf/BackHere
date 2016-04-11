@@ -1,10 +1,9 @@
 $(function() {
-  $('form.edit_status').on('ajax:success', function(e, data, status, xhr) {
-    // window.setTimeout(function(){
-    //     bootbox.hideAll();
-    // }, 1500);
-    // bootbox.alert('Status atualizado com sucesso!');
-  }).on("ajax:error", function(e, xhr, status, error) {
+  $('form.edit_status').on("ajax:error", function(e, xhr, status, error) {
+    bootbox.alert("Ops... <br /><br />" + xhr.responseText);
+  });
+
+  $('form.new_status').on('ajax:error', function(e, xhr, status, error) {
     bootbox.alert("Ops... <br /><br />" + xhr.responseText);
   });
 
@@ -15,7 +14,7 @@ $(function() {
     window.setTimeout(function(){
       $('i.fa-refresh').removeClass("fa-spin fa-lg");
       $('#update_all_status span').text(button_text);
-    }, 2000);
+    }, 1000);
     $('form.edit_status').each(function() {
       $(this).submit();
     });

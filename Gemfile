@@ -64,7 +64,7 @@ source 'https://rubygems.org'
   # gem 'htmlentities', '~> 4.3', '>= 4.3.4'                                                        # For encode and decode String safety for html
   # gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.2'                                                # For sanitizer html
   gem 'nprogress-rails'                                                                             # For progress bar using ajax
-  # gem 'select2-rails', '~> 4.0'                                                                   # For Jquery select field
+  gem 'select2-rails'                                                                               # For Jquery select field
   gem 'jasny-bootstrap-rails'                                                                       # For Jasny Bootstrap
 
 # Gems For Tests and Development

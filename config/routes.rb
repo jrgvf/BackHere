@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :customers, only: [:index, :show]
 
-  resources :status, only: [:index, :update]
+  resources :statuses, only: [:index, :update, :create]
 
   get 'platforms', to: 'account#index_platforms'
   

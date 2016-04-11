@@ -19,6 +19,7 @@
 //= require nprogress
 //= require nprogress-turbolinks
 //= require nprogress-ajax
+//= require select2-full
 //= require bootstrap-datepicker
 //= require icheck
 //= require jquery.slimscroll.min

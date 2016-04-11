@@ -1,0 +1,19 @@
+<%= form_for(new_status, remote: true) do |f| %>
+  <div class="col-sm-3 form-group">
+    <%= f.text_field :label, class: "form-control" %>
+  </div><!-- col-sm-3 form-group -->
+  <div class="col-sm-3 form-group">
+    <%= f.text_field :code, class: "form-control" %>
+  </div><!-- col-sm-3 form-group -->
+  <div class="col-sm-3 form-group">
+    <%= f.collection_select(:status_type, @status_types, :code, :label, {disabled: [:undefined]}, {class: "form-control select2", style: "width: 100%;"}) %>
+  </div><!-- col-sm-3 form-group -->
+  <div class="col-sm-2 form-group">
+    <%= button_tag(class: "btn btn-labeled btn-primary") do %>
+      <%= content_tag(:span, class: "btn-label") do %>
+        <%= fa_icon("plus") %>
+      <% end %>
+      Criar Status
+    <% end %>
+  </div><!-- col-sm-2 form-group -->
+<% end %>
