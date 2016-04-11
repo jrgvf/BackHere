@@ -2,27 +2,24 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   require 'sidekiq/cron/web'
 
-  get 'home/index'
-  post 'home_message', to: 'home#create_home_message'
+  root 'home#index'
 
+  post 'home_message', to: 'home#create_home_message'
+  get 'home/index'
   get 'dashboard' => 'account#dashboard'
+  get 'platforms', to: 'account#index_platforms'
 
   devise_for :admins, only: :sessions
   devise_for :users, only: :sessions
+
   resources :users, only: [:edit, :update]
-
   resources :tasks, only: [:index, :create, :new, :show]
-
   resources :customers, only: [:index, :show]
-
   resources :statuses, only: [:index, :update, :create]
-
-  get 'platforms', to: 'account#index_platforms'
   
   resources :magentos, except: [:index, :show] do
     get 'update_specific_version', to: 'magentos#update_specific_version'
   end
-
 
   authenticated :user do
     root 'account#dashboard', as: :authenticated_user_root
@@ -32,8 +29,6 @@ Rails.application.routes.draw do
     root 'rails_admin/main#dashboard', as: :authenticated_admin_root
     mount Sidekiq::Web => '/sidekiq'
   end
-
-  root 'home#index'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
