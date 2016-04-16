@@ -1,0 +1,68 @@
+<% provide(:title, 'Pedidos') %>
+<% provide(:header, "#{@order.internal_code}") %>
+<% provide(:description, "Detalhes sobre o pedido #{@order.internal_code}") %>
+<% provide(:levels, "Pedidos, #{@order.internal_code}") %>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Detalhes</h3>
+  </div><!-- /.box-header -->
+  <%= form_tag(order_path(@order), class:"form-horizontal" ) do %>
+    <div class="box-body">
+      <div class="form-group">
+        <%= label_tag nil, "Importado de:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @order.imported_from, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Id do pedido:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @order.remote_id, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Efetuada em:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= time_tag @order.placed_at, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Importado em:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= time_tag @order.created_at, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Atualizado em:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= time_tag @order.updated_at, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Id da loja:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @order.store_id, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Valor do pedido:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @order.store_id, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Local da venda:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @order.placed_in, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <%= label_tag nil, "Método de pagamento:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @order.payment_method, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+    </div><!-- /.box-body -->
+  <% end %>
+</div><!-- /.box -->

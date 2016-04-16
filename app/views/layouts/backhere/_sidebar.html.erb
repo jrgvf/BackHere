@@ -38,6 +38,9 @@
       <li class="<%= active_class(customers_path) %>">
         <%= link_to fa_icon("group", text: content_tag(:span, 'Clientes')), customers_path %>
       </li>
+      <li class="<%= active_class(orders_path) %>">
+        <%= link_to fa_icon("shopping-bag", text: content_tag(:span, 'Pedidos')), orders_path %>
+      </li>
       <li class="treeview <%= active_class(tasks_path) %>">
         <a href="#"><%= fa_icon("tasks", text: content_tag(:span, 'Tarefas')) %> <%= fa_icon("angle-left", class:'pull-right') %></a>
         <ul class="treeview-menu">

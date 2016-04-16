@@ -1,0 +1,52 @@
+<% provide(:title, 'Pedidos') %>
+<% provide(:header, "Lista dos Pedidos") %>
+<% provide(:description, "Lista de todos os pedidos.") %>
+<% provide(:levels, 'Pedidos') %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="box box-danger">
+      <div class="box-header">
+        <h3 class="box-title">Lista dos Pedidos</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <div class="col-sm-12">
+          <table data-link="row" class="table table-hover rowlink">
+            <tr>
+              <th>Plataforma</th>
+              <th>Id do pedido</th>
+              <th>Status</th>
+              <th>Efetuada em:</th>
+              <th>Importado em:</th>
+              <th>Atualizado em:</th>
+              <th>Cliente</th>
+              <th>Valor</th>
+              <th></th>
+            </tr>
+            <% @orders.each do |order| %>
+              <tr>
+                <td><%= order.imported_from %></td>
+                <td><%= order.remote_id %></td>
+                <td><%= order.status.label %></td>
+                <td><%= time_tag order.placed_at %></td>
+                <td><%= time_tag order.created_at %></td>
+                <td><%= time_tag order.updated_at %></td>
+                <td><%= order.customer.name.capitalize %></td>
+                <td><%= order.total_price %></td>
+                <td class="rowlink-skip"><%= link_to fa_icon("search-plus", class: "fa-lg"), order_path(order) %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div><!-- col-sm-12 -->
+      </div><!-- /.box-body -->
+      <div class="row">
+        <div class="col-sm-12">
+          <%= will_paginate @orders, class: 'backhere_pagination' %>
+          <div class="backhere_page_info">
+            <%= page_entries_info @orders %>
+          </div><!-- backhere_page_info -->
+        </div><!-- col-sm-12 -->
+      </div><!-- row -->
+    </div><!-- /.box -->
+  </div><!-- col-sm-12 -->
+</div><!-- row -->

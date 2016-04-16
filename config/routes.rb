@@ -2,24 +2,8 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   require 'sidekiq/cron/web'
 
-  root 'home#index'
-
-  post 'home_message', to: 'home#create_home_message'
-  get 'home/index'
-  get 'dashboard' => 'account#dashboard'
-  get 'platforms', to: 'account#index_platforms'
-
   devise_for :admins, only: :sessions
   devise_for :users, only: :sessions
-
-  resources :users, only: [:edit, :update]
-  resources :tasks, only: [:index, :create, :new, :show]
-  resources :customers, only: [:index, :show]
-  resources :statuses, only: [:index, :update, :create]
-  
-  resources :magentos, except: [:index, :show] do
-    get 'update_specific_version', to: 'magentos#update_specific_version'
-  end
 
   authenticated :user do
     root 'account#dashboard', as: :authenticated_user_root
@@ -31,6 +15,23 @@ Rails.application.routes.draw do
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
+  root 'home#index'
+  
+  post 'home_message', to: 'home#create_home_message'
+  get 'home/index'
+  get 'dashboard' => 'account#dashboard'
+  get 'platforms', to: 'account#index_platforms'
+
+  resources :users, only: [:edit, :update]
+  resources :tasks, only: [:index, :create, :new, :show]
+  resources :customers, only: [:index, :show]
+  resources :statuses, only: [:index, :update, :create]
+  resources :orders, only: [:index, :show]
+  
+  resources :magentos, except: [:index, :show] do
+    get 'update_specific_version', to: 'magentos#update_specific_version'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

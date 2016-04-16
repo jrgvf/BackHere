@@ -5,9 +5,10 @@ class Order
 
   tenant(:account)
 
+  field :imported_from,     type: String
   field :remote_id,         type: String
   field :store_id,          type: String
-  field :placed_at,         type: String
+  field :placed_at,         type: DateTime
   field :total_price,       type: String
   field :placed_in,         type: String
   field :payment_method,    type: String
@@ -21,9 +22,13 @@ class Order
   embeds_many :items,             class_name: "Item",           cascade_callbacks: true
   embeds_many :trackings,         class_name: "StatusHistory",  cascade_callbacks: true
 
-  validates_presence_of :remote_id, :placed_at, :total_price, :status, :customer, :billing_address, :items
-  validates :remote_id, uniqueness: { case_sensitive: false }
+  validates_presence_of :imported_from, :remote_id, :placed_at, :total_price, :status, :customer, :billing_address, :items
+  validates :remote_id, uniqueness: { scope: :imported_from, case_sensitive: false }
 
   accepts_nested_attributes_for :status, :billing_address, :shipping_address, :shipping, :items, :trackings
+
+  def internal_code
+    "(#{imported_from}) ##{remote_id}"
+  end
 
 end
