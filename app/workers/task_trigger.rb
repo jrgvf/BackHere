@@ -33,11 +33,23 @@ class TaskTrigger
           task.status = :queued
           task.save!
         end
+        try_reload_losted_tasks if slow_tasks.count > 0
+      end
+    end
+  end
 
-        blocked_tasks.each do |task|
-          running_job = Sidekiq::Queue.new(Platform.queue(task.platform_id)).find_job(task.job_id)
-          try_execute(task) if running_job.nil?
-        end
+  def try_reload_losted_tasks
+    workers = Sidekiq::Workers.new
+    jobs_id = workers.map { |process_id, thread_id, work| work["payload"]["jid"] } if workers.size > 0
+
+    slow_tasks.each do |task|
+      queued_job = Sidekiq::Queue.new(Platform.queue(task.platform_id)).find_job(task.job_id).present?
+      running_job = Array.wrap(jobs_id).include?(task.job_id)
+
+      if !queued_job && !running_job
+        task.status = :pending
+        task.save!
+        TaskTrigger.try_execute(task)
       end
     end
   end
@@ -48,8 +60,8 @@ class TaskTrigger
       Task.where(:status.in => standby_status)
     end
 
-    def blocked_tasks
-      Task.where(:status.in => blocked_status, :started_at.lte => 1.hour.ago)
+    def slow_tasks
+      Task.where(:status.in => [:queued, :processing], :started_at.lte => 1.hour.ago)
     end
 
     def blocked_status
