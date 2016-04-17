@@ -61,9 +61,13 @@ class MagentosController < BackHereController
 
   private
 
-  def find_magento_by_id; @magento = Magento.find(params[:id]) end
+  def find_magento_by_id
+    @magento = Magento.find(params[:id]) or not_found
+  end
 
-  def find_magento_by_magento_id; @magento = Magento.find(params[:magento_id]) end
+  def find_magento_by_magento_id
+    @magento = Magento.find(params[:magento_id]) or not_found
+  end
 
   def magento_params; params.require(:magento).permit(:name, :url, :version, :api_user, :api_key, :api_url, :start_date ) end
 

@@ -91,3 +91,8 @@ $nprogress-zindex: 10100;
     border: none;
   }
 }
+
+.dl-horizontal {
+  min-height: .01%;
+  overflow-x: auto;
+}

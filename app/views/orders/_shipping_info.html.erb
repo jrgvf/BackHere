@@ -1,0 +1,11 @@
+<div class="box-body">
+  <dl class="dl-horizontal">
+    <dt>Método de Envio:</dt>
+    <dd><%= shipping.method %></dd>
+    <dd><%= shipping.description %></dd>
+    <dt>Desconto:</dt>
+    <dd><%= sprintf "%.2f", shipping.discount %></dd>
+    <dt>Preço:</dt>
+    <dd><%= sprintf "%.2f", shipping.price %></dd>
+  </dl>
+</div><!-- /.box-body -->

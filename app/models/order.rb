@@ -1,4 +1,4 @@
-class Order
+ class Order
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Multitenancy::Document
@@ -9,7 +9,7 @@ class Order
   field :remote_id,         type: String
   field :store_id,          type: String
   field :placed_at,         type: DateTime
-  field :total_price,       type: String
+  field :total_price,       type: Float
   field :placed_in,         type: String
   field :payment_method,    type: String
 

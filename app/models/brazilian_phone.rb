@@ -38,6 +38,15 @@ class BrazilianPhone
     remote_phone.gsub(NORMALIZE_REGEX, '')
   end
 
+  def self.to_string(remote_phone)
+    phone = BrazilianPhone.format(remote_phone)
+    "+#{phone[:country_code]} (#{phone[:region_code]}) #{phone[:number]}"
+  end
+
+  def self.to_s(remote_phone)
+    BrazilianPhone.to_string(remote_phone)
+  end
+
   # def self.format2(remote_phone)
   #   complete_phone = BrazilianPhone.normalize(remote_phone)
   #   BRAZILIAN_PHONE_REGEX =~ complete_phone

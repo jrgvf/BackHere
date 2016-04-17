@@ -21,7 +21,7 @@ class UsersController < BackHereController
   private
 
     def find_user
-      @user = User.find(params[:id])
+      @user = User.find(params[:id]) or not_found
     end
 
     def user_params

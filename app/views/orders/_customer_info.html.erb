@@ -1,0 +1,19 @@
+<div class="box-body">
+  <dl class="dl-horizontal">
+    <dt>Nome:</dt>
+    <dd><%= customer.name %></dd>
+    <dt>Documento:</dt>
+    <dd><%= customer.document %></dd>
+    <dt>Identificador:</dt>
+    <% if customer.remote_id.nil? %>
+      <dd>Não possui. Cliente cadastrado como convidado.</dd>
+    <% else %>
+      <dd><%= customer.remote_id %></dd>
+    <% end %>
+    <dt>Compras Realizadas:</dt>
+    <dd><%= customer.orders.count %></dd>
+
+    <%= render partial: 'customers/emails', locals: { emails: customer.emails, auto_open: false } %>
+    <%= render partial: 'customers/phones', locals: { phones: customer.phones, auto_open: false } %>
+  </dl>
+</div><!-- /.box-body -->

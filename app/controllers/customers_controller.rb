@@ -11,6 +11,6 @@ class CustomersController < BackHereController
   private
 
     def find_customer
-      @customer = Customer.find(params[:id])
+      @customer = Customer.find(params[:id]) or not_found
     end
 end

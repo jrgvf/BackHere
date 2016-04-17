@@ -34,7 +34,7 @@ class StatusesController < BackHereController
   private
 
     def find_status
-      @status = Status.find(params[:id])
+      @status = Status.find(params[:id]) or not_found
     end
 
     def find_status_types

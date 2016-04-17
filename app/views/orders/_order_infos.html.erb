@@ -1,0 +1,24 @@
+<div class="box-body">
+  <dl class="dl-horizontal">
+    <dt>Código do Pedido:</dt>
+    <dd><%= order.remote_id %></dd>
+    <dt>Status do Pedido:</dt>
+    <dd><%= order.status.label %></dd>
+    <dt>Plataforma:</dt>
+    <dd><%= order.imported_from %></dd>
+    <dt>Código da Loja:</dt>
+    <dd><%= order.store_id %></dd>
+    <dt>Local da Venda:</dt>
+    <dd><%= order.placed_in %></dd>
+    <dt>Efetuado em:</dt>
+    <dd><%= time_tag order.placed_at %></dd>
+    <dt>Importado em:</dt>
+    <dd><%= time_tag order.created_at %></dd>
+    <dt>Atualizado em:</dt>
+    <dd><%= time_tag order.updated_at %></dd>
+    <dt>Valor do Pedido:</dt>
+    <dd><%= sprintf "%.2f", order.total_price.to_f %></dd>
+    <dt>Método de Pagamento:</dt>
+    <dd><%= order.payment_method %></dd>
+  </dl>
+</div><!-- /.box-body -->

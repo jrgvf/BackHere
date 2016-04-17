@@ -12,7 +12,7 @@ class OrdersController < BackHereController
   private
 
     def find_order
-      @order = Order.find(params[:id])
+      @order = Order.find(params[:id]) or not_found
     end
 
 end

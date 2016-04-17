@@ -1,0 +1,26 @@
+<div class="box-body table-responsive">
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>Nome</th>
+      <th>Sku</th>
+      <th>Código</th>
+      <th>Preço</th>
+      <th>Preço Promocional</th>
+      <th>Desconto</th>
+      <th>Quantidade</th>
+      <th>Preço Total</th>
+    </tr>
+    <% items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.sku %></td>
+        <td><%= item.remote_id %></td>
+        <td><%= sprintf "%.2f", item.original_price %></td>
+        <td><%= sprintf "%.2f", item.price %></td>
+        <td><%= sprintf "%.2f", item.discount %></td>
+        <td><%= item.quantity %></td>
+        <td><%= sprintf "%.2f", item.total_price %></td>
+      </tr>
+    <% end %>
+  </table>
+</div><!-- /.box-body -->

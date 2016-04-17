@@ -1,0 +1,16 @@
+<div class="box-body table-responsive">
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>Data</th>
+      <th>Status Remoto</th>
+      <th>Comentário</th>
+    </tr>
+    <% trackings.each do |tracking| %>
+      <tr>
+        <td><%= time_tag tracking.tracking_date %></td>
+        <td><%= tracking.remote_status %></td>
+        <td><%= tracking.comment %></td>
+      </tr>
+    <% end %>
+  </table>
+</div><!-- /.box-body -->

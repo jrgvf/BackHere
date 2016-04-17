@@ -1,0 +1,12 @@
+<div class="box-body">
+  <dl class="dl-horizontal">
+    <dt>Cliente:</dt>
+    <dd><%= address.customer_name %></dd>
+    <dt>Endereço:</dt>
+    <dd><%= address.street + ", " + address.number%></dd>
+    <dd><%= address.city + " - " + address.region %></dd>
+    <dd><%= address.post_code %></dd>
+    <dt>Telefone:</dt>
+    <dd><%= BrazilianPhone.to_s(address.phone) %></dd>
+  </dl>
+</div><!-- /.box-body -->

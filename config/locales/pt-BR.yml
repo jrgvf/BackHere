@@ -135,6 +135,7 @@ pt-BR:
       second: Segundo
       year: Ano
   errors:
+    connection_refused: "Conexão Negada"
     format: "%{attribute} %{message}"
     messages:
       accepted: deve ser aceito
