@@ -1,0 +1,476 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import "froala_editor.min";
+@import "froala_style.min";
+@import "plugins/char_counter.min";
+@import "plugins/code_view.min";
+@import "plugins/colors.min";
+@import "plugins/emoticons.min";
+@import "plugins/file.min";
+@import "plugins/fullscreen.min";
+@import "plugins/image.min";
+@import "plugins/image_manager.min";
+@import "plugins/line_breaker.min";
+@import "plugins/quick_insert.min";
+@import "plugins/table.min";
+@import "plugins/video.min";
+@import "font-awesome";
+@import 'ionicons';
+@import "icheck/flat/all";
+
+@mixin transition($time) {
+  -webkit-transition: all $time ease;
+  -moz-transition: all $time ease;
+  -o-transition: all $time ease;
+  transition: all $time ease;
+}
+
+body {
+  color: $black;
+  background: $background;
+  font-family: 'Raleway', sans-serif;
+}
+
+body.rails_admin .sidebar-nav .dropdown-header {
+  color: white;
+  padding: 10px 15px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  font-weight: normal;
+  text-transform: inherit;
+  cursor: pointer;
+  &::after {
+    content: "\f138";
+    position: absolute;
+    right: 15px;
+    color: white;
+    font-family: 'FontAwesome', sans-serif;
+  }
+}
+
+body.rails_admin .table .headerSortUp, body.rails_admin .table .headerSortDown {
+  background-color: inherit;
+  text-shadow: none;
+}
+
+body.rails_admin .table .header:after {
+  visibility: visible !important;
+}
+
+body.rails_admin .sidebar-nav {
+  background: $primary;
+}
+
+.nav .nav-pills .nav-stacked {
+  margin-top: 4px;
+}
+
+body.rails_admin .sidebar-nav > .nav-stacked > li > a {
+  padding: 10px 15px;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover {
+  outline: 0 !important;
+  -webkit-appearance: none;
+}
+
+.links {
+  ul li {
+    a {
+      color: white;
+      background: $primary;
+    }
+    &:nth-child(1) {
+      a {
+        background: #29B6F6;
+        color: white;
+      }
+    }
+    &:nth-child(2) {
+      a {
+        background: #66BB6A;
+        color: white;
+      }
+    }
+    &:nth-child(3) {
+      a {
+        background: #ef5350;
+        color: white
+      }
+    }
+  }
+}
+
+.alert-info {
+  background-color: #3498db;
+  border: 0;
+  color: #fff;
+}
+
+.alert-success {
+  background-color: #2ecc71;
+  border: 0;
+  color: #fff;
+}
+
+.alert-danger {
+  background-color: #e74c3c;
+  border: 0;
+  color: #fff;
+}
+
+.btn {
+  border-radius: 2px;
+  color: white !important;
+}
+
+.btn-default {
+  color: $black !important;
+}
+
+.btn-info {
+  background: $primary;
+  border-color: darken($primary, 10%);
+  &:hover, &:focus, &:target, &:active {
+    background: $ternary;
+    border-color: darken($ternary, 10%);
+    color: $primary;
+  }
+}
+
+.btn-info.disabled {
+  background: lighten($primary, 10%);
+  border-color: lighten($primary, 10%);
+}
+
+.btn-primary {
+  background: darken($ternary, 20%);
+  border-color: darken($ternary, 20%);
+  &:hover, &:focus, &:target, &:active {
+    background: darken($ternary, 20%);
+    border-color: darken($ternary, 20%);
+  }
+}
+
+.btn-primary.disabled {
+  background: lighten($ternary, 20%);
+  border-color: ligten($ternary, 20%);
+}
+
+.alert {
+  border-radius: 2px;
+}
+
+.sidebar-nav {
+  i {
+    margin-right: 10px;
+  }
+}
+
+.nav-tabs > li > a {
+  border-radius: 2px 2px 0 0;
+}
+
+.nav-tabs {
+  li {
+    border-radius: 2px;
+  }
+  a.dropdown-toggle, a {
+    color: $black;
+  }
+}
+
+.navbar-default {
+  background: darken($ternary, 20%);
+  border: 0;
+}
+
+.dropdown-header.open {
+  &::after {
+    content: "\f13a" !important;
+    position: absolute;
+    right: 15px;
+    color: white;
+    font-family: 'FontAwesome', sans-serif;
+  }
+}
+
+.dropdown-header:hover {
+  background: $ternary;
+}
+
+.dropdown-header.active {
+  background: $ternary;
+}
+
+a,
+.navbar-default .navbar-nav > li > a {
+  &:hover {
+    color: $ternary;
+  }
+  color: white;
+}
+
+.navbar-header {
+  margin-left: -15px;
+}
+
+a.navbar-brand {
+  width: 100%;
+  color: white !important;
+  cursor: pointer !important;
+  background: darken($ternary, 10%) !important;
+  &:hover {
+    background: darken($ternary, 10%) !important;
+    color: white !important;
+  }
+}
+
+.page-header {
+  margin-top: 0;
+  h1 {
+    background: $ternary;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 2px;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+}
+
+.content {
+  margin: 19px 0 15px 0;
+  background: white;
+  padding: 20px;
+  a {
+    color: $ternary;
+  }
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus {
+  color: $ternary !important;
+}
+
+.root_links {
+  .dashboard_root_link, .edit_user_root_link, .dashboard_root_link, li {
+    .label-danger {
+      padding: 5px 10px;
+    }
+    color: white;
+    &:hover {
+      background: darken($ternary, 10%) !important;
+    }
+    a {
+      &:hover {
+        color: white !important;
+      }
+    }
+  }
+}
+
+.sub-menu a {
+  color: white;
+  padding: 10px 15px 10px 30px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  font-weight: normal;
+  text-transform: inherit;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+
+.sub-menu-container {
+  background: darken($primary, 5%);
+  li a {
+    color: #EEE;
+    &:hover {
+      color: $ternary !important;
+    }
+  }
+  li.active a {
+    background: darken($primary, 10%);
+    color: $ternary !important;
+    &:hover {
+      color: $ternary !important;
+    }
+  }
+}
+
+.label-warning {
+  padding: 5px;
+}
+
+.well {
+  border-radius: 2px;
+}
+
+h1,
+.h1 {
+  font-size: 20px;
+}
+
+.fieldset a {
+  color: $ternary !important;
+}
+
+.table-striped td:not(.image_field) a {
+  text-decoration: none !important;
+  padding: 8px 10px;
+  border-radius: 2px;
+  color: $ternary;
+  &:hover {
+    background: $ternary;
+    color: $primary;
+  }
+}
+
+.ui-state-default a:link,
+.ui-state-default a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+#fields_to_export .control-label {
+  text-align: left;
+  margin-bottom: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.table-striped th,
+.table-striped td,
+body.rails_admin .table td {
+  vertical-align: middle;
+  line-height: 40px;
+  border-right: 1px solid #ddd;
+  padding: 6px 11px;
+}
+
+.row-highlight td {
+  background: rgba($ternary, .1)!important;
+}
+
+.table-condensed > thead > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > tfoot > tr > td {
+  padding: 15px 5px;
+}
+.table-striped {
+  border: 1px solid #ddd;
+  border-top: 4px solid $ternary;
+}
+
+th.shrink {
+  padding: 14px 11px!important;
+}
+
+td.carrierwave_type .img-thumbnail {
+  max-width: 40px;
+}
+
+.img-thumbnail {
+  max-width: 125px;
+  background: #EEE;
+}
+
+.breadcrumb .false a {
+  color: #C4C4C4 !important;
+}
+
+.breadcrumb {
+  border-radius: 2px;
+}
+
+.nav-stacked > li + li {
+  margin-top: 0;
+}
+
+.progress {
+  border-radius: 2px;
+}
+
+#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#sortable li {
+  color: white;
+  cursor: pointer;
+}
+
+#sortable li, .ui-state-highlight {
+  display: inline-block;
+}
+
+.sortable-container {
+  width: 100%;
+  background: lighten($ternary, 5%);
+  margin-bottom: 15px;
+}
+
+.ref_number, .li_sortable_label {
+  float: left;
+  padding: 10px 5px;
+}
+
+.li_sortable_label {
+  background: lighten($ternary, 5%);
+  color: $primary;
+  padding: 10px 15px;
+}
+
+.ref_number {
+  color: $ternary;
+  background: $primary;
+  padding: 10px 15px;
+  border-left: 2px solid darken($ternary, 20%);
+}
+
+.ui-state-highlight {
+  padding: 10px 15px;
+  margin: 0 15px 15px 15px;
+  width: 100%;
+  min-height: 40px;
+}
+
+.well {
+  box-shadow: none;
+}
+
+.fieldset {
+  dl {
+    dt span.label-info {
+      text-align: left;
+      display: block;
+      padding: 10px;
+      font-size: 13px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    dd.well {
+      padding: 10px;
+      border-top: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}
+
+.backhere-logo {
+  display: inline-block;
+  transform: rotate(-90deg) scale(-1, 1);
+}

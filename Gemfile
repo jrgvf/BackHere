@@ -4,6 +4,9 @@ source 'https://rubygems.org'
   
   gem 'rails', '4.2.6'                                                                              # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
+  gem "wysiwyg-rails"
+  # gem 'rails_admin_rollincode', github: 'rollincode/rails_admin_theme'
+
 # Gems for General Use
   gem 'faraday', '~> 0.9.2'                                                                         # Faraday for communication with API REST
   gem 'savon', '~> 2.0'                                                                             # Savon for communication with API SOAP

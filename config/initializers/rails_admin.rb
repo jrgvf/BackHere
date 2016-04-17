@@ -18,7 +18,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = ["Account", "Permission", "User", "HomeMessage", "Platform", "Magento"]
+  config.included_models = ["Account", "Permission", "User", "Platform", "HomeMessage", "Magento"]
 
   config.navigation_static_label = "Outros Links"
   config.navigation_static_links = {
@@ -31,7 +31,13 @@ RailsAdmin.config do |config|
   
   # config.included_models << "MongoidStore::Session"
 
+  config.model 'Platform' do
+    navigation_label 'Plataformas'
+    weight 1
+  end
+
   config.model 'User' do
+    navigation_icon 'icon-user'
     field :name
     field :position
     field :email
