@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require bootbox
 //= require creative/home_message
 //= require creative/jquery.easing.min

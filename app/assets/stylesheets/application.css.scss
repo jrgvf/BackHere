@@ -1,27 +1,13 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require bootstrap
- *= require jasny-bootstrap.min
- *= require bootstrap-datepicker
- *= require select2
- *= require jquery-ui
- *= require_self
- */
-
 $nprogress-color: #f1f1f1;
 $nprogress-height: 0.2em;
 $nprogress-zindex: 10100;
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "jasny-bootstrap.min";
+@import "bootstrap-datepicker";
+@import "select2";
+@import "jquery-ui";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "AdminLTE/AdminLTE";
@@ -32,67 +18,4 @@ $nprogress-zindex: 10100;
 @import 'nprogress';
 @import 'nprogress-bootstrap';
 @import 'backhere-pagination';
-
-.center {
-  text-align: center;
-}
-
-.right {
-  float: right;
-}
-
-.left {
-  float: left;
-}
-
-.sidebar-footer {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  height: auto;
-  width: auto;
-
-  li.header {
-    overflow: hidden;
-    text-overflow: clip;
-    background: #1a2226;
-    padding: 10px 25px 10px 5px;
-    font-size: 12px;
-  }
-}
-
-.slide-toggle-button {
-  margin-right: 1em;
-  cursor: pointer;
-
-  i.fa-circle {
-    color: #f05f40;
-  }
-}
-
-.form-control[readonly] {
-  cursor: default;
-}
-
-.platform-table {
-  padding: 4em 1em 1em 1em;
-}
-
-.task-index-responsive {
-  min-height: .01%;
-  overflow-x: auto;
-  padding-bottom: 5em;
-
-  .input-group {
-    padding-bottom: 1em;
-  }
-  
-  .input-group-addon, .form-control {
-    border: none;
-  }
-}
-
-.dl-horizontal {
-  min-height: .01%;
-  overflow-x: auto;
-}
+@import 'backhere-details';

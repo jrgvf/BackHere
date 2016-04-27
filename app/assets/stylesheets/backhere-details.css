@@ -1,0 +1,63 @@
+.center {
+  text-align: center;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.sidebar-footer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: auto;
+
+  li.header {
+    overflow: hidden;
+    text-overflow: clip;
+    background: #1a2226;
+    padding: 10px 25px 10px 5px;
+    font-size: 12px;
+  }
+}
+
+.slide-toggle-button {
+  margin-right: 1em;
+  cursor: pointer;
+
+  i.fa-circle {
+    color: #f05f40;
+  }
+}
+
+.form-control[readonly] {
+  cursor: default;
+}
+
+.platform-table {
+  padding: 4em 1em 1em 1em;
+}
+
+.task-index-responsive {
+  min-height: .01%;
+  overflow-x: auto;
+  padding-bottom: 5em;
+
+  .input-group {
+    padding-bottom: 1em;
+  }
+  
+  .input-group-addon, .form-control {
+    border: none;
+  }
+}
+
+.dl-horizontal {
+  min-height: .01%;
+  overflow-x: auto;
+}
