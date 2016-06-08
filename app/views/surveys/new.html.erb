@@ -1,0 +1,12 @@
+<% provide(:title, 'Nova Pesquisa') %>
+<% provide(:header, 'Nova Pesquisa') %>
+<% provide(:description, 'Preencha as informações necessárias para criar a pesquisa.') %>
+<% provide(:levels, 'Pesquisas, Tradicional, Criar') %>
+
+<div class="box box-danger">
+  <div class="box-header with-border">
+    <%= fa_icon "file-text-o" %>
+    <h3 class="box-title">Cadastro de nova pesquisa</h3>
+  </div><!-- /.box-header -->
+  <%= render @survey %>
+</div><!-- /.box -->

@@ -24,10 +24,15 @@ Rails.application.routes.draw do
   get 'platforms', to: 'account#index_platforms'
 
   resources :users, only: [:edit, :update]
+
   resources :tasks, only: [:index, :create, :new, :show]
   resources :customers, only: [:index, :show]
   resources :statuses, only: [:index, :update, :create]
   resources :orders, only: [:index, :show]
+  resources :surveys, except: [:show] do
+    get 'preview'
+    post 'answer', to: 'surveys#submit_answer'
+  end
   
   resources :magentos, except: [:index, :show] do
     get 'update_specific_version', to: 'magentos#update_specific_version'

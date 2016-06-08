@@ -1,0 +1,39 @@
+<div class="col-sm-12 question_options">
+  <% if question.multi_choice? %>
+    <% question.options.each do |option| %>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= check_box_tag "answers[#{index}][option][]", option.original_id, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
+        </span>
+        <span class="form-control"><%= option.text %></span>
+      </div><!-- /input-group -->
+    <% end %>
+    <% if question.include_other_option? %>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= check_box_tag "answers[#{index}][option][]", "other_option", false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
+        </span>
+        <span class="form-control">Outro.</span>
+      </div><!-- /input-group -->
+      <%= text_field_tag "answers[#{index}][other_option]", "", class: "form-control", placeholder: "Digite aqui a outra opção." %>
+    <% end %>
+  <% elsif question.choice? %>
+    <% question.options.each do |option| %>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= radio_button_tag "answers[#{index}][option][]", option.original_id, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
+        </span>
+        <span class="form-control"><%= option.text %></span>
+      </div><!-- /input-group -->
+    <% end %>
+    <% if question.include_other_option? %>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= radio_button_tag "answers[#{index}][option][]", "other_option", false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
+        </span>
+        <span class="form-control">Outro.</span>
+      </div><!-- /input-group -->
+      <%= text_field_tag "answers[#{index}][other_option]", "", class: "form-control", placeholder: "Digite aqui a outra opção." %>
+    <% end %>
+  <% end%>
+</div>

@@ -5,6 +5,7 @@ source 'https://rubygems.org'
   gem 'rails', '4.2.6'                                                                              # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
   gem "wysiwyg-rails"
+  gem "cocoon"
   #gem "twitter"
   # gem 'rails_admin_rollincode', github: 'rollincode/rails_admin_theme'
 
@@ -35,9 +36,9 @@ source 'https://rubygems.org'
 # Gems For MongoDB Support
   gem 'mongoid', '~> 5.0.0'                                                                         # For integration with MongoDB
   gem 'mongoid-multitenancy', '~> 1.1', '>= 1.1.2'                                                  # For Multitenanty with Mongoid
-  gem "mongo_session_store-rails4"                                                                  # For store Sessions into MongoDB
+  # gem "mongo_session_store-rails4"                                                                # For store Sessions into MongoDB
   # gem 'mongoid_search', '~> 0.3.2'                                                                # For simplify search text with MongoID
-  # gem 'mongoid_slug', '~> 4.0'                                                                    # For a use Slug with MongoID
+  gem 'mongoid-slug'                                                                                # For a use Slug with MongoID
   # gem 'mongoid-history', '~> 0.5.0'                                                               # For version control of models
   gem "mongoid-paperclip", :require => "mongoid_paperclip"                                          # For use paperclip with MongoID
   # gem 'mongoid-rspec', '3.0.0'                                                                    # For matchers of MongoID

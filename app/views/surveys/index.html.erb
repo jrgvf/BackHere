@@ -1,0 +1,47 @@
+<% provide(:title, 'Pesquisas') %>
+<% provide(:header, 'Pesquisas') %>
+<% provide(:description, 'Lista de pesquisas.') %>
+<% provide(:levels, 'Pesquisas') %>
+
+<div class="box box-danger">
+  <div class="box-header">
+    <h3 class="box-title">Lista de pesquisas (<%= @surveys.count %>)</h3>
+    <%= link_to fa_icon("check", text: content_tag(:span, 'Criar Pesquisa')), new_survey_path, class: "btn btn-primary btn-flat right" %>
+
+    <!-- <div style="float:right" class="btn-group">
+      <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Criar Pesquisa <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <%#= render partial: "available_survey", collection: @available_surveys %>
+      </ul>
+    </div> -->
+
+  </div><!-- /.box-header -->
+  <div class="box-body table-responsive platform-table">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Status</th>
+          <th>Respostas</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @surveys.each do |survey| %>
+        <tr>
+          <td><%= survey.name %></td>
+          <td><%= boolean_icon(survey.active) %></td>
+          <td><%= survey.answers.count %></td>
+          <td>
+            <%= link_to fa_icon("eye", text: content_tag(:span, 'Prévia', class: "sr-only"), title: "Prévia", "aria-hidden" => "true"), survey_preview_path(survey), class: "btn btn-primary btn-flat", target: "_blank" %>
+            <%= link_to fa_icon("edit", text: content_tag(:span, 'Editar', class: "sr-only"), title: "Editar", "aria-hidden" => "true"), edit_polymorphic_path(survey), class: "btn btn-primary btn-flat" %>
+            <%= link_to fa_icon("trash-o", text: content_tag(:span, 'Excluir', class: "sr-only"), title: "Excluir", "aria-hidden" => "true"), survey, class: "btn btn-primary btn-flat", method: :delete, data: { confirm: "Você tem certeza?"} %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div><!-- /.box-body -->
+</div><!-- /.box -->

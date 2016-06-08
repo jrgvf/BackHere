@@ -1,8 +1,8 @@
 <% if obj.errors.any? %>
   <div class="box-body" style="border:red 1px dashed">
-  <p class="help-block">Aconteceram os seguintes erros:</p>
+    <p class="help-block">Aconteceram os seguintes erros:</p>
     <ul>
-      <% obj.errors.full_messages.each do |msg| %>
+      <% obj.errors.full_messages.uniq.each do |msg| %>
         <li><p class="help-block"><%= msg %></p></li>
       <% end %>
     </ul>

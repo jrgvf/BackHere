@@ -1,0 +1,42 @@
+<%= render partial: 'layouts/form_errors', locals: { obj: survey } %>
+
+<!-- form start -->
+<%= form_for(survey, html: { class:"form-horizontal" }) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "Nome:", class: 'col-sm-2 control-label' %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, class: "form-control", placeholder: "Nome da pesquisa" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "Descrição:", class: 'col-sm-2 control-label' %>
+    <div class="col-sm-9">
+      <%= f.text_area :description, class: "form-control", placeholder: "Descrição da pesquisa" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :active, "Status:", class: 'col-sm-2 control-label' %>
+    <div class="col-sm-2">
+      <%= f.select(:active, survey.active_enum, {}, { class: "form-control" }) %>
+    </div>
+  </div>
+
+  <div id='questions'>
+    <%= f.fields_for :questions do |question| %>
+      <%= render "question_fields", f: question %>
+    <% end %>
+  </div>
+
+  <div class="box-footer">
+    <%= link_to fa_icon("reply", text: content_tag(:span, 'Voltar')), surveys_path, class: 'btn btn-primary' %>
+
+    <%= button_tag( class: "btn btn-primary") do %>
+      <%= fa_icon((survey.persisted? ? "refresh" : "check" ), text: content_tag(:span, (survey.persisted? ? "Atualizar" : "Cadastrar" ))) %>
+    <% end %>
+
+    <%= link_to_add_association fa_icon("plus", text: content_tag(:span, 'Adicionar Pergunta')), f, :questions, { class: "btn btn-primary right", "data-association-insertion-method" => "append", "data-association-insertion-node" => '#questions' } %>
+  </div>
+    
+<% end %>

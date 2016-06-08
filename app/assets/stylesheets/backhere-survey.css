@@ -1,0 +1,34 @@
+#questions {
+  padding: 15px;
+}
+
+.nested-question {
+  .box {
+    background-color: #F6F6F6;
+  }
+  .box-footer{
+    background-color: transparent;
+  }
+
+  .nested-option {
+    .input-group-addon {
+      border: none;
+      background-color: transparent;
+
+      a {
+        color:#f05f40;
+      }
+    }
+  }
+}
+
+.question_options {
+  
+  .input-group-addon, .form-control {
+    border: none;
+  }
+}
+
+.content-survey {
+  margin-left: 0;
+}

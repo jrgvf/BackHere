@@ -1,0 +1,33 @@
+<div class="col-sm-6 col-sm-offset-3">
+  <div class="box box-danger">
+    <div class="box-header with-border">
+      <%= fa_icon "file-text-o" %>
+      <h3 class="box-title"><%= @survey.name %></h3>
+      <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+        <%= @survey.description %>
+      </p>
+    </div><!-- /.box-header -->
+  
+    <%= form_tag(survey_answer_path(@survey), :method => :post) do %>
+      <% @survey.questions.each_with_index do |question, index| %>
+        <div class="col-sm-12">
+          <h4><%= "#{index + 1} - #{question.text.capitalize}" %></h4>
+          <%= hidden_field_tag "answers[#{index}][question_id]", question.id %>
+
+          <% if question.with_options? %>
+            <%= render partial: 'surveys/question_option', locals: { question: question, index: index } %>
+          <% else %>
+            <%= render partial: 'surveys/question_text', locals: { question: question, index: index } %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="box-footer">
+        <div class="col-sm-2 col-sm-offset-5">
+          <%= submit_tag "Enviar", class: 'btn btn-primary btn-flat', disabled: true %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div><!-- /.box -->

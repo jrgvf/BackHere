@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-1 no-padding">
+    <div class="nested-question">
+      <div class="box box-danger">
+        <div class="box-header with-border">
+          <%= fa_icon "question" %>
+          <h3 class="box-title"><%= question_title(f.object) %></h3>
+          <div class="box-tools pull-right">
+            <%= button_tag(class: "btn btn-box-tool", "data-widget" => "collapse") do %>
+              <%= fa_icon("minus", style: "color: #f05f40") %>
+            <% end %>
+            <%= link_to_remove_association fa_icon("close", text: content_tag(:span, 'Excluir Pergunta', class: "sr-only"), title: "Excluir Pergunta", "aria-hidden" => "true"), f, { class: "btn btn-box-tool", wrapper_class: "nested-question", style: "color: #f05f40" } %>
+          </div><!-- box-tools pull-right -->
+        </div><!-- /.box-header -->
+
+        <div class="box-body">
+          <div class="form-group">
+            <%= f.label :text, "Texto:", class: 'col-sm-1 control-label' %>
+            <div class="col-sm-10">
+              <%= f.text_field :text, class: "form-control", placeholder: "Texto da pergunta" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :type, "Tipo:", class: 'col-sm-1 control-label' %>
+            <div class="col-sm-3">
+              <%= f.select(:type, Question.type_enum, { include_blank: "Selecione um tipo" }, { class: "form-control", id: "type" }) %>
+            </div>
+          </div>
+
+          <div class="form-group" id="other_option">
+            <%= f.label :other_option, "Opção 'Outro':", class: 'col-sm-1 control-label' %>
+            <div class="col-sm-3">
+              <%= f.select(:other_option, Question.other_option_enum, {}, { class: "form-control" }) %>
+            </div>
+          </div>
+
+          <div class="col-sm-12 no-padding" id="options">
+            <%= f.fields_for :options do |option| %>
+              <%= render "option_fields", f: option %>
+            <% end %>
+
+            <div class="box-footer">
+              <%= link_to_add_association fa_icon("plus", text: content_tag(:span, 'Adicionar Opção')), f, :options, { class: "btn btn-primary right", "data-association-insertion-method" => "before" } %>
+            </div>
+          </div>
+
+        </div><!-- /.box -->
+      </div>
+    </div>
+  </div>
+</div>

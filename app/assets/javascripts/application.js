@@ -24,5 +24,6 @@
 //= require icheck
 //= require jquery.slimscroll.min
 //= require bootbox
+//= require cocoon
 //= require turbolinks
 //= require_tree ./backhere
