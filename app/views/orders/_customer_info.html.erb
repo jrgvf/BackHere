@@ -2,11 +2,15 @@
   <dl class="dl-horizontal">
     <dt>Nome:</dt>
     <dd><%= customer.name %></dd>
+    <% if customer.date_of_birth.present? %>
+      <dt>Data de Nascimento</dt>
+      <dd><%= time_tag customer.date_of_birth %></dd>
+    <% end %>
     <dt>Documento:</dt>
     <dd><%= customer.document %></dd>
     <dt>Identificador:</dt>
     <% if customer.remote_id.nil? %>
-      <dd>Não possui. Cliente cadastrado como convidado.</dd>
+      <dd>Cliente cadastrado como convidado.</dd>
     <% else %>
       <dd><%= customer.remote_id %></dd>
     <% end %>

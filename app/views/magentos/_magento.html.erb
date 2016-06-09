@@ -25,6 +25,13 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :time_zone, "Time Zone:", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-5">
+        <%= f.select(:time_zone, magento.time_zone_enum, { include_blank: "Selecione o Time Zone", selected: magento.time_zone }, { class: "form-control" }) %>
+      </div>
+    </div>
+
+    <div class="form-group">
       <%= f.label :api_user, "Usuário:", class: 'col-sm-2 control-label' %>
       <div class="col-sm-5">
         <%= f.text_field :api_user, class: "form-control", placeholder: "Informe o usuário da api" %>

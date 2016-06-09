@@ -5,7 +5,7 @@
       <th>Status Remoto</th>
       <th>Comentário</th>
     </tr>
-    <% trackings.each do |tracking| %>
+    <% trackings.desc(:tracking_date).each do |tracking| %>
       <tr>
         <td><%= time_tag tracking.tracking_date %></td>
         <td><%= tracking.remote_status %></td>

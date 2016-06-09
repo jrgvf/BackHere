@@ -12,7 +12,7 @@ module Backhere
         status_type = StatusType.find_by(code: remote_status[:status_type]) unless remote_status[:status_type].blank?
         status.status_type = status_type unless status_type.nil?
         
-        status.save!
+        { status: status, new_status: !status.persisted? }
       end
 
     end

@@ -12,7 +12,12 @@ class Platform
   field :time_zone,               type: String,     default: 'Brasilia'
   field :start_date,              type: Date
 
-  validates_presence_of :name, :start_date
+  validates_presence_of :name, :start_date, :time_zone
+  validates_inclusion_of :time_zone, in: :time_zone_enum
+
+  def time_zone_enum
+    ['Brasilia', 'UTC']
+  end
 
   def platform_name
     raise NotImplementedError

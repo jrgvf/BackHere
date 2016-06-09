@@ -8,6 +8,7 @@ class Magento < Platform
   field :specific_version,     type: String
 
   validates_presence_of :url, :api_user, :api_key, :api_url, :version
+  validates_inclusion_of :version, in: :version_enum
 
   def platform_name
     "Magento"  

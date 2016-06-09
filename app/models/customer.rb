@@ -10,9 +10,8 @@ class Customer
   field :first_name,        type: String
   field :last_name,         type: String
   field :document,          type: String
+  field :date_of_birth,     type: Date
   field :is_guest,          type: Boolean,    default: false
-
-  has_many :orders
 
   embeds_many :emails, cascade_callbacks: true
   embeds_many :phones, cascade_callbacks: true
@@ -25,6 +24,10 @@ class Customer
   validates_presence_of :remote_id, unless: :is_guest?
 
   validates :document, uniqueness: { case_sensitive: false }, allow_blank: true
+
+  def orders
+    Order.where(customer: self)
+  end
 
   def is_guest?
     self[:is_guest]

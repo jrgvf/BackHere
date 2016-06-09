@@ -33,6 +33,14 @@
           <%= text_field_tag nil, @customer.remote_id, class: "form-control", readonly: true %>
         </div><!-- col-sm-5 -->
       </div><!-- form-group -->
+      <% if @customer.date_of_birth.present? %>
+        <div class="form-group">
+          <%= label_tag nil, "Data de Nascimento:", class: 'col-sm-2 control-label' %>
+          <div class="col-sm-5">
+            <%= time_tag @customer.date_of_birth, class: "form-control", readonly: true %>
+          </div><!-- col-sm-5 -->
+        </div><!-- form-group -->
+      <% end %>
       <div class="form-group">
         <%= label_tag nil, "Convidado:", class: 'col-sm-2 control-label' %>
         <div class="col-sm-5">

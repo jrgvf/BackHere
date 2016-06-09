@@ -15,7 +15,7 @@
             <% @platforms.each do |platform| %>
               <div class="input-group">
                 <span class="input-group-addon">
-                  <%= check_box_tag 'platform_ids[]', platform.id, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
+                  <%= check_box_tag 'platform_ids[]', platform.id, (platform == @platforms.first ? true : false), class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
                 </span>
                 <span class="form-control"><%= platform.name %></span>
               </div><!-- /input-group -->
@@ -26,7 +26,7 @@
           <% @available_tasks.each do |task| %>
             <div class="input-group">
               <span class="input-group-addon">
-                <%= radio_button_tag :type, task.generic_type, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
+                <%= radio_button_tag :type, task.generic_type, (task == @available_tasks.first ? true : false), class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
               </span>
               <span class="form-control"><%= task.task_name %></span>
             </div><!-- /input-group -->

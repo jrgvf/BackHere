@@ -15,6 +15,7 @@
             <tr>
               <th>Nome</th>
               <th>Identificador</th>
+              <th>Compras Realizadas</th>
               <th>Importado em:</th>
               <th>Atualizado em:</th>
               <th></th>
@@ -22,7 +23,8 @@
             <% @customers.each_with_index do |customer, index| %>
               <tr>
                 <td><%= customer.name.capitalize %></td>
-                <td><%= customer.remote_id %></td>
+                <td><%= customer.remote_id || "Convidado" %></td>
+                <td><%= customer.orders.count %></td>
                 <td><%= time_tag customer.created_at %></td>
                 <td><%= time_tag customer.updated_at %></td>
                 <td class="rowlink-skip"><%= link_to fa_icon("search-plus", class: "fa-lg"), customer_path(customer) %></td>

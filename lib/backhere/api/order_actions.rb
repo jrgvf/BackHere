@@ -11,7 +11,7 @@ module Backhere
 
         remote_status   = remote_order.delete(:status)
         remote_customer = remote_order.delete(:customer)
-        order_status    = Backhere::Api::StatusActions.find_or_create_status(remote_status)
+        order_status    = Backhere::Api::StatusActions.find_or_create_status(remote_status)[:status]
         order_customer  = Backhere::Api::CustomerActions.find_or_create_customer(remote_customer)[:customer]
 
         order = Order.find_by(remote_id: remote_order[:remote_id])
@@ -28,6 +28,10 @@ module Backhere
         else
           Backhere::Api::ExecutionResults::Result.new(:failure, order.errors.full_messages.join('; '))
         end
+      end
+
+      def order_params(remote_order, status, customer)
+        remote_order.merge(status: status, customer: customer)
       end
 
     end

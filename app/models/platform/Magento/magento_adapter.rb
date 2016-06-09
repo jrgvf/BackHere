@@ -27,7 +27,7 @@ class MagentoAdapter
     try_execute_call do
       login unless logged_in?
 
-      initialize_variables(full_task, page)
+      initialize_variables(full_task, page, :last_customer_update)
 
       response = client.call(:customer_customer_list, message: { sessionId: self.session_key, filters: build_complex_filters(filter_info) })
       { remote_customers: Array.wrap(response.body[:customer_customer_list_response][:store_view][:item]), continue: (end_date < self.date_time_now) }
@@ -38,7 +38,7 @@ class MagentoAdapter
     try_execute_call do
       login unless logged_in?
 
-      initialize_variables(full_task, page)
+      initialize_variables(full_task, page, :last_order_update)
 
       response = client.call(:sales_order_list, message: { sessionId: self.session_key, filters: build_complex_filters(filter_info) })
       { remote_orders: Array.wrap(response.body[:sales_order_list_response][:result][:item]), continue: (end_date < self.date_time_now) }
@@ -56,17 +56,21 @@ class MagentoAdapter
 
   private
 
-  def initialize_variables(full_task, page)
-    self.sync_date       = complete?(full_task) ? DateTime.parse(self.magento.start_date.to_s) : self.magento.last_customer_update
+  def initialize_variables(full_task, page, flag)
+    complete_task = complete?(full_task, flag)
+    
+    sync_date            = complete_task ? DateTime.parse(self.magento.start_date.to_s) : self.magento.send(flag)
+    self.sync_date       = sync_date.in_time_zone(self.magento.time_zone)
     self.page            = page
-    self.offset          = complete?(full_task) ? 60 : 1
+    self.offset          = complete_task ? 60 : 1
     self.date_time_now   = DateTime.now.in_time_zone(self.magento.time_zone)
-    attribute_key = complete?(full_task) ? "created_at" : "updated_at"
+
+    attribute_key = complete_task ? "created_at" : "updated_at"
     define_pagination_filter(attribute_key)
   end
 
-  def complete?(full_task)
-    full_task || self.magento.last_customer_update.blank?
+  def complete?(full_task, flag)
+    full_task || self.magento.send(flag).blank?
   end
 
   def filter_info

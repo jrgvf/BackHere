@@ -27,17 +27,18 @@ class MagentoSynchronizer < Synchronizer
     remote_orders.each do |remote_order|
       translated_order = Hash.new
 
+      translated_order[:imported_from]     = platform.name
       translated_order[:remote_id]         = remote_order[:increment_id]
       translated_order[:store_id]          = remote_order[:store_id]
       translated_order[:placed_at]         = remote_order[:created_at]
       translated_order[:total_price]       = remote_order[:grand_total]
-      translated_order[:placed_in]         = remote_order[:store_name]
+      translated_order[:placed_in]         = remote_order[:store_name].gsub("\n", " >> ")
       translated_order[:payment_method]    = remote_order[:payment][:method] unless remote_order[:payment].blank?
       translated_order[:status]            = extract_status(remote_order)
       translated_order[:shipping]          = extract_shipping_info(remote_order)
       translated_order[:customer]          = extract_customer_info(remote_order)
-      translated_order[:shipping_address]  = extract_address(:shipping_address, remote_order)
-      translated_order[:billing_address]   = extract_address(:billing_address, remote_order)
+      translated_order[:shipping_address]  = extract_address(remote_order[:shipping_address])
+      translated_order[:billing_address]   = extract_address(remote_order[:billing_address])
       translated_order[:items]             = extract_items(remote_order)
       translated_order[:trackings]         = extract_trackings(remote_order)
 
@@ -51,7 +52,7 @@ class MagentoSynchronizer < Synchronizer
 
   def extract_status(remote_order)
     {
-      code:        "#{remote_order[:status]} # #{remote_order[:state]}"
+      code: "#{remote_order[:status]} # #{remote_order[:state]}"
     }
   end
 
@@ -65,33 +66,32 @@ class MagentoSynchronizer < Synchronizer
 
   def extract_customer_info(remote_order)
     {
-      emails:      [remote_order[:customer_email]],
-      group_id:     remote_order[:customer_group_id],
-      is_guest:    (remote_order[:customer_is_guest].to_s == "0"),
-      document:     remote_order[:customer_taxvat],
-      first_name:   remote_order[:firstname],
-      last_name:    remote_order[:lastname],
-      phones:       extract_phone([remote_order[:telephone]])
+      remote_id:      remote_order[:customer_id],
+      date_of_birth:  remote_order[:customer_dob],
+      emails:        [remote_order[:customer_email]],
+      group_id:       remote_order[:customer_group_id],
+      is_guest:      (remote_order[:customer_is_guest].to_s != "0"),
+      document:       remote_order[:customer_taxvat],
+      first_name:     remote_order[:firstname],
+      last_name:      remote_order[:lastname],
+      phones:         extract_phones(remote_order[:telephone], remote_order[:billing_address][:telephone], remote_order[:billing_address][:fax])
     }
   end
 
-  def extract_phone(remote_phones)
-    phones = Array.new
-    remote_phones.each do |remote_phone|
-      phones << BrazilianPhone.format(remote_phone.to_s)
-    end
-    phones
+  def extract_phones(*remote_phones)
+    remote_phones.uniq.compact.map { |remote_phone| BrazilianPhone.format(remote_phone.to_s) }
   end
 
-  def extract_address(type, remote_order)
+  def extract_address(remote_address)
     {
-      customer_name: (remote_order[:firstname].to_s + remote_order[:lastname].to_s),
-      street:         remote_order[:street],
-      city:           remote_order[:city],
-      region:         remote_order[:region],
-      post_code:      remote_order[:postcode],
-      country:        remote_order[:country_id],
-      phone:          remote_order[:telephone]
+      customer_name: (remote_address[:firstname].to_s + remote_address[:lastname].to_s),
+      street:         remote_address[:street],
+      city:           remote_address[:city],
+      region:         remote_address[:region],
+      post_code:      remote_address[:postcode],
+      country:        remote_address[:country_id],
+      phone:          remote_address[:telephone],
+      other_phone:    remote_address[:fax]
     }
   end
 

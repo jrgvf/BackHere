@@ -14,7 +14,7 @@
   field :payment_method,    type: String
 
   belongs_to :status,       inverse_of: nil
-  belongs_to :customer
+  belongs_to :customer,     inverse_of: nil
 
   embeds_one  :billing_address,   class_name: "Address",        cascade_callbacks: true
   embeds_one  :shipping_address,  class_name: "Address",        cascade_callbacks: true

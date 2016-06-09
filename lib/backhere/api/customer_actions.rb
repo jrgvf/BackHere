@@ -26,11 +26,15 @@ module Backhere
         emails = remote_customer.delete(:emails)
         phones = remote_customer.delete(:phones)
 
-        if remote_customer[:is_guest]
+        if remote_customer[:is_guest] && remote_customer[:remote_id].blank?
           customer = Customer.find_by(first_name: remote_customer[:first_name], last_name: remote_customer[:last_name])
+
+          remote_customer.delete(:remote_id)
         else
           customer = Customer.find_by(remote_id: remote_customer[:remote_id]) unless remote_customer[:remote_id].blank?
           customer ||= Customer.find_by(first_name: remote_customer[:first_name], last_name: remote_customer[:last_name], is_guest: false)
+          
+          remote_customer.delete(:is_guest)
         end
         
         if customer.nil?
@@ -54,7 +58,7 @@ module Backhere
 
       def build_phones(customer, phones)
         return if phones.nil? || phones.blank?
-        phones.each do phone_infos
+        phones.each do |phone_infos|
           customer.phones.find_or_initialize_by(number: phone_infos[:number], country_code: phone_infos[:country_code], region_code: phone_infos[:region_code])
         end
       end

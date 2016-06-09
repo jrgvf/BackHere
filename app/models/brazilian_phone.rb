@@ -4,9 +4,9 @@ class BrazilianPhone
   BRAZILIAN_PHONE_REGEX         = /\A(?<country_code>55|055|)(?<region_code>0\d{1,2}|\d{1,2})(?<number>\d+)/
 
   def initialize(match_result)
-    @country_code = match_result[:country_code]
-    @region_code = match_result[:region_code]
-    @number = match_result[:number]
+    @country_code = match_result[:country_code].to_s
+    @region_code = match_result[:region_code].to_s
+    @number = match_result[:number].to_s
   end
 
   def country_code
@@ -23,8 +23,8 @@ class BrazilianPhone
   end
 
   def self.format(remote_phone)
-    normalized_phone  = BrazilianPhone.normalize(remote_phone)
-    result            = BRAZILIAN_PHONE_REGEX.match(normalized_phone)
+    normalized_phone  = BrazilianPhone.normalize(remote_phone.to_s)
+    result            = BRAZILIAN_PHONE_REGEX.match(normalized_phone) || {}
     brazilian_phone   = BrazilianPhone.new(result)
 
     {
@@ -40,6 +40,8 @@ class BrazilianPhone
 
   def self.to_string(remote_phone)
     phone = BrazilianPhone.format(remote_phone)
+    return "" if phone[:number].blank? || phone[:region_code].blank?
+    
     "+#{phone[:country_code]} (#{phone[:region_code]}) #{phone[:number]}"
   end
 

@@ -20,6 +20,10 @@ class Status
     status_type.code
   end
 
+  def orders
+    Order.where(status: self)
+  end
+
   private
 
     def set_status_type
