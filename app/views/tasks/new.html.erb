@@ -10,41 +10,96 @@
   <div class="box-body task-index-responsive">
     <%= form_tag(tasks_path, :method => :post ) do %>
      <div class="col-sm-12">     
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <h3 class="box-title">Plataformas</h3>
             <% @platforms.each do |platform| %>
               <div class="input-group">
-                <span class="input-group-addon">
+                <div class="input-group-addon">
                   <%= check_box_tag 'platform_ids[]', platform.id, (platform == @platforms.first ? true : false), class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
-                </span>
-                <span class="form-control"><%= platform.name %></span>
+                </div>
+                <div class="form-control"><%= platform.name %></div>
               </div><!-- /input-group -->
             <% end %>
         </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <h3 class="box-title">Tarefas</h3>
           <% @available_tasks.each do |task| %>
             <div class="input-group">
-              <span class="input-group-addon">
+              <div class="input-group-addon">
                 <%= radio_button_tag :type, task.generic_type, (task == @available_tasks.first ? true : false), class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
-              </span>
-              <span class="form-control"><%= task.task_name %></span>
+              </div>
+              <div class="form-control"><%= task.task_name %></div>
             </div><!-- /input-group -->
           <% end %>
         </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <h3 class="box-title">Completa ?</h3>
+        <div class="col-sm-3">
+          <h3 class="box-title">Quando ?</h3>
           <div class="input-group">
-            <span class="input-group-addon">
-              <%= check_box_tag :full_task, true, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
-            </span>
-            <span class="form-control">Sim</span>
-            <span class="input-group-btn">
-              <%= submit_tag "Criar", class: 'btn btn-primary btn-flat' %>
-            </span>
+            <div class="input-group-addon">
+              <%= radio_button_tag :execute, :now, true, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange', id: 'task_now' %>
+            </div>
+            <div class="form-control">Executar agora</div>
+          </div>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <%= radio_button_tag :execute, :schedule, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange', id: 'task_schedule' %>
+            </div>
+            <div class="form-control">Agendada</div>
           </div><!-- /input-group -->
         </div><!-- /.col-sm-4 -->
+
+        <div class="col-sm-3">
+          <h3 class="box-title">Completa ?</h3>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <%= check_box_tag :full_task, true, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange', id: "full_task" %>
+            </div>
+            <div class="form-control">Sim</div>
+            <div class="input-group-btn">
+              <%= submit_tag "Criar", class: 'btn btn-primary btn-flat' %>
+            </div>
+          </div><!-- /input-group -->
+        </div>
       </div><!-- /.col-sm-12 -->
+
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+          <div class="box box-danger" id="task-scheduler-infos" style="background-color: #F6F6F6">
+            <div class="box-header with-border">
+              <h3 class="box-title">Informações do agendamento</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="col-sm-12">
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <%= label_tag "Intervalo:" %>
+                    <%= select_tag("schedule[interval]", options_for_select(@intervals, [:min_30]), class: "form-control select2") %>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <%= label_tag "De:" %>
+                    <%= select_tag("schedule[from]", options_for_select(@hours_from, ["07:00"]), class: "form-control select2") %>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <%= label_tag "Até:" %>
+                    <%= select_tag("schedule[to]", options_for_select(@hours_to, ["21:59"]), class: "form-control select2") %>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <%= label_tag "Dias:" %>
+                    <%= select_tag("schedule[during]", options_for_select(@days, @days[0..-3].map(&:last)), multiple: true, class: "form-control select2") %>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.box-body -->
+          </div><!-- /.box -->
+        </div>
+      </div>
+
     <% end %>
   </div><!-- /.box-body -->
 </div><!-- /.box -->

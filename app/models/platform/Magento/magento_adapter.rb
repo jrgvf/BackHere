@@ -92,7 +92,7 @@ class MagentoAdapter
   def end_date
     date = self.sync_date + (self.page * self.offset).days
     date = self.date_time_now if date > self.date_time_now
-    date #date.strftime("%Y-%m-%d %H:%M:%S %Z")
+    date
   end
 
   ##

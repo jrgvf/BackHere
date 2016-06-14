@@ -45,7 +45,7 @@
 
 .task-index-responsive {
   min-height: .01%;
-  overflow-x: auto;
+  /*overflow-x: auto;*/
   padding-bottom: 5em;
 
   .input-group {

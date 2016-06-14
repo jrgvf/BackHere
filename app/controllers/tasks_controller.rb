@@ -8,11 +8,16 @@ class TasksController < BackHereController
   def new
     @platforms = current_account.platforms
     @available_tasks = TaskFactory::TASKS.select { |task| task.visible? }
+    @intervals = [["5 minutos", :minutes_5], ["15 minutos", :minutes_15], ["30 minutos", :minutes_30]]
+    (1..12).each { |n| @intervals << ["#{n} hora#{'s' if n > 1 }", "hours_#{n}".to_sym]}
+    @days = [["Segunda-feira", :monday], ["Terça-feira", :tuesday], ["Quarta-feira", :wednesday], ["Quinta-feira", :thursday], ["Sexta-feira", :friday], ["Sábado", :saturday], ["Domingo", :sunday]]
+    @hours_from = (0..23).map { |n| "#{n < 10 ? '0' + n.to_s : n}:00"}
+    @hours_to = (0..23).map { |n| "#{n < 10 ? '0' + n.to_s : n}:59"}
   end
 
   def create
-    if invalid_params?
-      flash.keep[:alert] = "Deve ser selecionada qual tarefa deseja executar e ao menos uma plataforma."
+    if params[:platform_ids].blank?
+      flash.keep[:alert] = "Deve ser selecionada ao menos uma plataforma."
       return redirect_to new_task_path
     end
 
@@ -31,13 +36,8 @@ class TasksController < BackHereController
       TaskTrigger.try_execute(task)
     end
 
-    if params[:platform_ids].count > 1
-      flash.keep[:success] = "Tarefas criadas com sucesso."
-      redirect_to tasks_path
-    else
-      flash.keep[:success] = "Tarefa criada com sucesso."
-      redirect_to tasks_path
-    end
+    flash.keep[:success] = "Tarefa#{'s' if params[:platform_ids].count > 1} criadas com sucesso."
+    redirect_to tasks_path
   end
 
   def show    
@@ -55,12 +55,6 @@ class TasksController < BackHereController
 
   def type
     params[:type].to_sym
-  end
-
-  def invalid_params?
-    result = params[:platform_ids].blank?
-    result = params[:type].blank? unless result
-    result
   end
 
 end

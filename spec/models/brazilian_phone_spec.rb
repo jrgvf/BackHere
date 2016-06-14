@@ -26,6 +26,8 @@ describe BrazilianPhone do
   let(:expect_normalize_response3) { "5581998240131" }
   let(:expect_normalize_response4) { "05581998240131" }
 
+  let(:expect_to_string_response) { "+55 (81) 998240131"}
+
   subject { BrazilianPhone }
 
   context ".format" do
@@ -43,6 +45,13 @@ describe BrazilianPhone do
     it { list_of_phones[3..5].each  {|phone| expect(subject.normalize(phone)).to eq(expect_normalize_response2)} }
     it { list_of_phones[6..8].each  {|phone| expect(subject.normalize(phone)).to eq(expect_normalize_response3)} }
     it { list_of_phones[9..11].each {|phone| expect(subject.normalize(phone)).to eq(expect_normalize_response4)} }
+  end
+
+  context ".to_string" do
+    it { expect(subject).to respond_to(:to_string).with(1).argument }
+    it { expect(subject).not_to respond_to(:to_string).with(0).argument }
+    it { expect(subject).not_to respond_to(:to_string).with(2).argument }
+    it { list_of_phones.each {|phone| expect(subject.to_string(phone)).to eq(expect_to_string_response)} }
   end
 
 end
