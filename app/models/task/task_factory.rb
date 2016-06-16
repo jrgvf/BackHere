@@ -24,4 +24,8 @@ class TaskFactory
     false
   end
 
+  def self.find_by_type(type)
+    TASKS.each { |task| return task if task.same_type?(type) }
+  end
+
 end

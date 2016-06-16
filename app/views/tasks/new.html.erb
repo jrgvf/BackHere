@@ -38,13 +38,13 @@
             <div class="input-group-addon">
               <%= radio_button_tag :execute, :now, true, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange', id: 'task_now' %>
             </div>
-            <div class="form-control">Executar agora</div>
+            <div class="form-control">Agora</div>
           </div>
           <div class="input-group">
             <div class="input-group-addon">
-              <%= radio_button_tag :execute, :schedule, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange', id: 'task_schedule' %>
+              <%= radio_button_tag :execute, :delayed, false, class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange', id: 'task_schedule' %>
             </div>
-            <div class="form-control">Agendada</div>
+            <div class="form-control">Agendar</div>
           </div><!-- /input-group -->
         </div><!-- /.col-sm-4 -->
 
@@ -73,25 +73,25 @@
                 <div class="col-sm-2">
                   <div class="form-group">
                     <%= label_tag "Intervalo:" %>
-                    <%= select_tag("schedule[interval]", options_for_select(@intervals, [:min_30]), class: "form-control select2") %>
+                    <%= select_tag("delay[interval]", options_for_select(@intervals, [:minutes_30]), class: "form-control select2") %>
                   </div>
                 </div>
                 <div class="col-sm-2">
                   <div class="form-group">
                     <%= label_tag "De:" %>
-                    <%= select_tag("schedule[from]", options_for_select(@hours_from, ["07:00"]), class: "form-control select2") %>
+                    <%= select_tag("delay[time_from]", options_for_select(@hours_from, [7]), class: "form-control select2") %>
                   </div>
                 </div>
                 <div class="col-sm-2">
                   <div class="form-group">
                     <%= label_tag "Até:" %>
-                    <%= select_tag("schedule[to]", options_for_select(@hours_to, ["21:59"]), class: "form-control select2") %>
+                    <%= select_tag("delay[time_to]", options_for_select(@hours_to, [22]), class: "form-control select2") %>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <%= label_tag "Dias:" %>
-                    <%= select_tag("schedule[during]", options_for_select(@days, @days[0..-3].map(&:last)), multiple: true, class: "form-control select2") %>
+                    <%= select_tag("delay[days]", options_for_select(@days, @days[0..-3].map(&:last)), multiple: true, class: "form-control select2") %>
                   </div>
                 </div>
               </div>
@@ -99,7 +99,10 @@
           </div><!-- /.box -->
         </div>
       </div>
-
     <% end %>
   </div><!-- /.box-body -->
 </div><!-- /.box -->
+
+<% if @delayer_tasks.present? %>
+  <%= render partial: "tasks/delayer_tasks" %>
+<% end %>

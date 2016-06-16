@@ -19,6 +19,9 @@ class Account
   validates_format_of :default_email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
   validate :verify_email
 
+  scope :actives,    -> { where(blocked: false) }
+  scope :inactives,  -> { where(blocked: true) }
+
   rails_admin do
     configure :platforms do
       read_only true

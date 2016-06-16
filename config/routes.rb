@@ -25,7 +25,12 @@ Rails.application.routes.draw do
 
   resources :users, only: [:edit, :update]
 
-  resources :tasks, only: [:index, :create, :new, :show]
+  resources :tasks, only: [:index, :create, :new, :show] do
+    collection do
+      delete 'delete_delayer/:id', to: 'tasks#delete_delayer', as: 'delete_delayer'
+    end
+  end
+
   resources :customers, only: [:index, :show]
   resources :statuses, only: [:index, :update, :create]
   resources :orders, only: [:index, :show]

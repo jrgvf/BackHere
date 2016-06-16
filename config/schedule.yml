@@ -8,3 +8,7 @@
 task_trigger:
   cron: "*/1 * * * *"
   class: "TaskTrigger"
+
+delayer_task_trigger:
+  cron: "*/1 * * * *"
+  class: "DelayerTaskTrigger"

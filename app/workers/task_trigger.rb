@@ -57,11 +57,11 @@ class TaskTrigger
   private
 
     def waiting_tasks
-      Task.where(:status.in => standby_status)
+      Task.where(:status.in => standby_status).asc(:id)
     end
 
     def slow_tasks
-      Task.where(:status.in => [:queued, :processing], :started_at.lte => 1.hour.ago)
+      Task.where(:status.in => [:queued, :processing], :started_at.lte => 1.hour.ago).asc(:id)
     end
 
     def blocked_status

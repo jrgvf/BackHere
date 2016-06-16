@@ -1,49 +1,90 @@
 class TasksController < BackHereController
   before_action :find_task, only: [:show]
+  before_action :validate_params, only: [:create]
 
   def index
-    @tasks = Task.where(is_visible: true).order_by(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    @tasks = Task.where(is_visible: true).desc(:created_at).paginate(page: params[:page], per_page: 10)
   end
 
   def new
     @platforms = current_account.platforms
     @available_tasks = TaskFactory::TASKS.select { |task| task.visible? }
-    @intervals = [["5 minutos", :minutes_5], ["15 minutos", :minutes_15], ["30 minutos", :minutes_30]]
-    (1..12).each { |n| @intervals << ["#{n} hora#{'s' if n > 1 }", "hours_#{n}".to_sym]}
-    @days = [["Segunda-feira", :monday], ["Terça-feira", :tuesday], ["Quarta-feira", :wednesday], ["Quinta-feira", :thursday], ["Sexta-feira", :friday], ["Sábado", :saturday], ["Domingo", :sunday]]
-    @hours_from = (0..23).map { |n| "#{n < 10 ? '0' + n.to_s : n}:00"}
-    @hours_to = (0..23).map { |n| "#{n < 10 ? '0' + n.to_s : n}:59"}
+    @delayer_tasks = DelayerTask.asc(:created_at)
+
+    @intervals  = DelayerTask.intervals
+    @days       = DelayerTask.days
+    @hours_from = DelayerTask.hours_from
+    @hours_to   = DelayerTask.hours_to
+  end
+
+  def create_delayer_task
+    delayer_task = DelayerTask.new(delayer_task_params)
+    return flash.keep[:error] = "Não foi possível criar o agendamento." unless delayer_task.save
+    flash.keep[:success] = "Agendamento criado com sucesso."
   end
 
   def create
-    if params[:platform_ids].blank?
-      flash.keep[:alert] = "Deve ser selecionada ao menos uma plataforma."
-      return redirect_to new_task_path
-    end
+    if delayed?
+      delayer_task = DelayerTask.find_or_initialize_by(type: type, platform_ids: params["platform_ids"])
+      delayer_task.update_attributes(delayer_task_params)
 
-    params[:platform_ids].each do |platform_id|
-      platform = Platform.find(platform_id)
-
-      authorize! :manage, platform
-
-      task = TaskFactory.build(type, task_params(platform))
-
-      if task && !task.save
-        flash.keep[:error] = "(#{platform.name}) Não foi possível criar a tarefa."
-        return redirect_to new_task_path
+      if delayer_task.save
+        flash.keep[:success] = "Agendamento criado com sucesso."
+      else
+        flash.keep[:error] = "Não foi possível criar o agendamento."
       end
 
-      TaskTrigger.try_execute(task)
+      return redirect_to new_task_path
+    else
+      params[:platform_ids].each do |platform_id|
+        platform = Platform.find(platform_id)
+        authorize! :manage, platform
+
+        task = TaskFactory.build(type, task_params(platform))
+
+        if task && !task.save
+          flash.keep[:error] = "(#{platform.name}) Não foi possível criar a tarefa."
+          return redirect_to new_task_path
+        end
+
+        TaskTrigger.try_execute(task)
+      end
+      flash.keep[:success] = "Tarefa#{'s' if params[:platform_ids].count > 1} criadas com sucesso."
     end
 
-    flash.keep[:success] = "Tarefa#{'s' if params[:platform_ids].count > 1} criadas com sucesso."
     redirect_to tasks_path
   end
 
   def show    
   end
 
+  def delete_delayer
+    delayer_task = DelayerTask.find(params[:id])
+
+    if delayer_task.destroy
+      flash.keep[:success] = "Agendamento removido com sucesso."
+    else
+      flash.keep[:error] = "Não foi possível remover o agendamento."
+    end
+
+    redirect_to new_task_path
+  end
+
   private
+
+  def validate_params
+    flash.keep[:alert] = "Deve ser selecionada ao menos uma plataforma." if params[:platform_ids].blank?
+    flash.keep[:alert] = "Deve ser selecionado um período de tempo válido." if delayed? && invalid_time_range
+    return redirect_to new_task_path if flash.keys.include?("alert")
+  end
+
+  def invalid_time_range
+    params[:delay][:time_from].to_i >= params[:delay][:time_to].to_i
+  end
+
+  def delayed?
+    params[:execute].to_s == "delayed"
+  end
 
   def find_task
     @task = Task.find(params[:id]) or not_found
@@ -51,6 +92,10 @@ class TasksController < BackHereController
 
   def task_params(platform)
     params.permit(:type, :full_task).merge(platform_id: platform.id.to_s, platform_name: platform.name)
+  end
+
+  def delayer_task_params
+    params.require(:delay).permit(:interval, :time_from, :time_to, days:[]).merge({type: type, platform_ids: params["platform_ids"]})
   end
 
   def type
