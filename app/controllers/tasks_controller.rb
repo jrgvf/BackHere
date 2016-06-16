@@ -79,7 +79,7 @@ class TasksController < BackHereController
   end
 
   def invalid_time_range
-    params[:delay][:time_from].to_i >= params[:delay][:time_to].to_i
+    params[:delay][:time_from].to_i > params[:delay][:time_to].to_i
   end
 
   def delayed?

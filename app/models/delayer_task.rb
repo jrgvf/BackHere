@@ -43,7 +43,7 @@ class DelayerTask
   end
 
   def self.hours_to
-    (1..24).map { |n| ["#{(n-1) < 10 ? '0' + (n-1).to_s : (n-1)}:59", n]}
+    (0..23).map { |n| ["#{n < 10 ? '0' + n.to_s : n}:59", n]}
   end
 
   def platforms
@@ -63,7 +63,7 @@ class DelayerTask
   end
 
   def time_range
-    "#{time_from}:00 - #{time_to-1}:59"
+    "#{'0' if time_from < 10}#{time_from}:00 - #{'0' if time_to < 10}#{time_to}:59"
   end
 
   def days_range
