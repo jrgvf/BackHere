@@ -61,3 +61,7 @@
   min-height: .01%;
   overflow-x: auto;
 }
+
+.nav-tabs-custom > .nav-tabs > li.active {
+    border-top-color: #f05f40;
+}

@@ -1,0 +1,23 @@
+<div class="box box-danger" style="background-color: #F6F6F6;"> <!-- add class collapsed-box for collapsed box-->
+  <div class="box-header with-border">
+    <h3 class="box-title">Mapeamentos</h3>
+    <div class="box-tools pull-right">
+      <%= button_tag(class: "btn btn-box-tool", "data-widget" => "collapse") do %>
+        <%= fa_icon("minus") %>
+      <% end %>
+    </div><!-- box-tools pull-right -->
+  </div><!-- box-header with-border -->
+
+  <div class="box-body table-responsive no-padding">
+    <div class="col-sm-12">
+      <table class="table table-hover" id="survey_mappings_table">
+        <tr>
+          <th>Tipo de status</th>
+          <th>Pesquisa</th>
+          <th></th>
+        </tr>
+        <%= render partial: 'survey_mapping', collection: survey_mappings %>
+      </table>
+    </div><!-- col-sm-12 -->
+  </div><!-- /.box-body -->
+</div><!-- box box-danger -->

@@ -1,0 +1,43 @@
+<div class="box box-danger" style="background-color: #F6F6F6;"> <!-- add class collapsed-box for collapsed box-->
+  <div class="box-header with-border">
+    <h3 class="box-title">Criar novo mapeamento</h3>
+    <div class="box-tools pull-right">
+      <%= button_tag(class: "btn btn-box-tool", "data-widget" => "collapse") do %>
+        <%= fa_icon("minus") %>
+      <% end %>
+    </div><!-- box-tools pull-right -->
+  </div><!-- box-header with-border -->
+
+  <div class="box-body">
+    <div class="col-sm-12">
+      <div class="col-sm-3 form-group">
+        <%= label_tag :status_type, "Tipo do status" %>
+      </div><!-- col-sm-3 form-group -->
+      <div class="col-sm-3 form-group">
+        <%= label_tag :survey, "Pesquisa" %>
+      </div><!-- col-sm-3 form-group -->
+    </div><!-- col-sm-12 -->
+    <div class="col-sm-12">
+      <%= form_tag(survey_mappings_path, :method => :post, remote: true, id: "survey_mapping_form") do %>
+        <div class="col-sm-3 form-group">
+          <%= collection_select(:status_type, :code, @status_types, :code, :label, {disabled: [:undefined]}, {class: "form-control select2", style: "width: 100%;"}) %>
+        </div><!-- col-sm-3 form-group -->
+        <div class="col-sm-3 form-group">
+          <%= collection_select(:survey, :id, @surveys, :id, :name, {}, {class: "form-control select2", style: "width: 100%;"}) %>
+        </div><!-- col-sm-3 form-group -->
+        <div class="col-sm-2 form-group">
+          <%= button_tag(class: "btn btn-labeled btn-primary") do %>
+            <%= content_tag(:span, class: "btn-label") do %>
+              <%= fa_icon("plus") %>
+            <% end %>
+            Criar
+          <% end %>
+        </div><!-- col-sm-2 form-group -->
+      <% end %>
+    </div><!-- col-sm-12 -->
+  </div><!-- box-body -->
+</div><!-- box box-danger -->
+
+<div id="survey_mappings">
+  <%= render partial: 'survey_mappings', locals: { survey_mappings: @survey_mappings } %>
+</div>

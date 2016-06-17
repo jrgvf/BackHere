@@ -1,5 +1,5 @@
 $("<%= escape_javascript(render @status) %>").appendTo("#statuses").hide().animate({height: 'toggle'}, 500).on("ajax:error", function(e, xhr, status, error) {
   bootbox.alert("Ops... <br /><br />" + xhr.responseText);
-});;
+});
 
 $(".select2").select2();

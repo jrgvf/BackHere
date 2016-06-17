@@ -58,6 +58,9 @@
           <li><%= link_to fa_icon("history", text: 'Histórico'), tasks_path %></li>
         </ul>
       </li>
+      <li class="<%= active_class(mappings_path) %>">
+        <%= link_to fa_icon("cogs", text: content_tag(:span, 'Configurações')), mappings_path %>
+      </li>
     </ul>
     <!-- /.sidebar-menu -->
     <!-- Sidebar Footer -->

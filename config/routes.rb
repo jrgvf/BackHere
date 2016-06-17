@@ -43,6 +43,13 @@ Rails.application.routes.draw do
     get 'update_specific_version', to: 'magentos#update_specific_version'
   end
 
+  resources :mappings, only: [:index] do
+    collection do
+      post 'survey', to: 'mappings#survey_mapping'
+      delete 'delete_survey/:id', to: 'mappings#delete_survey_mapping', as: 'delete_survey'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,5 @@
+<tr>
+  <td><%= survey_mapping.status_type.label %></td>
+  <td><%= survey_mapping.survey.name %></td>
+  <td><%= link_to fa_icon("trash", class: "fa-lg"), delete_survey_mappings_path(survey_mapping), method: :delete, remote: true %></td>
+</tr>
