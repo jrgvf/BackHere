@@ -7,6 +7,9 @@ class Phone
   field :number,          type: Integer
   field :is_valid,        type: Boolean,    default: false
   field :verified,        type: Boolean,    default: false
+  field :type,            type: String
+  field :location,        type: String
+  field :is_mobile,       type: Boolean,    default: false
 
   validates :country_code, presence: true, numericality: { only_integer: true }
   validates :region_code, presence: true, numericality: { only_integer: true }
@@ -14,12 +17,21 @@ class Phone
 
   embedded_in :customer
 
+  scope :verifieds,     -> { where(verified: true) }
+  scope :not_verifieds, -> { where(verified: false) }
+  scope :valids,        -> { where(verified: true, is_valid: true) }
+  scope :invalids,      -> { where(verified: true, is_valid: false) }
+
   def is_valid?
     self[:is_valid]
   end
 
   def verified?
     self[:verified]
+  end
+
+  def is_mobile?
+    self[:is_mobile]
   end
 
   def full_phone

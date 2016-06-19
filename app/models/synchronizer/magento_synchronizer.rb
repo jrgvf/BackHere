@@ -6,14 +6,15 @@ class MagentoSynchronizer < Synchronizer
     remote_customers.each do |remote_customer|
       translated_customer = Hash.new
 
-      translated_customer[:remote_id]   = remote_customer[:customer_id]
-      translated_customer[:first_name]  = remote_customer[:firstname].capitalize
-      translated_customer[:last_name]   = remote_customer[:lastname].capitalize
-      translated_customer[:created_in]  = remote_customer[:created_in]
-      translated_customer[:store_id]    = remote_customer[:store_id]
-      translated_customer[:group_id]    = remote_customer[:group_id]
-      translated_customer[:website_id]  = remote_customer[:website_id]
-      translated_customer[:emails]      = [remote_customer[:email]]
+      translated_customer[:imported_from] = platform.id
+      translated_customer[:remote_id]     = remote_customer[:customer_id]
+      translated_customer[:first_name]    = remote_customer[:firstname].capitalize
+      translated_customer[:last_name]     = remote_customer[:lastname].capitalize
+      translated_customer[:created_in]    = remote_customer[:created_in]
+      translated_customer[:store_id]      = remote_customer[:store_id]
+      translated_customer[:group_id]      = remote_customer[:group_id]
+      translated_customer[:website_id]    = remote_customer[:website_id]
+      translated_customer[:emails]        = [remote_customer[:email]]
       
       translated_customers << translated_customer
     end
@@ -66,6 +67,7 @@ class MagentoSynchronizer < Synchronizer
 
   def extract_customer_info(remote_order)
     {
+      imported_from:  platform.id,
       remote_id:      remote_order[:customer_id],
       date_of_birth:  remote_order[:customer_dob],
       emails:        [remote_order[:customer_email]],
@@ -84,7 +86,7 @@ class MagentoSynchronizer < Synchronizer
 
   def extract_address(remote_address)
     {
-      customer_name: (remote_address[:firstname].to_s + remote_address[:lastname].to_s),
+      customer_name: (remote_address[:firstname].to_s + " " + remote_address[:lastname].to_s),
       street:         remote_address[:street],
       city:           remote_address[:city],
       region:         remote_address[:region],

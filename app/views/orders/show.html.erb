@@ -3,6 +3,11 @@
 <% provide(:description, "Detalhes sobre o pedido #{@order.internal_code}") %>
 <% provide(:levels, "Pedidos, #{@order.internal_code}") %>
 
+<div class="pull-right" style="padding-bottom: 10px">
+  <%= label_tag :available_for_surveys, "Dispoível para pesquisas?" %>
+  <%= check_box_tag :available_for_surveys, @order.available_for_surveys, @order.available_for_surveys, data: { name: 'available_for_survey', size: 'mini', inverse: true, 'on-text' => 'Sim', 'off-text' => 'Não' } %>
+</div>
+
 <div class="row">
   <div class="col-sm-4">
 

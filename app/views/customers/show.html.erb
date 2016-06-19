@@ -16,6 +16,12 @@
         </div><!-- col-sm-5 -->
       </div><!-- form-group -->
       <div class="form-group">
+        <%= label_tag nil, "Importado de:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-5">
+          <%= text_field_tag nil, @customer.imported_name, class: "form-control", readonly: true %>
+        </div><!-- col-sm-5 -->
+      </div><!-- form-group -->
+      <div class="form-group">
         <%= label_tag nil, "Importado em:", class: 'col-sm-2 control-label' %>
         <div class="col-sm-5">
           <%= time_tag @customer.created_at, class: "form-control", readonly: true %>

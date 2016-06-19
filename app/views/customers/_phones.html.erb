@@ -8,12 +8,14 @@
         <th>Número</th>
         <th class="center">Verificado?</th>
         <th class="center">Válido?</th>
+        <th class="center">Mobile?</th>
       </tr>
       <% phones.each do |phone| %>
         <tr>
           <td><%= phone.full_phone %></td>
           <td class="center"><%= boolean_icon(phone.verified) %></td>
           <td class="center"><%= boolean_icon(phone.is_valid) if phone.verified? %></td>
+          <td class="center"><%= boolean_icon(phone.is_mobile) if phone.verified? %></td>
         </tr>
       <% end %>
     </table>

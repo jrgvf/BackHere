@@ -2,7 +2,7 @@ module Backhere
   module Api
     module CustomerActions
 
-      DEFAULT_ATTRIBUTES = [:remote_id, :first_name, :last_name, :document, :is_guest]
+      DEFAULT_ATTRIBUTES = [:remote_id, :imported_from, :first_name, :last_name, :document, :is_guest]
 
       def create_or_update_customers(results, remote_customers)
         remote_customers.each { |remote_customer| results << create_or_update_customer(remote_customer) }
@@ -27,14 +27,10 @@ module Backhere
         phones = remote_customer.delete(:phones)
 
         if remote_customer[:is_guest] && remote_customer[:remote_id].blank?
-          customer = Customer.find_by(first_name: remote_customer[:first_name], last_name: remote_customer[:last_name])
-
-          remote_customer.delete(:remote_id)
+          customer = Customer.find_by(default_attributes(remote_customer))
         else
-          customer = Customer.find_by(remote_id: remote_customer[:remote_id]) unless remote_customer[:remote_id].blank?
-          customer ||= Customer.find_by(first_name: remote_customer[:first_name], last_name: remote_customer[:last_name], is_guest: false)
-          
-          remote_customer.delete(:is_guest)
+          customer = Customer.find_by(remote_id: remote_customer[:remote_id], imported_from: remote_customer[:imported_from]) unless remote_customer[:remote_id].blank?
+          customer ||= Customer.find_by(default_attributes(remote_customer))
         end
         
         if customer.nil?
@@ -48,6 +44,7 @@ module Backhere
         customer.fill_dynamic_attributes(others_attributes(remote_customer))
         build_emails(customer, emails)
         build_phones(customer, phones)
+        
         { customer: customer, new_customer: new_customer }
       end
 

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-  #ruby '2.2.0'                                                                                     # A Ruby version for Heroku
+  #ruby '2.3.1'                                                                                     # A Ruby version for Heroku
   
   gem 'rails', '4.2.6'                                                                              # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
@@ -71,6 +71,7 @@ source 'https://rubygems.org'
   gem 'nprogress-rails'                                                                             # For progress bar using ajax
   gem 'select2-rails'                                                                               # For Jquery select field
   gem 'jasny-bootstrap-rails'                                                                       # For Jasny Bootstrap
+  gem "bootstrap-switch-rails"                                                                      # For Bootstrap Switch
 
 # Gems For Tests and Development
 group :development, :test do

@@ -1,12 +1,12 @@
 class TaskFactory
 
   TASKS = [
-    CustomerTask, OrderTask
+    CustomerTask, OrderTask, CustomerEmailVerificationTask, CustomerPhoneVerificationTask
   ]
 
-  def self.build(type, params = {})
+  def self.build(generic_type, params = {})
     TASKS.each do |task|
-      if task.same_type?(type)
+      if task.same_type?(generic_type)
         params.merge!({type: task.type})
         return task.new(params)
       end
@@ -14,9 +14,9 @@ class TaskFactory
     false
   end
 
-  def self.find_or_initialize_by(type, params = {})
+  def self.find_or_initialize_by(generic_type, params = {})
     TASKS.each do |task|
-      if task.same_type?(type)
+      if task.same_type?(generic_type)
         params.merge!({type: task.type})
         return task.find_or_initialize_by(params)
       end
@@ -24,8 +24,8 @@ class TaskFactory
     false
   end
 
-  def self.find_by_type(type)
-    TASKS.each { |task| return task if task.same_type?(type) }
+  def self.find_by_generic_type(generic_type)
+    TASKS.each { |task| return task if task.same_type?(generic_type) }
   end
 
 end

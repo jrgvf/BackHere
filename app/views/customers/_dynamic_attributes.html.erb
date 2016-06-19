@@ -1,9 +1,10 @@
-<% attributes.each do |name, value| %>  
+<% attributes.each do |name, value| %>
+  <% next if name == :date_of_birth %>
   <div class="form-group">
     <%= label_tag nil, attribute_name(name), class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
       <% if date_or_time_attribute?(value) %>
-        <%= time_tag value  , class: "form-control", readonly: true %>
+        <%= time_tag value, class: "form-control", readonly: true %>
       <% else %>
         <%= text_field_tag nil, value, class: "form-control", readonly: true %>
       <% end %>

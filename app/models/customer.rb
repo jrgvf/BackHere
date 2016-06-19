@@ -7,6 +7,7 @@ class Customer
   tenant(:account)
 
   field :remote_id,         type: String
+  field :imported_from,     type: String
   field :first_name,        type: String
   field :last_name,         type: String
   field :document,          type: String
@@ -20,10 +21,43 @@ class Customer
 
   validates_presence_of :first_name, :last_name
 
-  validates :remote_id, uniqueness: { case_sensitive: false }, allow_blank: true
+  validates :remote_id, uniqueness: { scope: :imported_from, case_sensitive: false }, allow_blank: true
   validates_presence_of :remote_id, unless: :is_guest?
 
-  validates :document, uniqueness: { case_sensitive: false }, allow_blank: true
+  validates :document, uniqueness: { scope: :imported_from, case_sensitive: false }, allow_blank: true
+  
+
+  def self.with_unchecked_email
+    self.elem_match(emails: {verified: false})
+  end
+
+  def self.with_unchecked_phone
+    self.elem_match(phones: {verified: false})
+  end
+
+  def self.with_valid_email
+    self.elem_match(emails: {is_valid: true})
+  end
+
+  def self.with_valid_phone
+    self.elem_match(phones: {is_valid: true})
+  end
+
+  def self.with_valid_mobile_phone
+    self.elem_match(phones: {is_valid: true, is_mobile: true})
+  end
+
+  def self.with_invalid_email
+    self.elem_match(emails: {verified: true, is_valid: false})
+  end
+
+  def self.with_invalid_phone
+    self.elem_match(phones: {verified: true, is_valid: false})
+  end
+
+  def self.available_for_surveys
+    self.or(self.with_valid_email.selector, self.with_valid_mobile_phone.selector)
+  end
 
   def orders
     Order.where(customer: self)
@@ -31,6 +65,10 @@ class Customer
 
   def is_guest?
     self[:is_guest]
+  end
+
+  def imported_name
+    Platform.find_by(id: self[:imported_from])&.name
   end
 
   def dynamic_attributes
@@ -85,6 +123,7 @@ class Customer
   def black_listed_attributes(other_attributes = [])
     black_list = [
       :remote_id,
+      :imported_from,
       :first_name,
       :last_name,
       :emails,

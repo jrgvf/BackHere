@@ -21,6 +21,7 @@
 //= require nprogress-ajax
 //= require select2-full
 //= require bootstrap-datepicker
+//= require bootstrap-switch
 //= require icheck
 //= require jquery.slimscroll.min
 //= require bootbox

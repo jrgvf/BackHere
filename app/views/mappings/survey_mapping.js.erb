@@ -1,6 +1,6 @@
 $("#survey_mappings_table tr:last").after("<%= escape_javascript(render partial: 'survey_mapping', object: @survey_mapping) %>").hide().animate({height: 'toggle'}, 500);
 
-$('a[data-method="delete"]').on("ajax:error", function(e, xhr, status, error) {
+$('a[data-method="delete"]:last').on("ajax:error", function(e, xhr, status, error) {
   bootbox.alert("Ops... <br /><br />" + xhr.responseText);
 });
 

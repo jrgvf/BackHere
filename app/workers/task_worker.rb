@@ -15,12 +15,19 @@ class TaskWorker
   end
 
   def perform(task_id)
-    task = Task.find(task_id)
-    return if task.nil? || finished_status.include?(task.status)
+    begin
+      task = Task.find(task_id)
+      return if task.nil? || finished_status.include?(task.status)
 
-    Mongoid::Multitenancy.with_tenant(task.account) do
-      task.execute
-      TaskTrigger.try_execute(task, 10) unless finished_status.include?(task.status)
+      Mongoid::Multitenancy.with_tenant(task.account) do
+        task.execute
+        TaskTrigger.try_execute(task.id, 10) unless finished_status.include?(task.reload.status)
+      end
+    rescue Exception => e
+      task.error_messages << e.message
+      task.finished_at = DateTime.now.in_time_zone('Brasilia')
+      task.status = :finished_with_error
+      task.save
     end
   end
 

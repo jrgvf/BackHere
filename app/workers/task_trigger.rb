@@ -3,14 +3,15 @@ class TaskTrigger
 
   sidekiq_options retry: 1,
     queue: :cron_jobs,
-    unique: :until_and_while_executing,
+    unique: :while_executing,
     run_lock_expiration: 24*60*60,
-    unique_expiration: 24*60*60,
     log_duplicate_payload: true,
     failures: true
 
-  def self.try_execute(task, delay = 0)
+  def self.try_execute(task_id, delay = 0)
+    task = Task.find_by(id: task_id)
     return if task.nil? || already_processing?(task)
+
     task.job_id = Sidekiq::Client.enqueue_to_in(Platform.queue(task.platform_id), delay.seconds, TaskWorker, task.id.to_s)
     task.status = :queued
     task.save
@@ -49,7 +50,7 @@ class TaskTrigger
       if !queued_job && !running_job
         task.status = :pending
         task.save!
-        TaskTrigger.try_execute(task)
+        TaskTrigger.try_execute(task.id)
       end
     end
   end

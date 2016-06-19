@@ -26,7 +26,7 @@
           <% @available_tasks.each do |task| %>
             <div class="input-group">
               <div class="input-group-addon">
-                <%= radio_button_tag :type, task.generic_type, (task == @available_tasks.first ? true : false), class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
+                <%= radio_button_tag :generic_type, task.generic_type, (task == @available_tasks.first ? true : false), class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
               </div>
               <div class="form-control"><%= task.task_name %></div>
             </div><!-- /input-group -->

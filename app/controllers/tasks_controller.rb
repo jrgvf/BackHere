@@ -25,7 +25,7 @@ class TasksController < BackHereController
 
   def create
     if delayed?
-      delayer_task = DelayerTask.find_or_initialize_by(type: type, platform_ids: params["platform_ids"])
+      delayer_task = DelayerTask.find_or_initialize_by(generic_type: generic_type, platform_ids: params["platform_ids"])
       delayer_task.update_attributes(delayer_task_params)
 
       if delayer_task.save
@@ -40,14 +40,14 @@ class TasksController < BackHereController
         platform = Platform.find(platform_id)
         authorize! :manage, platform
 
-        task = TaskFactory.build(type, task_params(platform))
+        task = TaskFactory.build(generic_type, task_params(platform))
 
         if task && !task.save
           flash.keep[:error] = "(#{platform.name}) Não foi possível criar a tarefa."
           return redirect_to new_task_path
         end
 
-        TaskTrigger.try_execute(task)
+        TaskTrigger.try_execute(task.id)
       end
       flash.keep[:success] = "Tarefa#{'s' if params[:platform_ids].count > 1} criadas com sucesso."
     end
@@ -91,15 +91,15 @@ class TasksController < BackHereController
   end
 
   def task_params(platform)
-    params.permit(:type, :full_task).merge(platform_id: platform.id.to_s, platform_name: platform.name)
+    params.permit(:full_task).merge(platform_id: platform.id.to_s, platform_name: platform.name)
   end
 
   def delayer_task_params
-    params.require(:delay).permit(:interval, :time_from, :time_to, days:[]).merge({type: type, platform_ids: params["platform_ids"]})
+    params.require(:delay).permit(:interval, :time_from, :time_to, days:[]).merge({generic_type: generic_type, platform_ids: params["platform_ids"]})
   end
 
-  def type
-    params[:type].to_sym
+  def generic_type
+    params[:generic_type].to_sym
   end
 
 end

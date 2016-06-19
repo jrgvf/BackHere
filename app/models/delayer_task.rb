@@ -6,14 +6,14 @@ class DelayerTask
   tenant(:account)
 
   field :platform_ids,      type: Array
-  field :type,              type: Symbol
+  field :generic_type,      type: Symbol
   field :interval,          type: String
   field :time_from,         type: Integer
   field :time_to,           type: Integer
   field :days,              type: Array
   field :last_task,         type: DateTime
 
-  validates_presence_of :platform_ids, :type, :interval, :time_from, :time_to, :days
+  validates_presence_of :platform_ids, :generic_type, :interval, :time_from, :time_to, :days
 
   DAYS_VALUES = {
     monday: 1,
@@ -55,7 +55,7 @@ class DelayerTask
   end
 
   def task_name
-    TaskFactory.find_by_type(type).task_name
+    TaskFactory.find_by_generic_type(generic_type).task_name
   end
 
   def interval_name
@@ -82,8 +82,8 @@ class DelayerTask
         next unless delayer_task.should_create_task?(last_time)
 
         delayer_task.platforms.each do |platform|
-          task = TaskFactory.build(delayer_task.type, delayer_task.task_params(platform))
-          TaskTrigger.try_execute(task) if task && task.save
+          task = TaskFactory.build(delayer_task.generic_type, delayer_task.task_params(platform))
+          TaskTrigger.try_execute(task.id) if task && task.save
         end
 
         delayer_task.update_attributes!(last_task: last_time)

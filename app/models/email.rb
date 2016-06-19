@@ -10,6 +10,11 @@ class Email
 
   embedded_in :customer
 
+  scope :verifieds,     -> { where(verified: true) }
+  scope :not_verifieds, -> { where(verified: false) }
+  scope :valids,        -> { where(verified: true, is_valid: true) }
+  scope :invalids,      -> { where(verified: true, is_valid: false) }
+
   def is_valid?
     self[:is_valid]
   end

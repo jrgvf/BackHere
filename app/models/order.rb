@@ -5,13 +5,14 @@
 
   tenant(:account)
 
-  field :imported_from,     type: String
-  field :remote_id,         type: String
-  field :store_id,          type: String
-  field :placed_at,         type: DateTime
-  field :total_price,       type: Float
-  field :placed_in,         type: String
-  field :payment_method,    type: String
+  field :imported_from,           type: String
+  field :remote_id,               type: String
+  field :store_id,                type: String
+  field :placed_at,               type: DateTime
+  field :total_price,             type: Float
+  field :placed_in,               type: String
+  field :payment_method,          type: String
+  field :available_for_surveys,   type: Boolean,    default: true
 
   belongs_to :status,       inverse_of: nil
   belongs_to :customer,     inverse_of: nil
@@ -29,6 +30,11 @@
 
   def internal_code
     "(#{imported_from}) ##{remote_id}"
+  end
+
+  def self.available_for_surveys
+    customer_ids = Customer.available_for_surveys.pluck(:id).compact
+    self.where(available_for_surveys: true).in(customer_id: customer_ids)
   end
 
 end

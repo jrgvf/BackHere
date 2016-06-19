@@ -13,6 +13,8 @@ class Platform
   field :start_date,              type: Date
 
   validates_presence_of :name, :start_date, :time_zone
+  validates_uniqueness_of :name, case_sensitive: false
+  
   validates_inclusion_of :time_zone, in: :time_zone_enum
 
   def time_zone_enum

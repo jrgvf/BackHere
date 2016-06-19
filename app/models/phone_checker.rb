@@ -1,22 +1,23 @@
-class EmailChecker
-  attr_accessor :email
+class PhoneChecker
+  attr_accessor :phone
 
-# I'm using QuickEmailVerification API
-# QEV_KEY is the key for BackHere in QuickEmailVerification
-# Limit of 100 Verification per day for free 
+# I'm using Neutrino API (Phone Validate)
+# NEUTRINO_USER is the user for BackHere in Neutrino API
+# NEUTRINO_KEY is the key for BackHere in Neutrino API
+# Limit of 25 Verification per day for free (Phone Validate)
 
-  def initialize(email)
-    @email = email
+  def initialize(phone)
+    @phone = phone
   end
 
-  def self.check_email(email)
-    EmailChecker.new(email).check_email
+  def self.check_phone(phone)
+    PhoneChecker.new(phone).check_phone
   end
 
-  def check_email
+  def check_phone
     result = Hash.new
     begin
-      response = get(email)
+      response = get(phone)
       result = JSON.parse(response.body) rescue {}
       result["status"] = response.status
     rescue Exception => ex
@@ -28,14 +29,15 @@ class EmailChecker
 
   private
 
-    def get(email)
+    def get(phone)
       con.get do |req|
-        req.url "/v1/verify"
+        req.url "/phone-validate"
         req.headers["Content-Type"]   = "application/json"
         req.headers["Accept"]         = "application/json"
-        
-        req.params['email']           = "#{email}"
-        req.params['apikey']          = "#{ENV['QEV_KEY']}"
+
+        req.params['user-id']         = "#{ENV['NEUTRINO_USER']}"
+        req.params['api-key']         = "#{ENV['NEUTRINO_KEY']}"
+        req.params['number']          = "#{phone}"
       end
     end
 
@@ -43,7 +45,7 @@ class EmailChecker
       if ENV['RAILS_ENV'] == "test"
         @con = Faraday.default_connection
       else
-        @con = Faraday.new(:url => "http://api.quickemailverification.com") do |faraday|
+        @con = Faraday.new(:url => "https://neutrinoapi.com") do |faraday|
           faraday.request  :url_encoded             # form-encode POST params
           faraday.response :logger                  # log requests to STDOUT
           faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP

@@ -72,20 +72,20 @@ class Task
     self.save!
   end
 
-  def update_finished_task(execution_result, task_date_attribute)
+  def update_finished_task(execution_result, task_date_attribute = nil)
     update_messages(execution_result)
 
     platform = Platform.find(self.platform_id)
-    finished_at = DateTime.now.in_time_zone(platform.time_zone)
+    finished_at = DateTime.now.in_time_zone('Brasilia')
 
     if all_successful?
       status = :successfully_finished
-      platform.update_attributes!({ task_date_attribute => self.started_at })
+      platform.update_attributes!({ task_date_attribute => self.started_at.in_time_zone(platform.time_zone) }) unless task_date_attribute.nil?
     elsif has_error?
       status = :finished_with_error
     else
       status = :finished_with_failure
-      platform.update_attributes!({ task_date_attribute => self.started_at })
+      platform.update_attributes!({ task_date_attribute => self.started_at.in_time_zone(platform.time_zone) }) unless task_date_attribute.nil?
     end
 
     self.finished_at = finished_at
