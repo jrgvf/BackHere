@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   resources :customers, only: [:index, :show]
   resources :statuses, only: [:index, :update, :create]
-  resources :orders, only: [:index, :show]
+  resources :orders, only: [:index, :show, :update]
   resources :surveys, except: [:show] do
     get 'preview'
     post 'answer', to: 'surveys#submit_answer'

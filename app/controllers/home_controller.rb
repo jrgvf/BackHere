@@ -12,7 +12,7 @@ class HomeController < ApplicationController
       if @home_message.save
         begin
           HomeMessageMailer.home_message(@home_message).deliver_now
-        rescue Exception => e
+        rescue StandardError => e
           @home_message.destroy
           format.json { render json: "Aconteceu algum problema e a mensagem não foi enviada. <br /><br /> Tente novamente em alguns instantes.", status: :internal_server_error}
         end

@@ -65,3 +65,12 @@
 .nav-tabs-custom > .nav-tabs > li.active {
     border-top-color: #f05f40;
 }
+
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary,
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary {
+  background: #f05f40;
+}
+
+.bootstrap-switch.bootstrap-switch-focused {
+  border-color: #f05f40;
+}

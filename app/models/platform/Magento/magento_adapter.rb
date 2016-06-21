@@ -152,7 +152,7 @@ class MagentoAdapter
         # TO DO: Logger!
         raise exception
       end
-    rescue Exception => exception
+    rescue StandardError => exception
       debugger unless Rails.env.production?
       # TO DO: Logger!
       raise exception

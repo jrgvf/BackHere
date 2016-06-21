@@ -20,7 +20,7 @@ class PhoneChecker
       response = get(phone)
       result = JSON.parse(response.body) rescue {}
       result["status"] = response.status
-    rescue Exception => ex
+    rescue StandardError => ex
       result["status"] = 500
       result["error"] = ex.message
     end

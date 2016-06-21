@@ -53,7 +53,7 @@ class MagentosController < BackHereController
           logger.debug "Versão do Magento não atualizada."
           format.json { render json: @magento.errors.full_messages, status: :unprocessable_entity }
         end
-      rescue Exception => e
+      rescue StandardError => e
         format.json { render json: e.message, status: :internal_server_error }
       end
     end
