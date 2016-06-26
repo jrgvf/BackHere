@@ -18,7 +18,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = ["Account", "Permission", "User", "Platform", "HomeMessage", "Magento"]
+  config.included_models = ["Account", "Permission", "SocialInfo", "User", "Platform", "HomeMessage", "Magento"]
 
   config.navigation_static_label = "Outros Links"
   config.navigation_static_links = {

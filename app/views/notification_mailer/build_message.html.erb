@@ -1,0 +1,91 @@
+<div class="wrapper" style="min-width: 320px;background-color: #f0f0f0;" lang="x-wrapper">
+  <div class="preheader" style="Margin: 0 auto;max-width: 560px;min-width: 280px; width: 280px;width: calc(28000% - 173040px);">
+    <div style="border-collapse: collapse;display: table;width: 100%;">
+      <div class="snippet" style="Float: left;font-size: 12px;line-height: 19px; padding: 10px 0 5px 0;color: #bdbdbd;font-family: Ubuntu,sans-serif; width: 100%!important">
+        <!-- <p style="Margin-top: 0;Margin-bottom: 0;">[<%#= @account.name %>] Gostaríamos de saber sua opinião.</p> -->
+      </div>
+
+      <div class="webversion" style="Float: left;font-size: 12px;line-height: 19px;max-width: 280px;min-width: 139px; width: 139px;width: calc(14100% - 78680px);padding: 10px 0 5px 0;text-align: right;color: #bdbdbd;font-family: Ubuntu,sans-serif;">
+      </div>
+    </div>
+  </div>
+  <div class="header" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 173000px);" id="emb-email-header-container">
+    <div class="logo emb-logo-margin-box" style="font-size: 26px;line-height: 32px;Margin-top: 3px;Margin-bottom: 20px;color: #c3ced9;font-family: Roboto,Tahoma,sans-serif;Margin-left: 20px;Margin-right: 20px;" align="center">
+      <div class="logo-center" style="font-size:0px !important;line-height:0 !important;" align="center" id="emb-email-header">
+        <%= image_tag(@account.logo.url, alt: "backhere-logo", style: "height: auto;width: 100%;border: 0;max-width: 234px; text-decoration: none;transition: opacity 0.1s ease-in;color: #c3ced9;", width: "234") %>
+
+        <%#= link_to (image_tag(@account.logo.url, alt: "backhere-logo", style: "height: auto;width: 100%;border: 0;max-width: 234px;", width: "234")), root_path, style: "text-decoration: none;transition: opacity 0.1s ease-in;color: #c3ced9;" %>
+      </div>
+    </div>
+  </div>
+  <div class="layout one-col fixed-width" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 173000px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
+    <div class="layout__inner" style="border-collapse: collapse;display: table;width: 100%;background-color: #ffffff;" emb-background-style="">
+      <div class="column" style="text-align: left;color: #787778;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);">
+        <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;">
+          <div style="line-height:20px;font-size:1px">&nbsp;</div>
+        </div>
+        <div style="Margin-left: 20px;Margin-right: 20px;">
+          <h1 class="size-36" style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #565656;font-size: 30px;line-height: 38px;text-align: center;" lang="x-size-36"><strong>Nós valorizamos o seu feedback!</strong></h1>
+          <p class="size-16" style="Margin-top: 20px;Margin-bottom: 0;font-size: 16px;line-height: 24px;" lang="x-size-16">Agradecemos por ter você como cliente. A sua opinião é muito importante e gostaríamos de obter o seu feedback sobre como estamos fazendo nossas vendas.</p>
+          <p class="size-16" style="Margin-top: 20px;Margin-bottom: 20px;font-size: 16px;line-height: 24px;" lang="x-size-16">As informações fornecidas nos ajudará a melhorar a nossa experiência de pós-venda&nbsp;para você e todos os demais clientes.</p>
+        </div>
+        <div style="Margin-left: 20px;Margin-right: 20px;">
+          <div style="line-height:10px;font-size:1px">&nbsp;</div>
+        </div>
+        <div style="Margin-left: 20px;Margin-right: 20px;">
+          <div class="btn btn--flat btn--large" style="Margin-bottom: 20px;text-align: center;">
+            <%= link_to 'Responda a pesquisa', backhere_notification_url(token: @token), style: "border-radius: 4px;display: inline-block;font-size: 14px;font-weight: bold;line-height: 24px;padding: 12px 24px;text-align: center;text-decoration: none !important;transition: opacity 0.1s ease-in;color: #fff;background-color: #f05f40;font-family: Ubuntu, sans-serif;" %>
+          </div>
+          <div style="text-align: center;">
+            <p class="size-11" style="Margin-top: 20px;Margin-bottom: 20px;font-size: 11px;line-height: 24px;" lang="x-size-11">Ou copie e cole o link abaixo no seu navegador:</br> <%= backhere_notification_url(token: @token) %></p>
+          </div>
+        </div>
+        <div style="Margin-left: 20px;Margin-right: 20px;">
+          <div class="divider" style="display: block;font-size: 2px;line-height: 2px;Margin-left: auto;Margin-right: auto;width: 40px;background-color: #bdbdbd;Margin-bottom: 20px;">&nbsp;</div>
+        </div>
+        <div style="Margin-left: 20px;Margin-right: 20px;">
+          <div style="line-height:10px;font-size:1px">&nbsp;</div>
+        </div>
+        <div style="Margin-left: 20px;Margin-right: 20px;">
+          <p class="size-11" style="Margin-top: 0;Margin-bottom: 20px;font-size: 11px;line-height: 21px;text-align: center;" lang="x-size-11">Todas as respostas são confidenciais e não serão compartilhadas fora da BackHere.</p>
+        </div>
+        <div style="Margin-left: 20px;Margin-right: 20px;Margin-bottom: 24px;">
+          <div style="line-height:5px;font-size:1px">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="line-height:10px;font-size:10px;">&nbsp;</div>
+  <div class="layout one-col email-footer" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 173000px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
+    <div class="layout__inner" style="border-collapse: collapse;display: table;width: 100%;">
+      <div class="column" style="text-align: center;font-size: 12px;line-height: 19px;color: #bdbdbd;font-family: Ubuntu,sans-serif;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);">
+        <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 10px;Margin-bottom: 10px;">
+
+        <% if @account.social_infos.present? %>
+          <div style="Margin-top: 20px; Margin-bottom: 10px; color: #f05f40;">
+            <div><strong>MÍDIAS SOCIAIS</strong></div>
+          </div>
+          <table align="center" cellpadding="0" cellspacing="0" class="email-footer__links emb-web-links center" style="border-collapse: collapse;table-layout: fixed;">
+              <tbody>
+                <tr>
+                  <% @account.social_infos.each do |social_info| %>
+                    <td class="emb-web-links" style="padding: 0 0 0 3px;width: 26px;"><%= link_to (image_tag("https://s3-sa-east-1.amazonaws.com/backhere/imgs/#{social_info.network}.png", style: "border: 0;", width: "26", height: "26")), social_info.url, style: "text-decoration: underline;transition: opacity 0.1s ease-in;color: #bdbdbd;" %></td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+
+          <div style="Margin-top: 30px;">
+            <div>Powered by <strong><%= link_to "BackHere!", root_path, style: "text-decoration: none; transition: opacity 0.1s ease-in; color: #f05f40;" %></strong></div>
+          </div>
+          <div style="Margin-top: 18px;"></div>
+          <!-- <div>
+            <a style="text-decoration: underline;transition: opacity 0.1s ease-in;color: #bdbdbd;" href="http://backhere.createsend1.com/t/d-u-tkudidk-l-k/">Remover subscrição</a>
+          </div> -->
+        </div>
+      </div>  
+    </div>
+  </div>
+  <div style="line-height:40px;font-size:40px;">&nbsp;</div>
+</div>

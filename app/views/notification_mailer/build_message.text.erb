@@ -1,0 +1,21 @@
+Nós valorizamos o seu feedback!
+
+Agradecemos por ter você como cliente. A sua opinião é muito importante e gostaríamos de obter o seu feedback sobre como estamos fazendo nossas vendas.
+
+As informações fornecidas nos ajudará a melhorar a nossa experiência de pós-venda para você e todos os demais clientes.
+
+Responda a pesquisa [<%= backhere_notification_url(token: @token) %>]
+
+Todas as respostas são confidenciais e não serão compartilhadas fora da BackHere.
+
+<% if @account.social_infos.present? %>
+
+  MÍDIAS SOCIAIS
+
+  <% @account.social_infos.each do |social_info| %>
+    <%= "#{social_info.network.to_s.capitalize} [#{social_info.url}]" %>
+  <% end %>
+
+<% end %>
+
+Powered by BackHere!

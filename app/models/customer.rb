@@ -14,6 +14,8 @@ class Customer
   field :date_of_birth,     type: Date
   field :is_guest,          type: Boolean,    default: false
 
+  has_many :notifications
+
   embeds_many :emails, cascade_callbacks: true
   embeds_many :phones, cascade_callbacks: true
 
@@ -55,7 +57,7 @@ class Customer
     self.elem_match(phones: {verified: true, is_valid: false})
   end
 
-  def self.available_for_surveys
+  def self.available_for_notification
     self.or(self.with_valid_email.selector, self.with_valid_mobile_phone.selector)
   end
 

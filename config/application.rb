@@ -51,5 +51,7 @@ module BackHere
     config.after_initialize do |app|
       app.routes.append{ get '*a', :to => 'application#not_found' } unless config.consider_all_requests_local
     end
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

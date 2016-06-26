@@ -50,6 +50,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notifications, only: [] do
+  end
+
+  get 'notification', to: 'notifications#by_token', as: 'backhere_notification'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

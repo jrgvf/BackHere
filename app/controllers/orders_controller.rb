@@ -30,7 +30,7 @@ class OrdersController < BackHereController
     end
 
     def order_params
-      params.require(:order).permit(:available_for_surveys)
+      params.require(:order).permit(:available_for_notification)
     end
 
 end

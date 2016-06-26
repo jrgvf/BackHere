@@ -57,7 +57,8 @@ class MappingsController < BackHereController
   def survey_mapping_params
     {
       status_type: status_type,
-      survey: survey
+      survey: survey,
+      services: params[:services]
     }
   end
 

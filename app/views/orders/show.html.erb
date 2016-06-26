@@ -4,8 +4,8 @@
 <% provide(:levels, "Pedidos, #{@order.internal_code}") %>
 
   <%= form_for(@order, remote: true, html: {class: "pull-right", style: "padding-bottom: 10px;"}) do |f| %>
-    <%= f.label :available_for_surveys, "Dispoível para pesquisas?" %>
-    <%= f.check_box :available_for_surveys, data: { name: 'available_for_survey', size: 'small', 'on-text' => 'Sim', 'off-text' => 'Não' } %>
+    <%= f.label :available_for_notification, "Disponível para notificação?" %>
+    <%= f.check_box :available_for_notification, data: { name: 'available_for_survey', size: 'mini', 'on-text' => 'Sim', 'off-text' => 'Não' } %>
   <% end %>
 
 <div class="row">
@@ -83,17 +83,20 @@
     </div>
     <div class="col-sm-12">
       <div class="box box-danger">
-      <div class="box-header with-border">
-        <%= fa_icon "history" %>
-        <h3 class="box-title">Histórico</h3>
-        <div class="box-tools pull-right">
-          <%= button_tag(class: "btn btn-box-tool", "data-widget" => "collapse") do %>
-            <%= fa_icon("minus") %>
-          <% end %>
-        </div><!-- box-tools pull-right -->
-      </div><!-- /.box-header -->
-      <%= render partial: "trackings", locals: { trackings: @order.trackings } %>
-    </div><!-- /.box -->
+        <div class="box-header with-border">
+          <%= fa_icon "history" %>
+          <h3 class="box-title">Histórico</h3>
+          <div class="box-tools pull-right">
+            <%= button_tag(class: "btn btn-box-tool", "data-widget" => "collapse") do %>
+              <%= fa_icon("minus") %>
+            <% end %>
+          </div><!-- box-tools pull-right -->
+        </div><!-- /.box-header -->
+        <%= render partial: "trackings", locals: { trackings: @order.trackings } %>
+      </div><!-- /.box -->
+    </div><!-- col-sm-12 -->
+
+    <div class="col-sm-12">
       <div class="box box-danger">
         <div class="box-header with-border">
           <% if @order.items.count > 1 %>
@@ -111,6 +114,22 @@
         </div><!-- /.box-header -->
         <%= render partial: "items", locals: { items: @order.items } %>
       </div><!-- /.box -->
-    </div>
-  </div>
-</div>
+    </div><!-- col-sm-12 -->
+
+    <div class="col-sm-12">
+      <div class="box box-danger">
+        <div class="box-header with-border">
+          <%= fa_icon "file-text-o" %>
+          <h3 class="box-title">Notificações (Pesquisa)</h3>
+          <div class="box-tools pull-right">
+            <%= button_tag(class: "btn btn-box-tool", "data-widget" => "collapse") do %>
+              <%= fa_icon("minus") %>
+            <% end %>
+          </div><!-- box-tools pull-right -->
+        </div><!-- /.box-header -->
+        <%= render partial: "survey_notifications", locals: { survey_notifications: @order.notifications } %>
+      </div><!-- /.box -->
+    </div><!-- col-sm-12 -->
+
+  </div><!-- col-sm-8 no-padding -->
+</div><!-- row -->

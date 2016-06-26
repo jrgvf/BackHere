@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_model_secure_token (1.0.0)
+      activemodel
     activejob (4.2.6)
       activesupport (= 4.2.6)
       globalid (>= 0.3.0)
@@ -460,6 +462,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_secure_token
   adminlte2-rails
   aws-sdk (~> 2)
   aws-sdk-v1

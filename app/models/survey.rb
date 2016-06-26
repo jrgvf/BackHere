@@ -17,6 +17,8 @@
 
   has_many :answers, class_name: "SurveyAnswer"
 
+  has_many :notifications, class_name: "SurveyNotification"
+
   validates_presence_of :name, :description, :active, :questions, allow_blank: false
   validates_uniqueness_of :name, case_sensitive: false
 

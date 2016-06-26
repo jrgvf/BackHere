@@ -16,6 +16,9 @@
       <div class="col-sm-3 form-group">
         <%= label_tag :survey, "Pesquisa" %>
       </div><!-- col-sm-3 form-group -->
+      <div class="col-sm-3 form-group">
+        <%= label_tag :services, "Serviços" %>
+      </div><!-- col-sm-3 form-group -->
     </div><!-- col-sm-12 -->
     <div class="col-sm-12">
       <%= form_tag(survey_mappings_path, :method => :post, remote: true, id: "survey_mapping_form") do %>
@@ -24,6 +27,9 @@
         </div><!-- col-sm-3 form-group -->
         <div class="col-sm-3 form-group">
           <%= collection_select(:survey, :id, @surveys, :id, :name, {}, {class: "form-control select2", style: "width: 100%;"}) %>
+        </div><!-- col-sm-3 form-group -->
+        <div class="col-sm-3 form-group">
+          <%= select_tag(:services, options_for_select(Mapping.services_enum, [:email, :sms]), multiple: true, class: "form-control select2") %>
         </div><!-- col-sm-3 form-group -->
         <div class="col-sm-2 form-group">
           <%= button_tag(class: "btn btn-labeled btn-primary") do %>

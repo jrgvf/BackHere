@@ -1,7 +1,8 @@
 class TaskFactory
 
   TASKS = [
-    CustomerTask, OrderTask, CustomerEmailVerificationTask, CustomerPhoneVerificationTask
+    CustomerTask, OrderTask, CustomerEmailVerificationTask, CustomerPhoneVerificationTask,
+    CreateSurveyNotificationsTask, SendNotificationsTask
   ]
 
   def self.build(generic_type, params = {})
@@ -23,6 +24,7 @@ class TaskFactory
     end
     false
   end
+
 
   def self.find_by_generic_type(generic_type)
     TASKS.each { |task| return task if task.same_type?(generic_type) }

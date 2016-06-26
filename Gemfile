@@ -44,6 +44,7 @@ source 'https://rubygems.org'
   # gem 'mongoid-rspec', '3.0.0'                                                                    # For matchers of MongoID
   # gem 'mongoid_relations_dirty_tracking', github: 'versative/mongoid_relations_dirty_tracking'    # For verify relations changes
   gem "will_paginate_mongoid"                                                                       # For will_paginate with mongoid
+  gem 'active_model_secure_token'                                                                   # For create Unique Tokens
   
 # For use CanCan for manage permissions
   gem 'cancancan', '~> 1.10'                                                                        # For Permissions

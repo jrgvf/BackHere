@@ -11,11 +11,13 @@
       </div><!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
         <div class="col-sm-12">
-          <table data-link="row" class="table table-hover rowlink">
+          <table data-link="row" class="table table-hover rowlink center">
             <tr>
               <th>Plataforma</th>
               <th>Código do Pedido</th>
               <th>Status</th>
+              <th>Notificações Criadas</th>
+              <th>Notificações Respondidas</th>
               <th>Efetuado em:</th>
               <th>Importado em:</th>
               <th>Atualizado em:</th>
@@ -28,6 +30,8 @@
                 <td><%= order.imported_from %></td>
                 <td><%= order.remote_id %></td>
                 <td><%= order.status.label %></td>
+                <td><%= order.notifications.count %></td>
+                <td><%= order.notifications.answered.count %></td>
                 <td><%= time_tag order.placed_at %></td>
                 <td><%= time_tag order.created_at %></td>
                 <td><%= time_tag order.updated_at %></td>
