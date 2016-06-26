@@ -36,7 +36,7 @@ class SendNotificationsTask < Task
     def email_notification(notification, results)
       begin
         notification.customer.emails.valids.each do |email|
-          NotificationMailer.build_message(account.id.to_s, notification.token, email.address).deliver_later
+          NotificationMailer.build_message(notification.id.to_s, email.address).deliver_later
           results << Result.new(:success, "Notificação enviada com sucesso para #{email.address}.")
         end
         notification.update_attributes!({ status: :sent })

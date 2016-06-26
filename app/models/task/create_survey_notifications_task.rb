@@ -23,7 +23,11 @@ class CreateSurveyNotificationsTask < Task
     results = Array.new
 
     mappings.each do |mapping|
+      next unless mapping.survey.active?
+      
       orders(mapping).each do |order|
+        next if order.notifications.where(status_type: mapping.status_type).exists?
+
         begin
           params = {
             order: order,

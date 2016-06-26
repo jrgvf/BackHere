@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :update]
   resources :surveys, except: [:show] do
     get 'preview'
-    post 'answer', to: 'surveys#submit_answer'
   end
   
   resources :magentos, except: [:index, :show] do
@@ -51,6 +50,7 @@ Rails.application.routes.draw do
   end
 
   resources :notifications, only: [] do
+    post 'answer', to: 'notifications#submit_answer'
   end
 
   get 'notification', to: 'notifications#by_token', as: 'backhere_notification'

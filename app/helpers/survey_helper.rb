@@ -16,4 +16,8 @@ module SurveyHelper
     option.question.options.index(option) + 1
   end
 
+  def option_checked?(options, option_value)
+    Array.wrap(options).include?(option_value.to_s)
+  end
+
 end

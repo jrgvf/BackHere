@@ -1,7 +1,8 @@
 class SurveysController < BackHereController
   # before_action :available_surveys, only: [:index]
+
   before_action :find_survey_by_id, only: [:edit, :update, :destroy]
-  before_action :find_survey_by_survey_id, only: [:preview, :submit_answer]
+  before_action :find_survey_by_survey_id, only: [:preview]
 
   def index
     @surveys = Survey.asc(:created_at)
@@ -47,36 +48,6 @@ class SurveysController < BackHereController
       flash.keep[:error] = "Não foi possível remover a pesquisa."
     end
     redirect_to surveys_path
-  end
-
-  def submit_answer
-    @answer = @survey.answers.build
-
-    answers.each do |index, values|
-      answer = answer(values)
-      question = question(answer)
-
-      if answer["option"].present?
-        answer["option"].each do |option_answer|
-          if option_answer == "other_option"
-            type = :other_option
-            text = answer[type]
-            response = @answer.responses.build(question: question, type: type, text: text)
-          else
-            type = :option
-            option = question.options.find_by(original_id: option_answer)
-            response = @answer.responses.build(question: question, type: type, text: option.text, option_id: option.original_id)
-          end
-        end
-      else
-        type = "text"
-        text = answer[type]
-        response = @answer.responses.build(question: question, type: type, text: text)
-      end
-    end
-
-    @answer.save
-    render :preview, layout: 'survey'
   end
 
   private

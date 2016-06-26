@@ -20,24 +20,25 @@
   </div>
   <div class="layout one-col fixed-width" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 173000px);overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;">
     <div class="layout__inner" style="border-collapse: collapse;display: table;width: 100%;background-color: #ffffff;" emb-background-style="">
-      <div class="column" style="text-align: left;color: #787778;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);">
+      <div class="column" style="text-align: justify;color: #787778;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);">
         <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;">
           <div style="line-height:20px;font-size:1px">&nbsp;</div>
         </div>
         <div style="Margin-left: 20px;Margin-right: 20px;">
           <h1 class="size-36" style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #565656;font-size: 30px;line-height: 38px;text-align: center;" lang="x-size-36"><strong>Nós valorizamos o seu feedback!</strong></h1>
-          <p class="size-16" style="Margin-top: 20px;Margin-bottom: 0;font-size: 16px;line-height: 24px;" lang="x-size-16">Agradecemos por ter você como cliente. A sua opinião é muito importante e gostaríamos de obter o seu feedback sobre como estamos fazendo nossas vendas.</p>
-          <p class="size-16" style="Margin-top: 20px;Margin-bottom: 20px;font-size: 16px;line-height: 24px;" lang="x-size-16">As informações fornecidas nos ajudará a melhorar a nossa experiência de pós-venda&nbsp;para você e todos os demais clientes.</p>
+          <p class="size-16" style="Margin-top: 20px;Margin-bottom: 0;font-size: 16px;line-height: 24px;" lang="x-size-16">Agradecemos por ter você como cliente <%= @customer.first_name.capitalize %>.</p>
+          <p class="size-16" style="Margin-top: 20px;Margin-bottom: 0;font-size: 16px;line-height: 24px;" lang="x-size-16">A sua opinião é muito importante e gostaríamos de obter o seu feedback sobre como foi sua experiência com a nossa empresa.</p>
+          <p class="size-16" style="Margin-top: 20px;Margin-bottom: 20px;font-size: 16px;line-height: 24px;" lang="x-size-16">As informações fornecidas por você nos ajudará a melhorar a nossa experiência de venda para você e todos os demais clientes.</p>
         </div>
         <div style="Margin-left: 20px;Margin-right: 20px;">
           <div style="line-height:10px;font-size:1px">&nbsp;</div>
         </div>
         <div style="Margin-left: 20px;Margin-right: 20px;">
           <div class="btn btn--flat btn--large" style="Margin-bottom: 20px;text-align: center;">
-            <%= link_to 'Responda a pesquisa', backhere_notification_url(token: @token), style: "border-radius: 4px;display: inline-block;font-size: 14px;font-weight: bold;line-height: 24px;padding: 12px 24px;text-align: center;text-decoration: none !important;transition: opacity 0.1s ease-in;color: #fff;background-color: #f05f40;font-family: Ubuntu, sans-serif;" %>
+            <%= link_to 'Clique para Responder a pesquisa', backhere_notification_url(token: @notification.token), style: "border-radius: 4px;display: inline-block;font-size: 14px;font-weight: bold;line-height: 24px;padding: 12px 24px;text-align: center;text-decoration: none !important;transition: opacity 0.1s ease-in;color: #fff;background-color: #f05f40;font-family: Ubuntu, sans-serif;" %>
           </div>
           <div style="text-align: center;">
-            <p class="size-11" style="Margin-top: 20px;Margin-bottom: 20px;font-size: 11px;line-height: 24px;" lang="x-size-11">Ou copie e cole o link abaixo no seu navegador:</br> <%= backhere_notification_url(token: @token) %></p>
+            <p class="size-11" style="Margin-top: 20px;Margin-bottom: 20px;font-size: 11px;line-height: 24px;" lang="x-size-11">Ou copie e cole o link abaixo no seu navegador:</br> <%= backhere_notification_url(token: @notification.token) %></p>
           </div>
         </div>
         <div style="Margin-left: 20px;Margin-right: 20px;">

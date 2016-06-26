@@ -1,11 +1,11 @@
 <div class="col-sm-12">
   <% if question.short_answer? %>
     <div class="form-group">
-      <%= text_field_tag "answers[#{index}][text]", "", class: "form-control", placeholder: "Texto da Resposta" %>
+      <%= text_field_tag "answers[#{index}][text]", params.dig(:answers, index.to_s, :text), class: "form-control", placeholder: "Texto da Resposta" %>
     </div>
   <% elsif question.long_answer? %>
     <div class="form-group">
-      <%= text_area_tag "answers[#{index}][text]", "", class: "form-control", placeholder: "Texto da Resposta" %>
+      <%= text_area_tag "answers[#{index}][text]", params.dig(:answers, index.to_s, :text), class: "form-control", placeholder: "Texto da Resposta" %>
     </div>
   <% end %>
 </div>

@@ -3,7 +3,8 @@ class NotificationMailerPreview < ActionMailer::Preview
 
   # Preview this email at http://localhost:3000/rails/mailers/notification_mailer/preview
   def preview
-    NotificationMailer.build_message(Account.all.entries.last.id.to_s, 'teste', 'jrgvf@cin.ufpe.br')
+    notification = Notification.all.entries.first
+    NotificationMailer.build_message(notification.id.to_s, 'jrgvf@cin.ufpe.br')
   end
 
 end

@@ -31,6 +31,10 @@
     [["Ativo", true], ["Inativo", false]]
   end
 
+  def active?
+    self[:active]
+  end
+
   private
 
     def handle_post_validation

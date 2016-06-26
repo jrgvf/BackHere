@@ -28,6 +28,10 @@ class Notification
     [:pending, :sent, :answered, :error]
   end
 
+  def self.status_enum
+    new().status_enum
+  end
+
   def status_name
     status_names[self[:status]]
   end
@@ -38,6 +42,12 @@ class Notification
 
   def of_sms?
     self[:services].include?("sms")
+  end
+
+  Notification.status_enum.each do |status|
+    define_method("#{status}?") do
+      status == self.status
+    end
   end
 
   private

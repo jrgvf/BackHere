@@ -4,7 +4,6 @@
       <th>Tipo de Status</th>
       <th>Pesquisa</th>
       <th>Cliente</th>
-      <th>Pedido</th>
       <th>Situação</th>
     </tr>
     <% survey_notifications.each do |notification| %>
@@ -12,7 +11,6 @@
         <td><%= notification.status_type.label %></td>
         <td><%= notification.survey.name %></td>
         <td><%= notification.customer.name %></td>
-        <td><%= notification.order.internal_code %></td>
         <td><%= notification.status_name %></td>
       </tr>
     <% end %>
