@@ -13,7 +13,8 @@ class Notification
 
   belongs_to :order
   belongs_to :customer
-  belongs_to :status_type,       inverse_of: nil
+  belongs_to :status_type,  inverse_of: nil
+  belongs_to :answer, class_name: "SurveyAnswer", inverse_of: nil    
 
   has_secure_token :token
 
@@ -30,6 +31,10 @@ class Notification
 
   def self.status_enum
     new().status_enum
+  end
+
+  def services_name
+    self[:services].map(&:capitalize).join(' | ')
   end
 
   def status_name

@@ -1,0 +1,49 @@
+<% provide(:title, 'Notificações') %>
+<% provide(:header, 'Notificações') %>
+<% provide(:description, 'Lista de notificações enviadas.') %>
+<% provide(:levels, 'Notificações') %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="box box-danger">
+      <div class="box-header">
+        <h3 class="box-title">Notificações</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <div class="col-sm-12">
+          <table class="table table-hover">
+            <tr>
+              <th>Tipo de Status</th>
+              <th>Pesquisa</th>
+              <th>Cliente</th>
+              <th>Situação</th>
+              <th>Canais</th>
+              <th>Resposta</th>
+            </tr>
+            <% @notifications.each_with_index do |notification, index| %>
+              <tr>
+                <td><%= notification.status_type.label %></td>
+                <td><%= notification.survey.name %></td>
+                <td><%= notification.customer.name %></td>
+                <td><%= notification.status_name %></td>
+                <td><%= notification.services_name %></td>
+                <% debugger %>
+                <% if notification.answer.present? %>
+                  <td><%= link_to fa_icon("search-plus", class: "fa-lg"), '#' %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </table>
+        </div><!-- col-sm-12 -->
+      </div><!-- /.box-body -->
+      <div class="row">
+        <div class="col-sm-12">
+          <%= will_paginate @notifications, class: 'backhere_pagination' %>
+          <div class="backhere_page_info">
+            <%= page_entries_info @notifications %>
+          </div><!-- backhere_page_info -->
+        </div><!-- col-sm-12 -->
+      </div><!-- row -->
+    </div><!-- /.box -->
+  </div><!-- col-sm-12 -->
+</div><!-- row -->

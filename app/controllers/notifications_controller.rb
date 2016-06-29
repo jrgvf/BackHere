@@ -1,10 +1,15 @@
 class NotificationsController < BackHereController
-  layout 'survey'
+  layout 'survey', except: [:index]
+  layout 'backhere', only: [:index]
 
   skip_before_filter :authenticate_user!, only: [:by_token, :submit_answer]
 
   before_action :initialize_variables, only: [:by_token, :submit_answer]
   before_action :answered?, only: [:by_token, :submit_answer]
+
+  def index
+    @notifications = Notification.order_by(created_at: :desc).paginate(page: params[:page], per_page: 10)
+  end
 
   def by_token
   end
@@ -37,7 +42,7 @@ class NotificationsController < BackHereController
       end
 
       if @answer.save
-        @notification.update_attributes({status: :answered})
+        @notification.update_attributes({status: :answered, answer: @answer})
         render :success
       else
         flash.now[:error] = "Não foi possível salvar as respostas, verifique se não deixou algo em branco."

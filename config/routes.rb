@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only: [] do
+  resources :notifications, only: [:index] do
     post 'answer', to: 'notifications#submit_answer'
   end
 
