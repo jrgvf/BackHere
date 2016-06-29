@@ -15,41 +15,27 @@ class PhoneChecker
   end
 
   def check_phone
-    result = Hash.new
-    begin
-      response = get(phone)
-      result = JSON.parse(response.body) rescue {}
-      result["status"] = response.status
-    rescue StandardError => ex
-      result["status"] = 500
-      result["error"] = ex.message
-    end
-    result
+    options = { params: { "country-code" => "BR", "number" => phone } }
+    connection.get("/phone-validate", options)
   end
 
   private
 
-    def get(phone)
-      con.get do |req|
-        req.url "/phone-validate"
-        req.headers["Content-Type"]   = "application/json"
-        req.headers["Accept"]         = "application/json"
-
-        req.params['user-id']         = "#{ENV['NEUTRINO_USER']}"
-        req.params['api-key']         = "#{ENV['NEUTRINO_KEY']}"
-        req.params['number']          = "#{phone}"
-      end
+    def connection
+      @connection ||= BaseConnection.new("https://neutrinoapi.com", options)
     end
 
-    def con
-      if ENV['RAILS_ENV'] == "test"
-        @con = Faraday.default_connection
-      else
-        @con = Faraday.new(:url => "https://neutrinoapi.com") do |faraday|
-          faraday.request  :url_encoded             # form-encode POST params
-          faraday.response :logger                  # log requests to STDOUT
-          faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-        end
-      end
+    def options
+      @options ||= {
+        parallel: false,
+        timeout: 5,
+        open_timeout: 5,
+        params: base_params
+      }
     end
+
+    def base_params
+      { "user-id" => "#{ENV['NEUTRINO_USER']}", "api-key" => "#{ENV['NEUTRINO_KEY']}" }
+    end
+
 end

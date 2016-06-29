@@ -26,9 +26,11 @@ class CustomerPhoneVerificationTask < Task
       customer.phones.not_verifieds.each do |phone|
         begin
           number = phone.full_phone
-          result = PhoneChecker.check_phone(number)
+          response = PhoneChecker.check_phone(number)
 
-          if (200..299).include?(result["status"])
+          if (200..299).include?(response.status)
+            result = response.body
+
             verified = result.has_key?("valid")
             is_valid = result["valid"].to_s == "true"
 

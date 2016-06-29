@@ -11,6 +11,9 @@ source 'https://rubygems.org'
 
 # Gems for General Use
   gem 'faraday', '~> 0.9.2'                                                                         # Faraday for communication with API REST
+  gem 'faraday_middleware'
+  gem 'multi_xml'
+  gem "typhoeus"
   gem 'savon', '~> 2.0'                                                                             # Savon for communication with API SOAP
   gem 'devise', '~> 3.5', '>= 3.5.2'                                                                # Devise for Generate users access
   gem 'rails_admin', '~> 0.7.0'                                                                     # For Admin Control

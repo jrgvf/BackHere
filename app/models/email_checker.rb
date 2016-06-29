@@ -14,40 +14,27 @@ class EmailChecker
   end
 
   def check_email
-    result = Hash.new
-    begin
-      response = get(email)
-      result = JSON.parse(response.body) rescue {}
-      result["status"] = response.status
-    rescue StandardError => ex
-      result["status"] = 500
-      result["error"] = ex.message
-    end
-    result
+    options = { params: { "email" => email } }
+    connection.get("/v1/verify", options)
   end
 
   private
 
-    def get(email)
-      con.get do |req|
-        req.url "/v1/verify"
-        req.headers["Content-Type"]   = "application/json"
-        req.headers["Accept"]         = "application/json"
-        
-        req.params['email']           = "#{email}"
-        req.params['apikey']          = "#{ENV['QEV_KEY']}"
-      end
+    def connection
+      @connection ||= BaseConnection.new("http://api.quickemailverification.com", options)
     end
 
-    def con
-      if ENV['RAILS_ENV'] == "test"
-        @con = Faraday.default_connection
-      else
-        @con = Faraday.new(:url => "http://api.quickemailverification.com") do |faraday|
-          faraday.request  :url_encoded             # form-encode POST params
-          faraday.response :logger                  # log requests to STDOUT
-          faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-        end
-      end
+    def options
+      @options ||= {
+        parallel: false,
+        timeout: 5,
+        open_timeout: 5,
+        params: base_params
+      }
     end
+
+    def base_params
+      { "apikey" => "#{ENV['QEV_KEY']}" }
+    end
+
 end

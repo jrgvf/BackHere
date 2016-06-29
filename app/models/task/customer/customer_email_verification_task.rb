@@ -25,9 +25,11 @@ class CustomerEmailVerificationTask < Task
     customers(platform).each do |customer|
       customer.emails.not_verifieds.each do |email|
         begin
-          result = EmailChecker.check_email(email.address)
+          response = EmailChecker.check_email(email.address)
 
-          if (200..299).include?(result["status"])
+          if (200..299).include?(response.status)
+            result = response.body
+            
             verified = result["result"] != "unknown"
             is_valid = result["result"] == "valid"
 
