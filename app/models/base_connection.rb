@@ -196,7 +196,7 @@ class BaseConnection
     # Create a Faraday::Response when Faraday::Error appears]
     #
     def response_error(method, path, error)
-      body = { Error: error.message }.to_json
+      body = { Error: error.message }
       url = URI::HTTP.build({host: URI.parse(base_url).hostname, path: path})
 
       env = Faraday::Env.new(method, body, url)
