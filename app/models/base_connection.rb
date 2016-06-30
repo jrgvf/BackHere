@@ -82,6 +82,15 @@ class BaseConnection
     base_parallel_call(:delete, requests, options)
   end
 
+  ##
+  # Call a block of requests in parallel
+  #
+  def in_parallel(max_concurrency = 100)
+    con.in_parallel(manager(max_concurrency)) do
+      yield
+    end
+  end
+
   private
 
     ##
@@ -259,17 +268,10 @@ class BaseConnection
     end
 
     ##
-    # Default max concurrency for parallel calls
-    #
-    def max_concurrency
-      @max_concurrency ||= options[:max_concurrency] || 10
-    end
-
-    ##
     # Define the manager for parallel calls
     #
-    def manager
-      @manager ||= Typhoeus::Hydra.new(max_concurrency: max_concurrency)
+    def manager(max_concurrency = 100)
+      @manager = Typhoeus::Hydra.new(max_concurrency: max_concurrency)
     end
 
     ##
