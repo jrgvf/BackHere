@@ -85,7 +85,6 @@ class Task
       status = :finished_with_error
     else
       status = :finished_with_failure
-      platform.update_attributes!({ task_date_attribute => self.started_at.in_time_zone(platform.time_zone) }) unless task_date_attribute.nil?
     end
 
     self.finished_at = finished_at

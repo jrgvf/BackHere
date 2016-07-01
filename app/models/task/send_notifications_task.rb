@@ -24,7 +24,9 @@ class SendNotificationsTask < Task
 
     notifications.each do |notification|
       email_notification(notification, results) if notification.of_email?
-      # sms_notification(notification, results) if notification.services.include?(:sms)
+      sms_notification(notification, results)   if notification.of_sms?
+
+      notification.update_attributes!({ status: :sent })
     end
 
     execution_result.results += results
@@ -37,13 +39,36 @@ class SendNotificationsTask < Task
       begin
         notification.customer.emails.valids.each do |email|
           NotificationMailer.build_message(notification.id.to_s, email.address).deliver_later
-          results << Result.new(:success, "Notificação enviada com sucesso para #{email.address}.")
+          results << Result.new(:success, "Email enviado com sucesso para #{email.address}.")
         end
-        notification.update_attributes!({ status: :sent })
       rescue StandardError => e
-        notification.update_attributes!({ status: :error })
         results << Result.new(:error, e.message)
       end      
+    end
+
+    def sms_notification(notification, results)
+      notification.customer.phones.valids_mobile.each_with_index do |phone, index|
+        begin
+          number = phone.full_number
+          messenger = NotificationMessenger.build_messenger(notification, number, index)
+          response  = messenger.deliver
+
+          if (200..299).include?(response.status)
+            result = response.body["sendSmsResponse"]
+            success = result["statusCode"].to_s == "00"
+
+            if success
+              results << Result.new(:success, "SMS enviada com sucesso para #{phone.full_phone}.")
+            else
+              results << Result.new(:failure, "Não foi possível enviar SMS para #{phone.full_phone}. Erro: #{result["statusDescription"]} - #{result["detailDescription"]}")
+            end
+          else
+            results << Result.new(:failure, "Não foi possível enviar SMS para #{phone.full_phone}. Erro: #{result.dig("exception", "message")}")
+          end
+        rescue StandardError => e
+          results << Result.new(:error, e.message)
+        end
+      end
     end
 
     def notifications

@@ -10,7 +10,7 @@ class Status
   belongs_to :status_type, inverse_of: nil
 
   validates_presence_of :code, :label, :status_type
-  validates_uniqueness_of :code
+  validates :code, uniqueness: { scope: [:account] }
 
   accepts_nested_attributes_for :status_type
 

@@ -26,7 +26,7 @@
   embeds_many :trackings,         class_name: "StatusHistory",  cascade_callbacks: true
 
   validates_presence_of :imported_from, :remote_id, :placed_at, :total_price, :status, :customer, :billing_address, :items
-  validates :remote_id, uniqueness: { scope: :imported_from, case_sensitive: false }
+  validates :remote_id, uniqueness: { scope: [:account, :imported_from], case_sensitive: false }
 
   accepts_nested_attributes_for :status, :billing_address, :shipping_address, :shipping, :items, :trackings
 

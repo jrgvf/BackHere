@@ -20,7 +20,7 @@
   has_many :notifications, class_name: "SurveyNotification"
 
   validates_presence_of :name, :description, :active, :questions, allow_blank: false
-  validates_uniqueness_of :name, case_sensitive: false
+  validates :name, uniqueness: { scope: [:account], case_sensitive: false }
 
   after_validation :handle_post_validation
 

@@ -26,8 +26,6 @@ class CreateSurveyNotificationsTask < Task
       next unless mapping.survey.active?
       
       orders(mapping).each do |order|
-        next if order.notifications.where(status_type: mapping.status_type).exists?
-
         begin
           params = {
             order: order,
@@ -39,6 +37,7 @@ class CreateSurveyNotificationsTask < Task
           }
 
           notification = SurveyNotification.find_or_initialize_by(params)
+          next if notification.persisted?          
           
           if notification.save
             results << Result.new(:success, "Notificação criada com sucesso.")

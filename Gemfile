@@ -39,6 +39,7 @@ source 'https://rubygems.org'
 # Gems For MongoDB Support
   gem 'mongoid', '~> 5.0.0'                                                                         # For integration with MongoDB
   gem 'mongoid-multitenancy', '~> 1.1', '>= 1.1.2'                                                  # For Multitenanty with Mongoid
+  gem 'mongoid-autoinc'
   # gem "mongo_session_store-rails4"                                                                # For store Sessions into MongoDB
   # gem 'mongoid_search', '~> 0.3.2'                                                                # For simplify search text with MongoID
   gem 'mongoid-slug'                                                                                # For a use Slug with MongoID

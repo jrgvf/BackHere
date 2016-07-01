@@ -21,6 +21,7 @@ class Phone
   scope :not_verifieds, -> { where(verified: false) }
   scope :valids,        -> { where(verified: true, is_valid: true) }
   scope :invalids,      -> { where(verified: true, is_valid: false) }
+  scope :valids_mobile, -> { where(verified: true, is_valid: true, is_mobile: true) }
 
   def is_valid?
     self[:is_valid]
@@ -36,6 +37,10 @@ class Phone
 
   def full_phone
     "+#{country_code} (#{region_code}) #{number}"
+  end
+
+  def full_number
+    "#{country_code}#{region_code}#{number}"
   end
 
 end

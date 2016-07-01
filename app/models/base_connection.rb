@@ -198,6 +198,12 @@ class BaseConnection
           faraday.response :yaml,    :content_type => /\byaml$/
           faraday.response :marshal, :content_type => /\bmarshal$/
         end
+
+        if options[:basic_auth].present?
+          @con.basic_auth(options[:basic_auth][:user], options[:basic_auth][:password])
+        end
+
+        @con
       end
     end
 

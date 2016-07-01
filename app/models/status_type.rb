@@ -6,5 +6,6 @@ class StatusType
 
   validates_presence_of :label, :code
   validates_uniqueness_of :code
+  
 
 end

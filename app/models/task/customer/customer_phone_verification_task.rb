@@ -25,8 +25,7 @@ class CustomerPhoneVerificationTask < Task
     customers(platform).each do |customer|
       customer.phones.not_verifieds.each do |phone|
         begin
-          number = phone.full_phone
-          response = PhoneChecker.check_phone(number)
+          response = PhoneChecker.check_phone(phone.full_number)
 
           if (200..299).include?(response.status)
             result = response.body
@@ -36,8 +35,8 @@ class CustomerPhoneVerificationTask < Task
 
             phone.update_attributes!({verified: verified, is_valid: is_valid, type: result["type"], location: result["location"], is_mobile: result["is-mobile"]})
 
-            results << Result.new(:success, "Cliente: #{customer.name}, Número: #{number} verificado com sucesso. (#{is_valid ? 'Válido' : 'Inválido'})") if verified
-            results << Result.new(:failure, "Cliente: #{customer.name}. Não foi possível verificar o número #{number}.") unless verified
+            results << Result.new(:success, "Cliente: #{customer.name}, Número: #{phone.full_phone} verificado com sucesso. (#{is_valid ? 'Válido' : 'Inválido'})") if verified
+            results << Result.new(:failure, "Cliente: #{customer.name}. Não foi possível verificar o número #{phone.full_phone}.") unless verified
           end
         rescue StandardError => e
           results << Result.new(:error, e.message)

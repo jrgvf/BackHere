@@ -1,11 +1,17 @@
+require 'autoinc'
+
 class Account
   include Mongoid::Document
   include Mongoid::Paperclip
   include Mongoid::Timestamps
+  include Mongoid::Autoinc
   
   field :name,              type: String
   field :default_email,     type: String
   field :blocked,           type: Boolean,    default: false
+  field :aggregate_id,      type: Integer
+
+  increments :aggregate_id, seed: 100
 
   has_mongoid_attached_file :logo,
     :styles => {
@@ -28,6 +34,8 @@ class Account
   accepts_nested_attributes_for :social_infos, allow_destroy: true
 
   validates_presence_of :name, :default_email, :logo
+  validates :name, length: { maximum: 20 }
+  validates_uniqueness_of :aggregate_id
   validates_format_of :default_email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
   validate :verify_email
 

@@ -23,10 +23,10 @@ class Customer
 
   validates_presence_of :first_name, :last_name
 
-  validates :remote_id, uniqueness: { scope: :imported_from, case_sensitive: false }, allow_blank: true
+  validates :remote_id, uniqueness: { scope: [:account, :imported_from], case_sensitive: false }, allow_blank: true
   validates_presence_of :remote_id, unless: :is_guest?
 
-  validates :document, uniqueness: { scope: :imported_from, case_sensitive: false }, allow_blank: true
+  validates :document, uniqueness: { scope: [:account, :imported_from], case_sensitive: false }, allow_blank: true
   
 
   def self.with_unchecked_email

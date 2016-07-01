@@ -22,10 +22,10 @@ class PhoneChecker
   private
 
     def connection
-      @connection ||= BaseConnection.new("https://neutrinoapi.com", options)
+      @connection ||= BaseConnection.new("https://neutrinoapi.com", base_options)
     end
 
-    def options
+    def base_options
       @options ||= {
         parallel: false,
         timeout: 5,
