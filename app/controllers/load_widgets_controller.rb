@@ -58,7 +58,7 @@ class LoadWidgetsController < BackHereController
   def lastet_orders
     begin
       respond_to do |format|
-        @lastet_orders = Order.where(account: current_account).asc(:placed_at).limit(10)
+        @lastet_orders = Order.where(account: current_account).desc(:placed_at).limit(10)
         format.js {}
       end
     rescue

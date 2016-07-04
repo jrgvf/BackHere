@@ -38,6 +38,8 @@ class Notification
   end
 
   def services_name
+    return self[:services][0].capitalize if self[:services].count < 2
+    
     self[:services][0..-2].map(&:capitalize).join(', ').concat(" & #{self[:services].last.capitalize}")
   end
 
