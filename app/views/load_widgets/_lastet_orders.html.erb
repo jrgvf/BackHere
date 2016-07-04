@@ -1,0 +1,20 @@
+<div class="table-responsive">
+  <table class="table no-margin">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Items</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% lastet_orders.each do |order| %>
+        <tr>
+          <td><%= link_to (order.internal_code), order_path(order) %></td>
+          <td><%= order.items.map(&:name).join(' | ') %></td>
+          <td><span><%= order.status.label %></span></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div><!-- /.table-responsive -->

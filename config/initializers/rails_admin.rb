@@ -17,13 +17,6 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
-
-  config.included_models = ["Account", "Permission", "SocialInfo", "User", "Platform", "HomeMessage", "Magento"]
-
-  config.navigation_static_label = "Outros Links"
-  config.navigation_static_links = {
-    'Sidekiq' => '/sidekiq'
-  }
   
   # For support Paginate and show list of sessions in Rails_Admin
   # MongoidStore::Session.send(:include, Kaminari::MongoidExtension::Document)
@@ -31,9 +24,37 @@ RailsAdmin.config do |config|
   
   # config.included_models << "MongoidStore::Session"
 
+  config.included_models = [
+    "Account", "Permission", "SocialInfo", "User", "HomeMessage", "Platform", "Magento",
+    "Notification", "Customer", "Order", "Survey", "Message", "Task", "DelayerTask"
+  ]
+
+  config.included_models << TaskFactory::TASKS.map(&:to_s)
+
+  config.navigation_static_label = "Outros Links"
+  config.navigation_static_links = {
+    'Sidekiq' => '/sidekiq'
+  }
+
   config.model 'Platform' do
     navigation_label 'Plataformas'
     weight 1
+  end
+
+  config.model 'Task' do
+    navigation_label 'Tarefas'
+    weight 1
+  end
+
+  config.model 'DelayerTask' do
+    navigation_label 'Tarefas'
+    weight 2
+  end
+
+  config.model 'Order' do
+    object_label_method do
+      :internal_code
+    end
   end
 
   config.model 'User' do

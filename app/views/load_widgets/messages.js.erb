@@ -1,0 +1,3 @@
+$("#messages-email").html("<%= escape_javascript(render partial: 'email_messages', locals: { messages: @messages.of_email }) %>");
+
+$("#messages-sms").html("<%= escape_javascript(render partial: 'sms_messages', locals: { messages: @messages.of_sms }) %>");

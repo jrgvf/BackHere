@@ -1,0 +1,16 @@
+<div class="small-box bg-green">
+  <div class="inner">
+    <h3><%= count = customers.count %></h3>
+    <% if count == 1 %>
+      <p>Cliente</p>
+    <% else %>
+      <p>Clientes</p>
+    <% end %>
+  </div>
+  <div class="icon">
+    <%= fa_icon("group") %>
+  </div>
+  <a href="<%= customers_path %>" class="small-box-footer">
+    Mais Informações <%= fa_icon("arrow-circle-right") %>
+  </a>
+</div>

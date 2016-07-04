@@ -13,7 +13,7 @@ class CustomerPhoneVerificationTask < Task
   end
 
   def self.task_name
-    "Verificar informações dos clientes (Telefones)"
+    "Verificar informações (Telefones)"
   end
 
   def execute

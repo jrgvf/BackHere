@@ -1,7 +1,5 @@
 $(function() {
 
-  $('table.center th').addClass("center");
-
   $('input[data-name="available_for_survey"]').bootstrapSwitch();
 
   $('input[data-name="available_for_survey"]').on('switchChange.bootstrapSwitch', function(event, state) {

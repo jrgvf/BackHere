@@ -14,13 +14,17 @@ class Notification
   belongs_to :order
   belongs_to :customer
   belongs_to :status_type,  inverse_of: nil
-  belongs_to :answer, class_name: "SurveyAnswer", inverse_of: nil    
+  belongs_to :answer, class_name: "SurveyAnswer", inverse_of: nil
+
+  has_many :messages
 
   has_secure_token :token
 
   validates_uniqueness_of :token
   validates_presence_of   :order, :customer, :status_type, :services, :type
   validates_inclusion_of  :status,  in: :status_enum
+
+  accepts_nested_attributes_for :messages
 
   scope :pending,  -> { where(status: :pending) }
   scope :answered, -> { where(status: :answered) }
@@ -34,7 +38,7 @@ class Notification
   end
 
   def services_name
-    self[:services].map(&:capitalize).join(' | ')
+    self[:services][0..-2].map(&:capitalize).join(', ').concat(" & #{self[:services].last.capitalize}")
   end
 
   def status_name
@@ -47,6 +51,11 @@ class Notification
 
   def of_sms?
     self[:services].include?("sms")
+  end
+
+  def all_messages_sent?
+    messages.each { |message| return false unless message.sent? }
+    true
   end
 
   Notification.status_enum.each do |status|

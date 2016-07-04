@@ -11,13 +11,15 @@
       </div><!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
         <div class="col-sm-12">
-          <table class="table table-hover">
+          <table class="table table-hover center">
             <tr>
               <th>Tipo de Status</th>
               <th>Pesquisa</th>
               <th>Cliente</th>
               <th>Situação</th>
               <th>Canais</th>
+              <th>Emails Enviados</th>
+              <th>SMS Enviados</th>
               <th>Resposta</th>
             </tr>
             <% @notifications.each_with_index do |notification, index| %>
@@ -27,9 +29,10 @@
                 <td><%= notification.customer.name %></td>
                 <td><%= notification.status_name %></td>
                 <td><%= notification.services_name %></td>
-                <% debugger %>
+                <td><%= notification.messages.of_email.count %></td>
+                <td><%= notification.messages.of_sms.count %></td>
                 <% if notification.answer.present? %>
-                  <td><%= link_to fa_icon("search-plus", class: "fa-lg"), '#' %></td>
+                  <td><%= link_to fa_icon("search-plus", class: "fa-lg"), answer_path(notification.answer) %></td>
                 <% end %>
               </tr>
             <% end %>

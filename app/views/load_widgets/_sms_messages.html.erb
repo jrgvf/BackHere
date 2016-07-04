@@ -1,0 +1,16 @@
+<div class="small-box bg-red">
+  <div class="inner">
+    <h3><%= count = messages.count %></h3>
+    <% if count == 1 %>
+      <p>SMS Enviada</p>
+    <% else %>
+      <p>SMS Enviadas</p>
+    <% end %>
+  </div>
+  <div class="icon">
+    <%= fa_icon("send") %>
+  </div>
+  <a href="<%= notifications_path %>" class="small-box-footer">
+    Mais Informações <%= fa_icon("arrow-circle-right") %>
+  </a>
+</div>

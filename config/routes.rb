@@ -52,8 +52,29 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index] do
     post 'answer', to: 'notifications#submit_answer'
   end
-
   get 'notification', to: 'notifications#by_token', as: 'backhere_notification'
+
+  resources :answers, only: [:show]
+
+  scope module: :api, defaults: { format: :json } do
+    scope '/zenvia' do
+      scope '/callback' do
+        post 'status', to: 'zenvia#status_update', as: 'zenvia_status_update'
+        post 'answer', to: 'zenvia#answer_receive', as: 'zenvia_answer_receive'
+      end
+    end
+  end
+
+  resources :widgets, only: [], controller: 'load_widgets' do
+    collection do
+      get 'orders'
+      get 'customers'
+      get 'messages'
+      get 'surveys'
+      get 'answers'
+      get 'lastet_orders'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

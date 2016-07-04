@@ -3,7 +3,7 @@ class OrdersController < BackHereController
   before_action :find_order, only: [:show, :update]
 
   def index
-    @orders = Order.order_by(placed_at: :desc).paginate(page: params[:page], per_page: 10)
+    @orders = Order.desc(:placed_at).paginate(page: params[:page], per_page: 10)
   end
 
   def show    

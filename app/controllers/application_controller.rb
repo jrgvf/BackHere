@@ -53,6 +53,7 @@ class ApplicationController < ActionController::Base
       logger.debug "Exception Class: #{exception.class} \n"
       logger.debug "Exception Backtrace: \n"
       logger.debug exception.backtrace.join("\n")
+      
       if [ActionController::RoutingError, ActionController::UnknownController].include?(exception.class)
         return render_404
       else

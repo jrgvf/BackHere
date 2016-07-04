@@ -17,6 +17,8 @@
   validates_presence_of :option_id, allow_blank: false, if: :require_option?
   validates_presence_of :text
 
+  scope :by_question, -> (question_id) { where(question_id: question_id) }
+
   def option
     self.question.options.find_by(original_id: self.option_id)
   end

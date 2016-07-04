@@ -1,0 +1,16 @@
+<div class="small-box bg-blue">
+  <div class="inner">
+    <h3><%= count = surveys.count %></h3>
+    <% if count == 1 %>
+      <p>Pesquisa Ativa</p>
+    <% else %>
+      <p>Pesquisas Ativas</p>
+    <% end %>
+  </div>
+  <div class="icon">
+    <%= fa_icon("file-text") %>
+  </div>
+  <a href="<%= surveys_path %>" class="small-box-footer">
+    Mais Informações <%= fa_icon("arrow-circle-right") %>
+  </a>
+</div>

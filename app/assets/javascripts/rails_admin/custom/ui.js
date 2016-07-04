@@ -1,6 +1,9 @@
 //= require icheck
 
 $(document).on('ready pjax:success', function() {
+  $('#bulk_form').css("min-height", ".01%");
+  $('#bulk_form').css("overflow-x", "auto");
+  
   $('input').iCheck({
     checkboxClass: 'icheckbox_flat-grey selectable',
     radioClass: 'iradio_flat-grey'
@@ -43,6 +46,9 @@ $(document).on('ready pjax:success', function() {
 });
 
 $(function () {
+  $('#bulk_form').css("min-height", ".01%");
+  $('#bulk_form').css("overflow-x", "auto");
+
   var width = $('.nav-stacked').width();
   $('.navbar-header').width(width);
 

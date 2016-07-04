@@ -15,6 +15,7 @@ class Customer
   field :is_guest,          type: Boolean,    default: false
 
   has_many :notifications
+  has_many :answers, class_name: "SurveyAnswer"
 
   embeds_many :emails, cascade_callbacks: true
   embeds_many :phones, cascade_callbacks: true

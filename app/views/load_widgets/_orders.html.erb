@@ -1,0 +1,16 @@
+<div class="small-box bg-aqua">
+  <div class="inner">
+    <h3><%= count = orders.count %></h3>
+    <% if count == 1 %>
+      <p>Pedido</p>
+    <% else %>
+      <p>Pedidos</p>
+    <% end %>
+  </div>
+  <div class="icon">
+    <%= fa_icon("shopping-bag") %>
+  </div>
+  <a href="<%= orders_path %>" class="small-box-footer">
+    Mais Informações <%= fa_icon("arrow-circle-right") %>
+  </a>
+</div>

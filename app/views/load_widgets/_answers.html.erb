@@ -1,0 +1,16 @@
+<div class="small-box bg-aqua">
+  <div class="inner">
+    <h3><%= count = answers.count %></h3>
+    <% if count == 1 %>
+      <p>Resposta Recebida</p>
+    <% else %>
+      <p>Respostas Recebidas</p>
+    <% end %>
+  </div>
+  <div class="icon">
+    <%= fa_icon("reply") %>
+  </div>
+  <a href="<%= notifications_path %>" class="small-box-footer">
+    Mais Informações <%= fa_icon("arrow-circle-right") %>
+  </a>
+</div>

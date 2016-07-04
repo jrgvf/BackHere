@@ -29,6 +29,13 @@ class SurveysController < BackHereController
   end
 
   def edit
+    if SurveyMapping.where(survey_id: @survey.id).exists?
+      flash.keep[:alert] = "Não é possível editar uma pesquisa mapeada."
+      redirect_to surveys_path
+    elsif Notification.where(survey_id: @survey.id).exists?
+      flash.keep[:alert] = "Não é possível editar uma pesquisa que já foi notificada."
+      redirect_to surveys_path
+    end
   end
 
   def update
@@ -42,6 +49,14 @@ class SurveysController < BackHereController
   end
 
   def destroy
+    if SurveyMapping.where(survey_id: @survey.id).exists?
+      flash.keep[:alert] = "Não é possível excluir uma pesquisa mapeada."
+      return redirect_to surveys_path
+    elsif Notification.where(survey_id: @survey.id).exists?
+      flash.keep[:alert] = "Não é possível excluir uma pesquisa que já foi notificada."
+      return redirect_to surveys_path
+    end
+
     if @survey.destroy
       flash.keep[:success] = "Pesquisa removida com sucesso."
     else

@@ -64,7 +64,7 @@ source 'https://rubygems.org'
   gem 'coffee-rails', '~> 4.1.0'                                                                    # Use CoffeeScript for .coffee assets and views
   gem 'therubyracer', platforms: :ruby                                                              # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'jquery-rails'                                                                                # Use jquery as the JavaScript library
-  gem 'turbolinks'                                                                                  # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+  gem 'turbolinks', '2.5.3'                                                                         # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
   gem 'jquery-turbolinks', '~> 2.1'                                                                 # For resolve problem with turbolinks and jquery
   gem 'bootbox-rails', '~> 0.5.0'                                                                   # For easy and custom Prompt
   gem 'icheck-rails'                                                                                # For use iCheck in Rails

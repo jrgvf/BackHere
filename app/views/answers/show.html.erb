@@ -1,0 +1,36 @@
+<% provide(:title, 'Respostas') %>
+<% provide(:header, "Resposta da #{@answer.survey.name}") %>
+<% provide(:description, "Por #{@answer.customer.name}") %>
+<% provide(:levels, "Respostas, #{@answer.survey.name}") %>
+
+<div class="box box-danger"> <!-- add class collapsed-box for collapsed box-->
+  <div class="box-header with-border">
+    <%= fa_icon "pencil" %>
+    <h3 class="box-title">Respostas</h3>
+    <div class="box-tools pull-right">
+      <%= button_tag(class: "btn btn-box-tool", "data-widget" => "collapse") do %>
+        <%= fa_icon("minus") %>
+      <% end %>
+    </div><!-- box-tools pull-right -->
+  </div><!-- box-header with-border -->
+
+  <div class="box-body">
+    <div class="col-sm-12">
+      <% @answer.survey.questions.each_with_index do |question, index| %>
+        <h4><%= "#{index + 1} - #{question.text.capitalize}" %></h4>
+        <div class="box-body">
+          <%= label_tag nil, "Resposta(s):", class: 'control-label' %>
+          <% @answer.responses.by_question(question.id).each_with_index do |response, index| %>
+            <div class="form-group">
+              <% if response.other_option_response? %>
+                <%= text_area_tag nil, "Outro: #{response.text}", class: "form-control", disabled: true %>
+              <% else %>
+              <%= text_area_tag nil, "#{response.text}", class: "form-control", disabled: true %>
+              <% end %>
+            </div>
+          <% end %>
+        </div><!-- /.box-body -->
+      <% end %>
+    </div><!-- col-sm-12 -->
+  </div><!-- box-body -->
+</div><!-- box box-primary -->

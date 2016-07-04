@@ -1,6 +1,5 @@
 class NotificationsController < BackHereController
-  layout 'survey', except: [:index]
-  layout 'backhere', only: [:index]
+  layout :layout_by_action
 
   skip_before_filter :authenticate_user!, only: [:by_token, :submit_answer]
 
@@ -9,6 +8,7 @@ class NotificationsController < BackHereController
 
   def index
     @notifications = Notification.order_by(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    render layout: 'backhere'
   end
 
   def by_token
@@ -17,6 +17,7 @@ class NotificationsController < BackHereController
   def submit_answer
     Mongoid::Multitenancy.with_tenant(account) do
       @answer = @survey.answers.build
+      @answer.customer = @notification.customer
 
       customer_answers.each do |index, values|
         answer = answer(values)
@@ -80,6 +81,10 @@ class NotificationsController < BackHereController
 
     def build_response(question, type, text, option_id = nil)
       @answer.responses.build(question: question, type: type, text: text, option_id: option_id)
+    end
+
+    def layout_by_action
+      ["index"].include?(params["action"]) ? "backhere" : "survey"
     end
 
 end
