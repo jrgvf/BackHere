@@ -25,7 +25,7 @@ class LoadWidgetsController < BackHereController
   def messages
     begin
       respond_to do |format|
-        @messages = Message.where(account: current_account)
+        @messages = Message.where(account: current_account).in(status: Message.sent_statuses)
         format.js {}
       end
     rescue
