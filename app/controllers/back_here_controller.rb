@@ -9,11 +9,11 @@ class BackHereController < ApplicationController
 
   def set_current_tenant
     Mongoid::Multitenancy.current_tenant = nil
-    Mongoid::Multitenancy.current_tenant = current_user.account unless current_user.nil?
+    Mongoid::Multitenancy.current_tenant = current_account
   end
 
   def current_account
-    @current_account = current_user.account unless current_user.nil?
+    @current_account ||= current_user.account unless current_user.nil?
   end
 
 end

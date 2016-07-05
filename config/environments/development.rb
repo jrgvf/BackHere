@@ -68,3 +68,4 @@ Rails.application.configure do
 end
 
 BackHere::Application.default_url_options = BackHere::Application.config.action_mailer.default_url_options
+Mongoid.logger = Logger.new($stdout)
