@@ -58,7 +58,7 @@ Rails.application.configure do
       :bucket => ENV['AWS_S3_BUCKET'],
       :access_key_id => ENV['AWS_ACCESS_KEY'],
       :secret_access_key => ENV['AWS_SECRET_KEY'],
-      :region => 'sa-east-1',
+      :region => ENV['AWS_REGION'],
       :s3_host_name => 's3-sa-east-1.amazonaws.com',
       :url => ":s3_domain_url"
     }

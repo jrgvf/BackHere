@@ -76,7 +76,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Support For Devise
-  config.action_mailer.default_url_options = { host: 'backhereapp.com.br' }
+  config.action_mailer.default_url_options = { host: 'backhere.com.br' }
   # For Email
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
@@ -97,8 +97,8 @@ Rails.application.configure do
       :bucket => ENV['AWS_S3_BUCKET'],
       :access_key_id => ENV['AWS_ACCESS_KEY'],
       :secret_access_key => ENV['AWS_SECRET_KEY'],
-      :region => 'sa-east-1',
-      :s3_host_name => 's3-sa-east-1.amazonaws.com',
+      :region => ENV['AWS_REGION'],
+      :s3_host_name => 's3-us-east-1.amazonaws.com',
       :url => ":s3_domain_url"
     }
   }
