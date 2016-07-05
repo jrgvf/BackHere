@@ -61,7 +61,8 @@ Rails.application.configure do
       :region => ENV['AWS_REGION'],
       :s3_host_name => 's3-sa-east-1.amazonaws.com',
       :url => ":s3_domain_url"
-    }
+    },
+    :s3_region => ENV['AWS_REGION']
   }
 
 end

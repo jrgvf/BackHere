@@ -100,7 +100,8 @@ Rails.application.configure do
       :region => ENV['AWS_REGION'],
       :s3_host_name => 's3-us-east-1.amazonaws.com',
       :url => ":s3_domain_url"
-    }
+    },
+    :s3_region => ENV['AWS_REGION']
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
