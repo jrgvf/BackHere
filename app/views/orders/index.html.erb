@@ -29,7 +29,7 @@
               <tr>
                 <td><%= order.imported_from %></td>
                 <td><%= order.remote_id %></td>
-                <td><%= order.status.label %></td>
+                <td><%= order.status.label unless order.status.nil? %></td>
                 <td><%= order.notifications.count %></td>
                 <td><%= order.notifications.answered.count %></td>
                 <td><%= time_tag order.placed_at %></td>
