@@ -73,7 +73,7 @@ class SendNotificationsTask < Task
               results << Result.new(:failure, "Não foi possível enviar SMS para #{phone.full_phone}. #{error_message}")
             end
           else
-            error_message = "Erro: #{result.dig("exception", "message")}"
+            error_message = "Erro: #{response.body.dig("exception", "message")}"
             create_message(message, "Failure Sent", error_message, "#{notification.token}-#{index}")
             results << Result.new(:failure, "Não foi possível enviar SMS para #{phone.full_phone}. #{error_message}")
           end
