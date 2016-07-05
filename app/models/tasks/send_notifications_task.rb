@@ -65,7 +65,7 @@ class SendNotificationsTask < Task
             success = result["statusCode"].to_s == "00"
 
             if success
-              create_message(message, "OK", "Message sent.", "#{notification.token}-#{index}")
+              create_message(message, "Ok", "Message sent.", "#{notification.token}-#{index}")
               results << Result.new(:success, "SMS enviada com sucesso para #{phone.full_phone}.")
             else
               error_message = "Erro: #{result["statusDescription"]} - #{result["detailDescription"]}"

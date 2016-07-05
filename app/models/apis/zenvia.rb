@@ -25,7 +25,7 @@ class Zenvia < Api
           from: account_name,
           to: number,
           msg: message,
-          callbackOption: "NONE",
+          callbackOption: "ALL",
           id: id,
           aggregateId: aggregate_id
         }
