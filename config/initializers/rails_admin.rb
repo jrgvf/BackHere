@@ -29,7 +29,7 @@ RailsAdmin.config do |config|
     "Notification", "Customer", "Order", "Survey", "Message", "Task", "DelayerTask"
   ]
 
-  config.included_models << TaskFactory::TASKS.map(&:to_s)
+  config.included_models += TaskFactory::TASKS.map(&:to_s)
 
   config.navigation_static_label = "Outros Links"
   config.navigation_static_links = {
