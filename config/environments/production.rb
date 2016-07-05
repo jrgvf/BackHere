@@ -21,8 +21,8 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   config.action_dispatch.rack_cache = {
-    metastore: "#{ENV['REDIS_URL']}/1/metastore",
-    entitystore: "#{ENV['REDIS_URL']}/1/entitystore"
+    metastore: "#{ENV['REDIS_URI']}/1/metastore",
+    entitystore: "#{ENV['REDIS_URI']}/1/entitystore"
   }
 
   # Disable serving static files from the `/public` folder by default since
