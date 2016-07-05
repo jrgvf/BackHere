@@ -88,6 +88,7 @@ class SendNotificationsTask < Task
       message.status = status
       message.description = description
       message.external_id = external_id unless external_id.nil?
+      message.save!
     end
 
     def notifications
