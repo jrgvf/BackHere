@@ -13,7 +13,7 @@ class SendNotificationsTask < Task
   end
 
   def self.task_name
-    "Envio de notificações"
+    "Enviar de notificações"
   end
 
   def execute
