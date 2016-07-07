@@ -3,12 +3,12 @@ class BackHereController < ApplicationController
   
   before_action :authenticate_user!
   before_action :set_current_tenant
+  
   helper_method :current_account
 
   protected
 
   def set_current_tenant
-    Mongoid::Multitenancy.current_tenant = nil
     Mongoid::Multitenancy.current_tenant = current_account
   end
 

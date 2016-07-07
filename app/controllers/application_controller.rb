@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  before_action :clear_current_tenant
   before_action :prevent_another_sign_in
 
   devise_group :user_model, contains: [:user, :admin]
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def clear_current_tenant
+    Mongoid::Multitenancy.current_tenant = nil
+  end
 
   # def prevent_admin_access_platform
   #   if current_admin && !admin_action?
