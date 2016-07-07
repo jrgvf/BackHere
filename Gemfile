@@ -62,7 +62,8 @@ source 'https://rubygems.org'
   gem 'sass-rails'                                                                                  # Use SCSS for stylesheets
   gem 'uglifier', '>= 1.3.0'                                                                        # Use Uglifier as compressor for JavaScript assets
   gem 'coffee-rails', '~> 4.1.0'                                                                    # Use CoffeeScript for .coffee assets and views
-  gem 'therubyracer', platforms: :ruby                                                              # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', platforms: :ruby                                                              # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'execjs'
   gem 'jquery-rails'                                                                                # Use jquery as the JavaScript library
   gem 'turbolinks', '2.5.3'                                                                         # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
   gem 'jquery-turbolinks', '~> 2.1'                                                                 # For resolve problem with turbolinks and jquery
