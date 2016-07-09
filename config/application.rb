@@ -54,5 +54,7 @@ module BackHere
 
     config.active_job.queue_adapter = :sidekiq
 
+    GC::Profiler.enable
+
   end
 end
