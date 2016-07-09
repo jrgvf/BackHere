@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   layout "home"
 
   before_action :sanitize_params, only: :create_home_message
+  before_action :allow_page_caching, only: :index
   
   def index
   end
@@ -41,4 +42,9 @@ class HomeController < ApplicationController
   def home_message_params
     params.require(:home_message).permit(:name, :email, :fone, :message)
   end
+
+  def allow_page_caching
+    expires_in(1.week, public: true) if Rails.env.production?
+  end
+
 end
