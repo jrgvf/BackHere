@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
-  root 'account#dashboard'
+  root 'home#index'
   
   post 'home_message', to: 'home#create_home_message'
   get 'home/index'
