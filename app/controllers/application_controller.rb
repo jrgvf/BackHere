@@ -41,8 +41,8 @@ class ApplicationController < ActionController::Base
 
   def prevent_another_sign_in
 
-    expire_in(1.minutes)
-    
+    expire_in(0)
+
     if devise_controller? && current_user_model && another_class?
       redirect_to root_path
       flash.keep[:alert] = "Você já está logado."
