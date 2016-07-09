@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :clear_current_tenant
   before_action :prevent_another_sign_in
+  before_action :allow_page_caching
 
   devise_group :user_model, contains: [:user, :admin]
 
@@ -88,6 +89,10 @@ class ApplicationController < ActionController::Base
       end
       format.all { render nothing: true, status: 500}
     end
+  end
+
+  def allow_page_caching
+    expires_in(5.minutes) if Rails.env.production?
   end
 
 end
