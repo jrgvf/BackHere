@@ -16,4 +16,8 @@ class BackHereController < ApplicationController
     @current_account ||= current_user.account unless current_user.nil?
   end
 
+  def allow_page_caching
+    expires_in(5.minutes) if Rails.env.production?
+  end
+
 end
