@@ -39,4 +39,8 @@
     self.where(account: account, available_for_notification: true).in(customer_id: customer_ids, status: statuses)
   end
 
+  def customer_name
+    self.customer.name.capitalize rescue ""
+  end
+
 end

@@ -35,7 +35,7 @@
                 <td><%= time_tag order.placed_at %></td>
                 <td><%= time_tag order.created_at %></td>
                 <td><%= time_tag order.updated_at %></td>
-                <td><%= order.customer.name.capitalize %></td>
+                <td><%= order.customer_name %></td>
                 <td><%= sprintf "%.2f", order.total_price %></td>
                 <td class="rowlink-skip"><%= link_to fa_icon("search-plus", class: "fa-lg"), order_path(order) %></td>
               </tr>

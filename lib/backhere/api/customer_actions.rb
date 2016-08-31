@@ -49,12 +49,12 @@ module Backhere
       end
 
       def build_emails(customer, emails)
-        return if emails.nil? || emails.blank?
+        return if emails.nil? || emails.compact.blank?
         emails.each { |email_address| customer.emails.find_or_initialize_by(address: email_address) }
       end
 
       def build_phones(customer, phones)
-        return if phones.nil? || phones.blank?
+        return if phones.nil? || phones.compact.blank?
         phones.each do |phone_infos|
           customer.phones.find_or_initialize_by(number: phone_infos[:number], country_code: phone_infos[:country_code], region_code: phone_infos[:region_code])
         end
