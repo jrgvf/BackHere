@@ -9,7 +9,6 @@ class DelayerTaskTrigger
     failures: true
 
   def perform
-    return
     DelayerTask.run_all
   end
 
