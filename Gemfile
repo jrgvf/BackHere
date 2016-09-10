@@ -39,6 +39,7 @@ source 'https://rubygems.org'
   gem 'mongoid', '~> 5.1.0'                                                                         # For integration with MongoDB
   gem 'mongoid-multitenancy', '~> 1.1', '>= 1.1.2'                                                  # For Multitenanty with Mongoid
   gem 'mongoid-autoinc'
+  gem "will_paginate_mongoid"                                                                       # For will_paginate with mongoid
   gem 'kaminari-mongoid'
   # gem "mongo_session_store-rails4"                                                                # For store Sessions into MongoDB
   # gem 'mongoid_search', '~> 0.3.2'                                                                # For simplify search text with MongoID
@@ -47,7 +48,6 @@ source 'https://rubygems.org'
   gem "mongoid-paperclip", :require => "mongoid_paperclip"                                          # For use paperclip with MongoID
   # gem 'mongoid-rspec', '3.0.0'                                                                    # For matchers of MongoID
   # gem 'mongoid_relations_dirty_tracking', github: 'versative/mongoid_relations_dirty_tracking'    # For verify relations changes
-  gem "will_paginate_mongoid"                                                                       # For will_paginate with mongoid
   gem 'active_model_secure_token'                                                                   # For create Unique Tokens
   
 # For use CanCan for manage permissions
