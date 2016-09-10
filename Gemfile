@@ -26,9 +26,10 @@ source 'https://rubygems.org'
   gem 'sidekiq'                                                                                     # For use Sidekiq
   gem "sidekiq-cron"                                                                                # Scheduler for Sidekiq
   gem 'sinatra', :require => nil                                                                    # For Sidekiq Web UI
-  gem 'sidekiq-statistic'
+  # gem 'sidekiq-statistic' # Comented because in production log of Sidekiq don't stay into Fronts
   gem 'sidekiq-unique-jobs'
   gem 'sidekiq-failures'
+  # gem 'sidekiq-reliable-fetch' # Comented because force downgrade of Sidekiq
   gem 'redis'                                                                                       # For use Redis
   gem "redis-rails"                                                                                 # For use Redis-Rails
   gem 'redis-rack-cache'                                                                            # For use Redis Rack Cache

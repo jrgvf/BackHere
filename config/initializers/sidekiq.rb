@@ -1,4 +1,6 @@
 Sidekiq.configure_server do |config|
+  # Sidekiq::ReliableFetcher.setup_reliable_fetch!(config)
+  
   config.redis = { url: ENV['REDIS_URL'], password: ENV['REDIS_PASSWORD'], network_timeout: 5, driver: :hiredis }
   # config.error_handlers << Proc.new {|ex,ctx_hash| MyErrorService.notify(ex, ctx_hash) }
 
@@ -14,6 +16,6 @@ end
 
 Sidekiq.default_worker_options = { 'backtrace' => true }
 
-Sidekiq::Statistic.configure do |config|
-  config.log_file = 'log/sidekiq.log'
-end
+# Sidekiq::Statistic.configure do |config|
+#   config.log_file = 'log/sidekiq.log'
+# end

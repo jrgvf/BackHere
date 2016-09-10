@@ -402,8 +402,6 @@ GEM
       sidekiq (>= 4.0.0)
     sidekiq-failures (0.4.5)
       sidekiq (>= 2.16.0)
-    sidekiq-statistic (1.2.0)
-      sidekiq (>= 3.3.4, < 5)
     sidekiq-unique-jobs (4.0.18)
       sidekiq (>= 2.6)
       thor
@@ -534,7 +532,6 @@ DEPENDENCIES
   sidekiq
   sidekiq-cron
   sidekiq-failures
-  sidekiq-statistic
   sidekiq-unique-jobs
   simple_form (~> 3.2)
   simplecov
