@@ -47,7 +47,7 @@
           <% end %>
         </div><!-- box-tools pull-right -->
       </div><!-- /.box-header -->
-      <%= render partial: "customer_info", locals: { customer: @order.customer } %>
+      <%= render(partial: "customer_info", locals: { customer: @order.customer }) unless @order.customer.nil? %>
     </div><!-- /.box -->
 
   </div>
