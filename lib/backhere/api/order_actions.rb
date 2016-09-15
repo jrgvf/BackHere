@@ -17,7 +17,7 @@ module Backhere
         order = Order.find_by(remote_id: remote_order[:remote_id])
         
         if order.present?
-          order.update_attributes(order_params(remote_order, order_status, order_customer))
+          order.assign_attributes(order_params(remote_order, order_status, order_customer))
         else
           new_order = true
           order = Order.new(order_params(remote_order, order_status, order_customer))
