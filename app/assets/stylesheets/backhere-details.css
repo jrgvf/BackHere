@@ -26,6 +26,13 @@
   }
 }
 
+.sidebar-menu li > a > .fa-angle-down {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin-right: 10px;
+}
+
 .slide-toggle-button {
   margin-right: 1em;
   cursor: pointer;

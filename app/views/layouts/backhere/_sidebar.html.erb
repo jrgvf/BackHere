@@ -12,8 +12,37 @@
       <li class="<%= root_active_class %> <%= active_class(dashboard_path) %>">
         <%= link_to '<i class="fa fa-dashboard"></i><span> Dashboard</span>'.html_safe, dashboard_path %>
       </li>
-      <li class="<%= active_class(platforms_path) %>">
-        <%= link_to fa_icon("laptop", text: content_tag(:span, 'Plataformas')), platforms_path %>
+      <li class="treeview <%= active_class('falta-preencher', surveys_path, notifications_path) %>">
+        <a href="#"><%= fa_icon("bullhorn", text: content_tag(:span, 'Pós-Venda')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
+        <ul class="treeview-menu">
+          <li class="<%= active_class('falta-preencher') %>">
+            <a href="#"><%= fa_icon("question", text: content_tag(:span, 'Perguntas')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
+            <ul class="treeview-menu">
+              <li><%= link_to fa_icon("plus", text: 'Criar'), '#' %></li>
+              <li><%= link_to fa_icon("list", text: 'Listar'), '#' %></li>
+              <li class="<%= active_class('falta-preencher') %>">
+                <a href="#"><%= fa_icon("crosshairs", text: content_tag(:span, 'KPIs')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
+                <ul class="treeview-menu">
+                  <li><%= link_to fa_icon("cogs", text: 'Configurar'), '#' %></li>
+                  <li><%= link_to fa_icon("list", text: 'Listar'), '#' %></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="<%= active_class(surveys_path) %>">
+            <a href="#"><%= fa_icon("file-text", text: content_tag(:span, 'Pesquisas')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
+            <ul class="treeview-menu">
+              <li><%= link_to fa_icon("plus", text: 'Criar'), new_survey_path %></li>
+              <li><%= link_to fa_icon("list", text: 'Listar'), surveys_path %></li>
+            </ul>
+          </li>
+          <li class="<%= active_class(notifications_path) %>">
+            <a href="#"><%= fa_icon("paper-plane", text: content_tag(:span, 'Envios')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
+            <ul class="treeview-menu">
+              <li><%= link_to fa_icon("list", text: 'Listar'), notifications_path %></li>
+            </ul>
+          </li>
+        </ul>
       </li>
       <li class="<%= active_class(customers_path) %>">
         <%= link_to fa_icon("group", text: content_tag(:span, 'Clientes')), customers_path %>
@@ -24,15 +53,11 @@
       <li class="<%= active_class(statuses_path) %>">
         <%= link_to fa_icon("tags", text: content_tag(:span, 'Status')), statuses_path %>
       </li>
-      <li class="<%= active_class(notifications_path) %>">
-        <%= link_to fa_icon("sticky-note", text: content_tag(:span, 'Notificações')), notifications_path %>
+      <li class="<%= active_class(platforms_path) %>">
+        <%= link_to fa_icon("laptop", text: content_tag(:span, 'Plataformas')), platforms_path %>
       </li>
-      <li class="treeview <%= active_class(surveys_path) %>">
-        <a href="#"><%= fa_icon("file-text", text: content_tag(:span, 'Pesquisas')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
-        <ul class="treeview-menu">
-          <li><%= link_to fa_icon("plus", text: 'Criar'), new_survey_path %></li>
-          <li><%= link_to fa_icon("list", text: 'Listar'), surveys_path %></li>
-        </ul>
+      <li class="<%= active_class(mappings_path) %>">
+        <%= link_to fa_icon("cogs", text: content_tag(:span, 'Configurações')), mappings_path %>
       </li>
       <li class="treeview <%= active_class(tasks_path) %>">
         <a href="#"><%= fa_icon("tasks", text: content_tag(:span, 'Tarefas')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
@@ -40,9 +65,6 @@
           <li><%= link_to fa_icon("plus", text: 'Criar'), new_task_path %></li>
           <li><%= link_to fa_icon("history", text: 'Histórico'), tasks_path %></li>
         </ul>
-      </li>
-      <li class="<%= active_class(mappings_path) %>">
-        <%= link_to fa_icon("cogs", text: content_tag(:span, 'Configurações')), mappings_path %>
       </li>
     </ul>
     <!-- /.sidebar-menu -->
