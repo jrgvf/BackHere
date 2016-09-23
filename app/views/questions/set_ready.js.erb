@@ -1,0 +1,2 @@
+$("#<%= @question.id %>").replaceWith("<%= escape_javascript(render partial: 'question_index', locals: { question: @question }) %>");
+$(".select2").select2();

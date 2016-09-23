@@ -8,9 +8,13 @@
   field :text,            type: String
   field :type,            type: Symbol
   field :other_option,    type: Boolean,    default: false
+  field :ready,           type: Boolean,    default: false
 
   embeds_many :options, class_name: "QuestionOption", cascade_callbacks: true
   accepts_nested_attributes_for :options, reject_if: :all_blank, allow_destroy: true
+
+  embeds_many :tags, class_name: "QuestionTag", cascade_callbacks: true
+  accepts_nested_attributes_for :tags, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :survey
 
@@ -30,7 +34,7 @@
       ["Resposta longa", :long_answer],
       ["Múltipla escolha", :multi_choice],
       ["Única escolha", :choice]
-      # ["Escala linear", :linear_scale]
+      # ["Escala linear (0-10)", :linear_scale]
       # ["Lista suspensa", :list_select],
       # ["Grade de múltipla escolha", :grad_multi_choice],
       # ["Data", :date],
@@ -43,12 +47,18 @@
     new().type_enum
   end
 
-  def self.other_option_enum
-    new().other_option_enum
-  end
-
   def self.type_values
     type_enum.map(&:last)
+  end
+
+  Question.type_values.each do |type|
+    define_method("#{type}?") do
+      type == self.type
+    end
+  end
+
+  def self.other_option_enum
+    new().other_option_enum
   end
 
   def with_options?
@@ -63,10 +73,11 @@
     self[:other_option]
   end
 
-  Question.type_values.each do |type|
-    define_method("#{type}?") do
-      type == self.type
+  def translated_type
+    type_enum.each do |type|
+      return type.first if type.last == self.type
     end
+    ""
   end
 
 private

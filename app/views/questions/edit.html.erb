@@ -1,0 +1,12 @@
+<% provide(:title, 'Editar Pergunta') %>
+<% provide(:header, 'Editar Pergunta') %>
+<% provide(:description, 'Altere as informações da pergunta.') %>
+<% provide(:levels, 'Pós-Venda, Perguntas, Editar') %>
+
+<div class="box box-danger">
+  <div class="box-header with-border">
+    <%= fa_icon "file-text-o" %>
+    <h3 class="box-title">Editar pergunta (<%= @question.text %>)</h3>
+  </div><!-- /.box-header -->
+  <%= render @question %>
+</div><!-- /.box -->

@@ -1,0 +1,43 @@
+<%= render partial: 'layouts/form_errors', locals: { obj: question } %>
+
+<!-- form start -->
+<%= form_for(question, html: { class:"form-horizontal", id:"form_question" }) do |f| %>
+  <div class="form-group">
+    <%= f.label :text, "Texto:", class: 'col-sm-1 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :text, class: "form-control", placeholder: "Texto da pergunta" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :type, "Tipo:", class: 'col-sm-1 control-label' %>
+    <div class="col-sm-2">
+      <%= f.select(:type, Question.type_enum, { include_blank: "Selecione um tipo" }, { class: "form-control", id: "type" }) %>
+    </div>
+  </div>
+
+  <div class="form-group" id="other_option">
+    <%= f.label :other_option, "Opção 'Outro':", class: 'col-sm-1 control-label' %>
+    <div class="col-sm-1">
+      <%= f.select(:other_option, Question.other_option_enum, {}, { class: "form-control" }) %>
+    </div>
+  </div>
+
+  <div class="col-sm-12 no-padding" id="options">
+    <%= f.fields_for :options do |option| %>
+      <%= render "option_fields", f: option %>
+    <% end %>
+
+    <div class="box-footer">
+      <%= link_to_add_association fa_icon("plus", text: content_tag(:span, 'Adicionar Opção')), f, :options, { class: "btn btn-primary right", "data-association-insertion-method" => "before" } %>
+    </div>
+  </div>
+
+  <div class="box-footer">
+    <%= link_to fa_icon("reply", text: content_tag(:span, 'Voltar')), questions_path, class: 'btn btn-primary' %>
+
+    <%= button_tag( class: "btn btn-primary") do %>
+      <%= fa_icon((question.persisted? ? "refresh" : "check" ), text: content_tag(:span, (question.persisted? ? "Atualizar" : "Cadastrar" ))) %>
+    <% end %>
+  </div>
+<% end %>

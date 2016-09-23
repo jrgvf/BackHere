@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   resources :customers, only: [:index, :show]
   resources :statuses, only: [:index, :update, :create]
   resources :orders, only: [:index, :show, :update]
+  resources :questions, except: [:show] do
+    post 'ready', to: 'questions#set_ready'
+  end
   resources :surveys, except: [:show] do
     get 'preview'
   end

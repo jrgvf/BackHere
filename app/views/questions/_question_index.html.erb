@@ -1,0 +1,12 @@
+<tr id="<%= question.id %>">
+  <td><%= question.text %></td>
+  <td><%= question.translated_type %></td>
+  <td class="col-sm-3 form-group">
+    <%= select_tag(:services, options_for_select(question.tags.map(&:name), question.tags.map(&:name)), multiple: true, class: "form-control select2", disabled: true) %>
+  </td>
+  <td>
+    <%= link_to fa_icon("check", text: content_tag(:span, 'Marcar como pronta', class: "sr-only"), title: "Marcar como pronta", "aria-hidden" => "true"), question_ready_path(question), class: "btn btn-primary btn-flat", disabled: question.ready, method: :post, data: { confirm: "Você tem certeza que deseja marcar como pronta?"}, remote: true %>
+    <%= link_to fa_icon("edit", text: content_tag(:span, 'Editar', class: "sr-only"), title: "Editar", "aria-hidden" => "true"), edit_polymorphic_path(question), class: "btn btn-primary btn-flat", disabled: question.ready %>
+    <%= link_to fa_icon("trash-o", text: content_tag(:span, 'Excluir', class: "sr-only"), title: "Excluir", "aria-hidden" => "true"), question, class: "btn btn-primary btn-flat", disabled: question.ready, method: :delete, data: { confirm: "Você tem certeza?"}, remote: true %>
+  </td>
+</tr>

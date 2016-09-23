@@ -18,8 +18,8 @@
           <li class="<%= active_class('falta-preencher') %>">
             <a href="#"><%= fa_icon("question", text: content_tag(:span, 'Perguntas')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
             <ul class="treeview-menu">
-              <li><%= link_to fa_icon("plus", text: 'Criar'), '#' %></li>
-              <li><%= link_to fa_icon("list", text: 'Listar'), '#' %></li>
+              <li><%= link_to fa_icon("plus", text: 'Criar'), new_question_path %></li>
+              <li><%= link_to fa_icon("list", text: 'Listar'), questions_path %></li>
               <li class="<%= active_class('falta-preencher') %>">
                 <a href="#"><%= fa_icon("crosshairs", text: content_tag(:span, 'KPIs')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
                 <ul class="treeview-menu">
