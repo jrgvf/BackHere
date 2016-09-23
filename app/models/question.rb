@@ -33,8 +33,8 @@
       ["Resposta curta", :short_answer],
       ["Resposta longa", :long_answer],
       ["Múltipla escolha", :multi_choice],
-      ["Única escolha", :choice]
-      # ["Escala linear (0-10)", :linear_scale]
+      ["Única escolha", :choice],
+      ["Escala linear (0-10)", :linear_scale]
       # ["Lista suspensa", :list_select],
       # ["Grade de múltipla escolha", :grad_multi_choice],
       # ["Data", :date],
@@ -83,7 +83,7 @@
 private
 
   def allow_options?
-    [:multi_choice, :choice, :linear_scale].include?(self[:type])
+    [:multi_choice, :choice].include?(self[:type])
   end
 
   def type_values

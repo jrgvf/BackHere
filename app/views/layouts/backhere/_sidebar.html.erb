@@ -12,10 +12,10 @@
       <li class="<%= root_active_class %> <%= active_class(dashboard_path) %>">
         <%= link_to '<i class="fa fa-dashboard"></i><span> Dashboard</span>'.html_safe, dashboard_path %>
       </li>
-      <li class="treeview <%= active_class('falta-preencher', surveys_path, notifications_path) %>">
+      <li class="treeview <%= active_class(questions_path, surveys_path, notifications_path) %>">
         <a href="#"><%= fa_icon("bullhorn", text: content_tag(:span, 'Pós-Venda')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
         <ul class="treeview-menu">
-          <li class="<%= active_class('falta-preencher') %>">
+          <li class="<%= active_class(questions_path) %>">
             <a href="#"><%= fa_icon("question", text: content_tag(:span, 'Perguntas')) %> <%= fa_icon("angle-down", class:'pull-right') %></a>
             <ul class="treeview-menu">
               <li><%= link_to fa_icon("plus", text: 'Criar'), new_question_path %></li>

@@ -11,14 +11,31 @@
 
   <div class="form-group">
     <%= f.label :type, "Tipo:", class: 'col-sm-1 control-label' %>
-    <div class="col-sm-2">
+    <div class="col-sm-4">
       <%= f.select(:type, Question.type_enum, { include_blank: "Selecione um tipo" }, { class: "form-control", id: "type" }) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :tags, "Tags:", class: 'col-sm-1 control-label' %>
+    <div class="col-sm-4">
+    <%= select_tag(:tags, options_for_select(@tags.map(&:name), question.tags.map(&:name)), multiple: true, class: "form-control select2", id: "tags") %>
+    </div>
+    <div class="col-sm-4">
+      <div class="input-group no-border">
+        <%= text_field_tag :new_tag, nil, class: "form-control", placeholder: "Nova Tag", id: "new_tag" %>
+        <span class="input-group-addon">
+          <%= button_tag(type: 'button', id: 'btn-add-tag', class: "btn btn-primary btn-flat btn-xs") do %>
+            <%= fa_icon("plus", text: content_tag(:span, 'Adicionar')) %>
+          <% end %>
+        </span>
+      </div>
     </div>
   </div>
 
   <div class="form-group" id="other_option">
     <%= f.label :other_option, "Opção 'Outro':", class: 'col-sm-1 control-label' %>
-    <div class="col-sm-1">
+    <div class="col-sm-4">
       <%= f.select(:other_option, Question.other_option_enum, {}, { class: "form-control" }) %>
     </div>
   </div>

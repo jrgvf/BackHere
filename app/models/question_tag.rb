@@ -18,6 +18,7 @@
 
     def find_or_create_tag
       return unless self.tag_id.nil?
+      self.name.capitalize!
       self.tag = Tag.find_or_create_by!({name: self.name})
     end
 

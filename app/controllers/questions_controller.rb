@@ -1,5 +1,6 @@
 class QuestionsController < BackHereController
   before_filter :find_question, only: [:edit, :update, :destroy, :set_ready]
+  before_filter :find_tags, only: [:new, :create, :edit, :update]
 
   def index
     @questions = Question.asc(:created_at)
@@ -11,6 +12,7 @@ class QuestionsController < BackHereController
 
   def create
     @question = Question.new(question_params)
+    add_tags
     if @question.save
       flash.keep[:success] = "Pergunta criada com sucesso."
       redirect_to questions_path
@@ -24,6 +26,7 @@ class QuestionsController < BackHereController
   end
 
   def update
+    add_tags
     if @question.update_attributes(question_params)
       flash.keep[:info] = "Pergunta editada com sucesso."
       redirect_to questions_path
@@ -58,13 +61,25 @@ class QuestionsController < BackHereController
 
   private
 
+    def add_tags 
+      @question.tags = tags.map { |tag| @question.tags.find_or_initialize_by({name: tag}) }
+    end
+
     def find_question
       @question = Question.find(params[:id] || params[:question_id])
+    end
+
+    def find_tags
+      @tags = Tag.asc(:name)
     end
 
     def question_params
       params.require(:question).permit(:text, :type, :other_option,
           options_attributes: [:id, :_destroy, :text])
+    end
+
+    def tags
+      Array.wrap(params[:tags])
     end
 
     def build_delete_error_message
