@@ -1,0 +1,15 @@
+<% if questions.empty? %>
+  <div class="center error-content">
+    <h3><i class="fa fa-warning text-red"></i> Não existem perguntas cadastras.</h3>
+    <p>Cadastre as perguntas antes.</p>
+  </div>
+<% else %>
+  <% questions.each do |question| %>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <%= check_box_tag "survey[questions_ids][]", question.id, survey.question_ids.include?(question.id), class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
+      </span>
+      <span class="form-control"><%= truncate(question.text, length: 65, separator: ' ') %></span>
+    </div><!-- /input-group -->
+  <% end %>
+<% end %>

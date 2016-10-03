@@ -14,7 +14,8 @@ class SurveysController < BackHereController
 
   def new
     @survey = Survey.new
-    @survey.questions.build
+    @questions = Question.desc(:created_at)
+    @tags = Tag.asc(:created_at)
   end
 
   def create
@@ -23,12 +24,18 @@ class SurveysController < BackHereController
       flash.keep[:success] = "Pesquisa criada com sucesso."
       redirect_to surveys_path
     else
+      @questions = Question.desc(:created_at)
+      @tags = Tag.asc(:created_at)
+
       flash.now[:error] = "Não foi possível criar a pesquisa."
       render :new
     end
   end
 
   def edit
+    @questions = Question.desc(:created_at)
+    @tags = Tag.asc(:created_at)
+
     if SurveyMapping.where(survey_id: @survey.id).exists?
       flash.keep[:alert] = "Não é possível editar uma pesquisa mapeada."
       redirect_to surveys_path
@@ -43,6 +50,9 @@ class SurveysController < BackHereController
       flash.keep[:info] = "Pesquisa (#{@survey.name.capitalize}) editada com sucesso."
       redirect_to surveys_path
     else
+      @questions = Question.desc(:created_at)
+      @tags = Tag.asc(:created_at)
+      
       flash.now[:error] = "Não foi possível salvar as modificações."
       render :edit
     end

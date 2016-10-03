@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
   resources :surveys, except: [:show] do
     get 'preview'
+    get 'filter_questions', to: 'questions#filter_questions', as: 'filter_questions'
   end
   
   resources :magentos, except: [:index, :show] do

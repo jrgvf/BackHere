@@ -31,4 +31,15 @@ $(function (){
     }
   };
 
+  $('#filter_tags').on('click', function() {
+    $.ajax({
+    type: 'GET',
+    url: '/surveys/:survey_id/filter_questions',
+    cache: false,
+    error: function() {
+      bootbox.alert("Ocorreu um erro... :X");
+    }
+  });
+  });
+
 });

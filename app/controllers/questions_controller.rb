@@ -59,7 +59,24 @@ class QuestionsController < BackHereController
     end
   end
 
+  def filter_questions
+    debugger
+    respond_to do |format|
+      @survey = Survey.find(params[:survey_id])
+      @questions = apply_filters([:_id, :text])
+      format.js {}
+      format.json { render json: @questions }
+    end
+  end
+
   private
+
+    def apply_filters(only_fields = [])
+      criteria = Question.where(account_id: current_account.id).desc(:created_at)
+      criteria = criteria.elem_match(tags: {:name.in => tags}) unless tags.empty?
+      criteria = criteria.only(only_fields) unless only_fields
+      criteria.to_a
+    end
 
     def add_tags 
       @question.tags = tags.map { |tag| @question.tags.find_or_initialize_by({name: tag}) }
