@@ -78,10 +78,10 @@ class QuestionsController < BackHereController
     end
 
     def tags
-      @tags ||= Array.wrap(params[:tags]).reject(&:blank?)
+      @tags_params ||= Array.wrap(params[:tags]).reject(&:blank?)
     end
 
-    def add_tags 
+    def add_tags
       @question.tags = tags.map { |tag| @question.tags.find_or_initialize_by({name: tag}) }
     end
 

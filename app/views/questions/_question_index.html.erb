@@ -1,5 +1,5 @@
 <tr id="<%= question.id %>">
-  <td><%= truncate(question.text, length: 30, separator: ' ') %></td>
+  <td><%= truncate(question.text, length: 80, separator: ' ') %></td>
   <td><%= question.translated_type %></td>
   <td class="col-sm-3 form-group">
     <%= select_tag(:services, options_for_select(question.tags.map(&:name), question.tags.map(&:name)), multiple: true, class: "form-control select2", disabled: true) %>
