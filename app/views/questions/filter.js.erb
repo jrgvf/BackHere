@@ -1,0 +1,23 @@
+$("#others_questions").html("<%= escape_javascript(render partial: 'surveys/others_questions', locals: { questions: @questions }) %>");
+
+var surveyQuestions = document.getElementById('surveyQuestions');
+if (surveyQuestions !== null) { startSortable(surveyQuestions, true) }
+var othersQuestions = document.getElementById('othersQuestions');
+if (othersQuestions !== null) { startSortable(othersQuestions, false) }
+
+function startSortable (element, sort) {
+  Sortable.create(element, {
+    group: "sorting",
+    ghostClass: 'ghost',
+    sort: sort,
+    onRemove: function (evt) { afterRemove(evt.from, evt.item) }
+  });
+};
+
+function afterRemove (from, item) {
+  if ($(from).is("#surveyQuestions")) {
+    $(item).find('input[type="checkbox"]').prop('checked',false);
+  } else {
+    $(item).find('input[type="checkbox"]').prop('checked',true);
+  }
+};

@@ -31,15 +31,46 @@ $(function (){
     }
   };
 
-  $('#filter_tags').on('click', function() {
-    $.ajax({
-    type: 'GET',
-    url: '/surveys/:survey_id/filter_questions',
-    cache: false,
-    error: function() {
-      bootbox.alert("Ocorreu um erro... :X");
+  var surveyQuestions = document.getElementById('surveyQuestions');
+  if (surveyQuestions !== null) { startSortable(surveyQuestions, true) }
+  var othersQuestions = document.getElementById('othersQuestions');
+  if (othersQuestions !== null) { startSortable(othersQuestions, false) }
+
+  function startSortable (element, sort) {
+    Sortable.create(element, {
+      group: "sorting",
+      ghostClass: 'ghost',
+      sort: sort,
+      onRemove: function (evt) { afterRemove(evt.from, evt.item) }
+    });
+  };
+
+  function afterRemove (from, item) {
+    if ($(from).is("#surveyQuestions")) {
+      $(item).find('input[type="checkbox"]').prop('checked',false);
+    } else {
+      $(item).find('input[type="checkbox"]').prop('checked',true);
     }
-  });
+  };
+
+  $('#filter_tags').on('change', function(event) {
+    event.preventDefault();
+
+    var tags = $('select[name="filter_tags[]"]').val();
+    var question_ids = []
+    $("input:checked").each(function() {
+      question_ids.push($(this).val());
+    });
+
+    $.ajax({
+      type: 'GET',
+      url: '/questions/filter',
+      cache: false,
+      data : { tags: tags, question_ids: question_ids },
+      error: function() {
+        bootbox.alert("Não foi possível filtrar as perguntas. <br /><br />Tente novamente mais tarde.");
+      }
+    });
   });
 
 });

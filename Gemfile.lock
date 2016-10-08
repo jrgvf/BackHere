@@ -419,6 +419,7 @@ GEM
       tilt (>= 1.3, < 3)
     slop (3.6.0)
     socksify (1.7.0)
+    sortable-rails (1.4.2.2)
     spring (1.7.2)
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
@@ -536,6 +537,7 @@ DEPENDENCIES
   simple_form (~> 3.2)
   simplecov
   sinatra
+  sortable-rails
   spring
   timecop (~> 0.8.0)
   turbolinks (= 2.5.3)

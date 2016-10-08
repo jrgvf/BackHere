@@ -27,4 +27,5 @@
 //= require bootbox
 //= require cocoon
 //= require turbolinks
+//= require sortable-rails-jquery
 //= require_tree ./backhere

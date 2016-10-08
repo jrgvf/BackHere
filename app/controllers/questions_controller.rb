@@ -59,10 +59,8 @@ class QuestionsController < BackHereController
     end
   end
 
-  def filter_questions
-    debugger
+  def filter
     respond_to do |format|
-      @survey = Survey.find(params[:survey_id])
       @questions = apply_filters([:_id, :text])
       format.js {}
       format.json { render json: @questions }
@@ -73,9 +71,14 @@ class QuestionsController < BackHereController
 
     def apply_filters(only_fields = [])
       criteria = Question.where(account_id: current_account.id).desc(:created_at)
+      criteria = criteria.nin(id: params[:question_ids])
       criteria = criteria.elem_match(tags: {:name.in => tags}) unless tags.empty?
       criteria = criteria.only(only_fields) unless only_fields
       criteria.to_a
+    end
+
+    def tags
+      @tags ||= Array.wrap(params[:tags]).reject(&:blank?)
     end
 
     def add_tags 
@@ -93,10 +96,6 @@ class QuestionsController < BackHereController
     def question_params
       params.require(:question).permit(:text, :type, :other_option,
           options_attributes: [:id, :_destroy, :text])
-    end
-
-    def tags
-      Array.wrap(params[:tags])
     end
 
     def build_delete_error_message

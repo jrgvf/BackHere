@@ -3,6 +3,7 @@ class SurveysController < BackHereController
 
   before_action :find_survey_by_id, only: [:edit, :update, :destroy]
   before_action :find_survey_by_survey_id, only: [:preview]
+  before_action :check_question_ids, only: [:update, :create]
 
   def index
     @surveys = Survey.asc(:created_at)
@@ -24,7 +25,7 @@ class SurveysController < BackHereController
       flash.keep[:success] = "Pesquisa criada com sucesso."
       redirect_to surveys_path
     else
-      @questions = Question.desc(:created_at)
+      @questions = Question.nin(id: @survey.question_ids).desc(:created_at)
       @tags = Tag.asc(:created_at)
 
       flash.now[:error] = "Não foi possível criar a pesquisa."
@@ -33,7 +34,7 @@ class SurveysController < BackHereController
   end
 
   def edit
-    @questions = Question.desc(:created_at)
+    @questions = Question.nin(id: @survey.question_ids).desc(:created_at)
     @tags = Tag.asc(:created_at)
 
     if SurveyMapping.where(survey_id: @survey.id).exists?
@@ -50,7 +51,7 @@ class SurveysController < BackHereController
       flash.keep[:info] = "Pesquisa (#{@survey.name.capitalize}) editada com sucesso."
       redirect_to surveys_path
     else
-      @questions = Question.desc(:created_at)
+      @questions = Question.nin(id: @survey.question_ids).desc(:created_at)
       @tags = Tag.asc(:created_at)
       
       flash.now[:error] = "Não foi possível salvar as modificações."
@@ -77,15 +78,22 @@ class SurveysController < BackHereController
 
   private
 
+    def check_question_ids
+      if survey_params[:question_ids].blank?
+        flash.keep[:error] = 'É necessário selecionar ao menos uma pergunta.'
+        return redirect_to :back
+      end
+    end
+
     # def available_surveys
     #   @available_surveys = Array.new
     #   @available_surveys << { name: "Tradicional", url: new_survey_path }
     # end
 
     def survey_params
-      params.require(:survey).permit(:name, :description, :active,
-        questions_attributes: [:id, :_destroy, :text, :type, :other_option,
-          options_attributes: [:id, :_destroy, :text]])
+      @survey_params ||= params.require(:survey).permit(:name, :description, :active).tap do |whitelisted|
+        whitelisted[:question_ids] = params[:survey][:question_ids]
+      end
     end
 
     def answer(values)

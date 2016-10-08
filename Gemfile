@@ -78,6 +78,7 @@ source 'https://rubygems.org'
   gem 'select2-rails'                                                                               # For Jquery select field
   gem 'jasny-bootstrap-rails'                                                                       # For Jasny Bootstrap
   gem "bootstrap-switch-rails"                                                                      # For Bootstrap Switch
+  gem 'sortable-rails'                                                                              # For Drag and Drop Sortable
 
 # Gems For Tests and Development
 group :development, :test do

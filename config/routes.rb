@@ -36,10 +36,13 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :update]
   resources :questions, except: [:show] do
     post 'ready', to: 'questions#set_ready'
+
+    collection do
+      get 'filter', to: 'questions#filter'
+    end
   end
   resources :surveys, except: [:show] do
     get 'preview'
-    get 'filter_questions', to: 'questions#filter_questions', as: 'filter_questions'
   end
   
   resources :magentos, except: [:index, :show] do

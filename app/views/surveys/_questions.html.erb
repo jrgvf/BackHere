@@ -1,15 +1,23 @@
-<% if questions.empty? %>
-  <div class="center error-content">
-    <h3><i class="fa fa-warning text-red"></i> Não existem perguntas cadastras.</h3>
-    <p>Cadastre as perguntas antes.</p>
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <div id="surveyQuestions" class="list-group" style="overflow: scroll; height: 400px;">
+    <% survey.questions.each do |question| %>
+      <div class="list-group-item">
+        <%= check_box_tag "survey[question_ids][]", question.id, true, class: 'hide' %>
+        <%= truncate(question.text, length: 65, separator: ' ') %>
+      </div>
+    <% end %>
   </div>
-<% else %>
-  <% questions.each do |question| %>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <%= check_box_tag "survey[questions_ids][]", question.id, survey.question_ids.include?(question.id), class: 'icheck-me', 'data-skin' => 'square', 'data-color' => 'orange' %>
-      </span>
-      <span class="form-control"><%= truncate(question.text, length: 65, separator: ' ') %></span>
-    </div><!-- /input-group -->
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <% if questions.empty? %>
+    <div class="center error-content">
+      <h3><%= fa_icon("warning", class: "text-red") %></i> Não existem perguntas cadastras.</h3>
+      <p>Cadastre as perguntas antes.</p>
+    </div>
+  <% else %>
+    <div id="others_questions">
+      <%= render "others_questions", questions: questions %>
+    </div>
   <% end %>
-<% end %>
+</div>

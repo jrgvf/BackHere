@@ -32,3 +32,21 @@
 .content-survey {
   margin-left: 0;
 }
+
+.list-group-item {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  width: 100%;
+}
+
+/* ghostClass */
+.ghost {
+  opacity: .5;
+  background: #C8EBFB;
+}
+
+#surveyQuestions, #othersQuestions {
+  padding: 1px 0;
+  border-top: 10px solid #f05f40;
+  border-bottom: 10px solid #f05f40;
+}

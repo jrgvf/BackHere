@@ -12,8 +12,7 @@
   field :description,   type: String
   field :active,        type: Boolean,    default: true
 
-  has_many :questions, dependent: :destroy
-  accepts_nested_attributes_for :questions, reject_if: :all_blank, allow_destroy: true
+  has_many :questions
 
   has_many :answers, class_name: "SurveyAnswer"
 
