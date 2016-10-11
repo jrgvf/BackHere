@@ -16,6 +16,6 @@ class Item
   embedded_in :order
 
   # validates_presence_of :remote_id, :sku, :name, :quantity, :weight, :price, :original_price, :discount, :total_price, :total_weight
-  validates_presence_of :quantity, :price, :original_price, :discount, :total_price
+  validates_presence_of :quantity, :price, :original_price, :total_price
 
 end

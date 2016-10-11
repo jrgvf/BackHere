@@ -26,7 +26,7 @@ module Backhere
         if order.save
           Backhere::Api::ExecutionResults::Result.new(:success, "Pedido #{order.remote_id} #{ new_order ? "importado" : "atualizado" } com sucesso.")
         else
-          Backhere::Api::ExecutionResults::Result.new(:failure, order.errors.full_messages.join('; '))
+          Backhere::Api::ExecutionResults::Result.new(:failure, "Pedido #{order.remote_id} com error(s):" + order.errors.full_messages.join('; '))
         end
       end
 
