@@ -4,6 +4,9 @@
 
 <!-- form start -->
 <%= form_for(question, html: { class:"form-horizontal", id:"form_question" }, remote: true) do |f| %>
+  
+  <%= f.check_box :ready, {checked: true, hidden: true} %>
+
   <div class="form-group">
     <%= f.label :text, "Texto:", class: 'col-sm-1 control-label' %>
     <div class="col-sm-10">

@@ -117,7 +117,7 @@ class QuestionsController < BackHereController
     end
 
     def question_params
-      params.require(:question).permit(:text, :type, :other_option,
+      params.require(:question).permit(:text, :type, :other_option, :ready,
           options_attributes: [:id, :_destroy, :text])
     end
 
