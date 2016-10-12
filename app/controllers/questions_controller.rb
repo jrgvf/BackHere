@@ -93,7 +93,7 @@ class QuestionsController < BackHereController
     end
 
     def apply_filters(only_fields = [])
-      criteria = Question.where(account_id: current_account.id).desc(:created_at)
+      criteria = Question.where(account_id: current_account.id, ready: true).desc(:created_at)
       criteria = criteria.nin(id: params[:question_ids])
       criteria = criteria.elem_match(tags: {:name.in => tags}) unless tags.empty?
       criteria = criteria.only(only_fields) unless only_fields
