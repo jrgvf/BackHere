@@ -1,0 +1,2 @@
+bootbox.hideAll();
+$("#surveyQuestions").prepend("<%= escape_javascript(render partial: 'surveys/checked_question', locals: { question: @question }) %>")

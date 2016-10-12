@@ -1,0 +1,4 @@
+<div class="list-group-item">
+  <%= check_box_tag "survey[question_ids][]", question.id, true, class: 'hide' %>
+  <%= truncate(question.text, length: 65, separator: ' ') %>
+</div>

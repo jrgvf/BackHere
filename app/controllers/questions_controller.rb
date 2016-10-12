@@ -1,6 +1,7 @@
 class QuestionsController < BackHereController
   before_filter :find_question, only: [:edit, :update, :destroy, :set_ready]
   before_filter :find_tags, only: [:new, :create, :edit, :update]
+  before_filter :check_ready, only: [:edit, :destroy, :set_ready]
 
   def index
     @questions = Question.asc(:created_at)
@@ -8,17 +9,32 @@ class QuestionsController < BackHereController
 
   def new
     @question = Question.new
+    respond_to do |format|
+      format.js { render template: 'surveys/new_question.js.erb' }
+      format.json { render nothing: true, status: 204, location: @question }
+      format.html { render :new }
+    end
   end
 
   def create
-    @question = Question.new(question_params)
-    add_tags
-    if @question.save
-      flash.keep[:success] = "Pergunta criada com sucesso."
-      redirect_to questions_path
-    else
-      flash.now[:error] = "Não foi possível criar a pergunta."
-      render :new
+    respond_to do |format|
+      @question = Question.new(question_params)
+      add_tags
+      if @question.save
+        format.js { render template: 'surveys/create_question_success.js.erb' }
+        format.json { render json: @question, status: 201, location: @question }
+        format.html do
+          flash.keep[:success] = "Pergunta criada com sucesso."
+          redirect_to questions_path
+        end
+      else
+        format.js { render template: 'surveys/create_question_error.js.erb' }
+        format.json { render json: @question.errors.full_messages, status: :unprocessable_entity, location: @question }
+        format.html do
+          flash.now[:error] = "Não foi possível criar a pergunta."
+          render :new
+        end
+      end
     end
   end
 
@@ -68,6 +84,13 @@ class QuestionsController < BackHereController
   end
 
   private
+
+    def check_ready
+      if @question.ready
+        flash.keep[:error] = 'Não é permitido alterar uma questão pronta.'
+        return redirect_to questions_path
+      end
+    end
 
     def apply_filters(only_fields = [])
       criteria = Question.where(account_id: current_account.id).desc(:created_at)

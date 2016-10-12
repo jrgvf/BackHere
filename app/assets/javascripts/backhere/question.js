@@ -44,4 +44,16 @@ $(function (){
     $("#new_tag").val('');
   });
 
+  // $('.autoShorten').each(function(){
+  //   if ($(this).text().length > 80) {
+  //     var words = $(this).text().substring(0,80).split(" ");
+  //     var shortText = words.slice(0, words.length - 1).join(" ") + "...";
+  //     $(this).data('replacementText', $(this).text())
+  //     .text(shortText)
+  //     .css({ cursor: 'pointer' })
+  //     .hover(function() { $(this).css({ textDecoration: 'underline' }); }, function() { $(this).css({ textDecoration: 'none' }); })
+  //     .click(function() { var tempText = $(this).text(); $(this).text($(this).data('replacementText')); $(this).data('replacementText', tempText); });
+  //   }
+  // });
+
 });

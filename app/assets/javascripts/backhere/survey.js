@@ -73,4 +73,18 @@ $(function (){
     });
   });
 
+  $("#new_question").on("click", function(event) {
+    event.preventDefault();
+    bootbox.dialog({ message: '<div class="text-center"><i class="fa fa-refresh fa-spin fa-lg"></i> Loading...</div>' });
+
+    $.ajax({
+      type: 'GET',
+      url: '/questions/new',
+      error: function() {
+        bootbox.hideAll();
+        bootbox.alert("Algo deu errado... <br /><br />Tente novamente mais tarde.");
+      }
+    });
+  });
+
 });

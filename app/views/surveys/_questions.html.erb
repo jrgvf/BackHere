@@ -1,20 +1,35 @@
 <div class="col-md-6 col-sm-6 col-xs-12">
   <div id="surveyQuestions" class="list-group" style="overflow: scroll; height: 400px;">
     <% survey.questions.each do |question| %>
-      <div class="list-group-item">
-        <%= check_box_tag "survey[question_ids][]", question.id, true, class: 'hide' %>
-        <%= truncate(question.text, length: 65, separator: ' ') %>
-      </div>
+      <%= render "checked_question", question: question %>
+    <% end %>
+  </div>
+
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <%= button_tag(class: "btn btn-primary", id: "new_question") do %>
+      <%= fa_icon("plus", text: content_tag(:span, "Adicionar nova pergunta")) %>
     <% end %>
   </div>
 </div>
 
 <div class="col-md-6 col-sm-6 col-xs-12">
   <% if questions.empty? %>
-    <div class="center error-content">
-      <h3><%= fa_icon("warning", class: "text-red") %></i> Não existem perguntas cadastras.</h3>
-      <p>Cadastre as perguntas antes.</p>
-    </div>
+    <% if Question.exists? %>
+      <div class="center error-content">
+        <% if survey.questions.empty? %>
+          <h3><%= fa_icon("warning", class: "text-red") %></i> Não existem perguntas prontas.</h3>
+          <p>Você deve marcar as perguntas como prontas antes.</p>
+        <% else %>
+          <h3><%= fa_icon("warning", class: "text-red") %></i> Todas as perguntas prontas já selecionadas.</h3>
+          <p>Você deve marcar as outras perguntas como prontas antes.</p>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="center error-content">
+        <h3><%= fa_icon("warning", class: "text-red") %></i> Não existem perguntas cadastras.</h3>
+        <p>Cadastre as perguntas antes.</p>
+      </div>
+    <% end %>
   <% else %>
     <div id="others_questions">
       <%= render "others_questions", questions: questions %>
