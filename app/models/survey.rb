@@ -12,7 +12,7 @@
   field :description,   type: String
   field :active,        type: Boolean,    default: true
 
-  has_many :questions
+  has_many :ordenators, dependent: :destroy
 
   has_many :answers, class_name: "SurveyAnswer"
 
@@ -32,6 +32,23 @@
 
   def active?
     self[:active]
+  end
+
+  def questions
+    Question.in(id: self.ordenators.pluck(:question_id)).sort_by do |question|
+      self.ordenators.find_by(question_id: question.id).position
+    end
+  end
+
+  def question_ids
+    self.ordenators.pluck(:question_id)
+  end
+
+  def question_ids=(question_ids)
+    Ordenator.nin(question_id: question_ids).destroy
+    question_ids.each_with_index do |question_id, index|
+      Ordenator.where(survey_id: self.id, question_id: question_id).find_one_and_update({:$set => { position: index }}, upsert: true, new: true)
+    end
   end
 
   private

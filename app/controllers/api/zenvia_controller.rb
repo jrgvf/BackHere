@@ -7,7 +7,7 @@ class Api::ZenviaController < ApiController
   def status_update
     respond_to do |format|
       begin
-        Mongoid::Multitenancy.with_tenant(account) do
+        Tenant.with_tenant(account) do
           @message.status = zenvia_params["statusMessage"]
           @message.status = "Blocked" if @message.status.include?("Blocked")
           @message.status_code = zenvia_params["status"]
@@ -29,7 +29,7 @@ class Api::ZenviaController < ApiController
   def answer_receive
     respond_to do |format|
       begin
-        Mongoid::Multitenancy.with_tenant(account) do
+        Tenant.with_tenant(account) do
           @response = @message.responses.find_or_initialize_by(external_id: zenvia_params["id"])
           @response.number = zenvia_params["mobile"]
           @response.short_code = zenvia_params["shortCode"]

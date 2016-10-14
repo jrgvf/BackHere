@@ -15,7 +15,7 @@ class NotificationsController < BackHereController
   end
 
   def submit_answer
-    Mongoid::Multitenancy.with_tenant(account) do
+    Tenant.with_tenant(account) do
       @answer = @survey.answers.build
       @answer.customer = @notification.customer
 

@@ -16,7 +16,7 @@
   embeds_many :tags, class_name: "QuestionTag", cascade_callbacks: true
   accepts_nested_attributes_for :tags, reject_if: :all_blank, allow_destroy: true
 
-  belongs_to :survey
+  has_many :ordenators, dependent: :destroy
 
   validates_presence_of :text, allow_blank: false
   validates_inclusion_of :type, in: :type_values
@@ -78,6 +78,14 @@
       return type.first if type.last == self.type
     end
     ""
+  end
+
+  def surveys
+    Survey.in(id: self.ordenators.pluck(:survey_id))
+  end
+
+  def survey_ids
+    self.ordenators.pluck(:survey_id)
   end
 
 private

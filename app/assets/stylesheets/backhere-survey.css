@@ -47,6 +47,9 @@
 
 #surveyQuestions, #othersQuestions {
   padding: 1px 0;
-  border-top: 10px solid #f05f40;
-  border-bottom: 10px solid #f05f40;
+  border: 0.3em solid #f05f40;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  /*border-bottom: 0.5em solid #f05f40;*/
 }

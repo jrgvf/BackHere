@@ -39,7 +39,7 @@
 
           <div class="box-body">
             <div class="form-group col-sm-12">
-              <%= label_tag :filter, "Filtrar por tags:", class: 'control-label col-sm-2' %>
+              <%= label_tag :filter, "Filtro por tags:", class: 'control-label col-sm-2' %>
               <div class="col-sm-10">
                 <%= select_tag(:filter_tags, options_for_select(@tags.map(&:name), []), multiple: true, class: "form-control select2", disabled: @questions.empty?) %>
               </div>

@@ -75,7 +75,7 @@ class DelayerTask
   end
 
   def self.try_create_tasks(account)
-    Mongoid::Multitenancy.with_tenant(account) do
+    Tenant.with_tenant(account) do
       DelayerTask.where(account: account).each do |delayer_task|
 
         last_time = delayer_task.cron_line.previous_time(Time.now)

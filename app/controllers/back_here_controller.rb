@@ -9,7 +9,7 @@ class BackHereController < ApplicationController
   protected
 
   def set_current_tenant
-    Mongoid::Multitenancy.current_tenant = current_account
+    Tenant.current = current_account
   end
 
   def current_account

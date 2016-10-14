@@ -27,7 +27,7 @@ class TaskTrigger
 
   def perform
     Account.each do |account|
-      Mongoid::Multitenancy.with_tenant(account) do
+      Tenant.with_tenant(account) do
         waiting_tasks.each do |task|
           next if already_processing?(task)
           task.job_id = Sidekiq::Client.enqueue_to(Platform.queue(task.platform_id), TaskWorker, task.id.to_s)

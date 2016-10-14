@@ -1,18 +1,5 @@
 <div class="col-md-6 col-sm-6 col-xs-12">
-  <div id="surveyQuestions" class="list-group" style="overflow: scroll; height: 400px;">
-    <% survey.questions.each do |question| %>
-      <%= render "checked_question", question: question %>
-    <% end %>
-  </div>
-
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <%= button_tag(class: "btn btn-primary", id: "new_question") do %>
-      <%= fa_icon("plus", text: content_tag(:span, "Adicionar nova pergunta")) %>
-    <% end %>
-  </div>
-</div>
-
-<div class="col-md-6 col-sm-6 col-xs-12">
+  <%= label_tag "Perguntas disponíveis:" %>
   <% if questions.empty? %>
     <% if Question.exists? %>
       <div class="center error-content">
@@ -35,4 +22,19 @@
       <%= render "others_questions", questions: questions %>
     </div>
   <% end %>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+  <%= label_tag "Perguntas selecionadas:" %>
+  <div id="surveyQuestions" class="list-group" style="overflow: scroll; height: 400px;">
+    <% survey.questions.each do |question| %>
+      <%= render "checked_question", question: question %>
+    <% end %>
+  </div>
+
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <%= button_tag(class: "btn btn-primary pull-right", id: "new_question") do %>
+      <%= fa_icon("plus", text: content_tag(:span, "Adicionar nova pergunta")) %>
+    <% end %>
+  </div>
 </div>

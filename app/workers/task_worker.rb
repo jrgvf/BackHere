@@ -19,7 +19,7 @@ class TaskWorker
       task = Task.find(task_id)
       return if task.nil? || finished_status.include?(task.status)
 
-      Mongoid::Multitenancy.with_tenant(task.account) do
+      Tenant.with_tenant(task.account) do
         task.execute
         TaskTrigger.try_execute(task.id, 10) unless finished_status.include?(task.reload.status)
       end

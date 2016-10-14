@@ -4,7 +4,7 @@ FactoryGirl.define do
     default_email 'backhere@backhere.com.br'
     
     after(:create) do |account|
-      Mongoid::Multitenancy.current_tenant = account
+      Tenant.current_tenant = account
     end
   end
 end
