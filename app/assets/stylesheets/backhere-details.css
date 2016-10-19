@@ -87,3 +87,12 @@
 .bootstrap-switch.bootstrap-switch-focused {
   border-color: #f05f40;
 }
+
+#linear_scale_handle {
+  width: 2em;
+  height: 1.4em;
+  top: 50%;
+  margin-top: -.8em;
+  text-align: center;
+  line-height: 1.4em;
+}

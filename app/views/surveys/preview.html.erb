@@ -16,6 +16,8 @@
 
           <% if question.with_options? %>
             <%= render partial: 'surveys/question_option', locals: { question: question, index: index } %>
+          <% elsif question.linear_scale? %>
+            <%= render partial: 'surveys/question_linear_scale', locals: { question: question, index: index } %>
           <% else %>
             <%= render partial: 'surveys/question_text', locals: { question: question, index: index } %>
           <% end %>

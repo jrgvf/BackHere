@@ -45,7 +45,7 @@
   end
 
   def question_ids=(question_ids)
-    Ordenator.nin(question_id: question_ids).destroy
+    Ordenator.where(survey_id: self.id).nin(question_id: question_ids).destroy
     question_ids.each_with_index do |question_id, index|
       Ordenator.where(survey_id: self.id, question_id: question_id).find_one_and_update({:$set => { position: index }}, upsert: true, new: true)
     end
