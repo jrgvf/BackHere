@@ -55,26 +55,5 @@ $(function (){
   //     .click(function() { var tempText = $(this).text(); $(this).text($(this).data('replacementText')); $(this).data('replacementText', tempText); });
   //   }
   // });
-
-  $(".slider").each(function () {
-    var handle = $(this).children("#linear_scale_handle");
-    $(this).slider({
-      value: $(this).prev("input.linear_scale").val() || 5,
-      min: 0,
-      max: 10,
-      step: 1,
-      range: "min",
-      create: function() {
-        var value = $(this).slider("value");
-        handle.text(value);
-        $(this).prev("input.linear_scale").val(value);
-      },
-      slide: function(event, ui) {
-        var value = ui.value;
-        handle.text(value);
-        $(this).prev("input.linear_scale").val(value);
-      }
-    });
-  });
-
+  
 });

@@ -23,9 +23,14 @@
           <% @answer.responses.by_question(question.id).each_with_index do |response, index| %>
             <div class="form-group">
               <% if response.other_option_response? %>
-                <%= text_area_tag nil, "Outro: #{response.text}", class: "form-control", disabled: true %>
+                <%= text_area_tag nil, "Outro: #{response.response}", class: "form-control", disabled: true %>
+              <% elsif response.linear_scale_response? %>
+                <%= hidden_field_tag nil, response.response, class: "form-control linear_scale", readonly: true %>
+                <div class="slider slider-disabled">
+                  <div id="linear_scale_handle" class="ui-slider-handle"></div>
+                </div>
               <% else %>
-              <%= text_area_tag nil, "#{response.text}", class: "form-control", disabled: true %>
+                <%= text_area_tag nil, "#{response.response}", class: "form-control", disabled: true %>
               <% end %>
             </div>
           <% end %>

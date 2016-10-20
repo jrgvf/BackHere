@@ -5,38 +5,35 @@
 
   tenant(:account)
 
-  field :type,        type: Symbol
-  field :text,        type: String
-  field :option_id,   type: BSON::ObjectId
-
   belongs_to :answer, class_name: "SurveyAnswer" ,inverse_of: :response
-
   belongs_to :question, inverse_of: nil
 
-  validates_presence_of :answer, :question, allow_blank: false
-  validates_presence_of :option_id, allow_blank: false, if: :require_option?
-  validates_presence_of :text
+  validates_presence_of :answer_id, :question_id, allow_blank: false
 
   scope :by_question, -> (question_id) { where(question_id: question_id) }
 
-  def option
-    self.question.options.find_by(original_id: self.option_id)
+  def self.type
+    raise NotImplementedError
   end
 
-  def require_option?
-    option_response?
+  def self.same_type?(type)
+    self.type == type
   end
 
   def option_response?
-    self[:type] == :option
+    false
   end
 
   def text_response?
-    self[:type] == :text
+    false
   end
 
   def other_option_response?
-    self[:type] == :other_option
+    false
+  end
+
+  def linear_scale_response?
+    false
   end
 
 end

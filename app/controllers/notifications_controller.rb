@@ -27,8 +27,8 @@ class NotificationsController < BackHereController
           answer[:option].each do |option_answer|
             if option_answer == "other_option"
               type = :other_option
-              text = answer[type]
-              build_response(question, type, text)
+              response = answer[type]
+              build_response(question, type, response)
             else
               type = :option
               option = question.options.find_by(original_id: option_answer)
@@ -36,9 +36,10 @@ class NotificationsController < BackHereController
             end
           end
         else
-          type = :text
-          text = answer[type]
-          build_response(question, type, text)
+          type = :linear_scale if answer[:linear_scale].present?
+          type ||= :text
+          response = answer[type]
+          build_response(question, type, response)
         end
       end
 
@@ -72,15 +73,17 @@ class NotificationsController < BackHereController
     end
 
     def answer(values)
-      values.permit(:question_id, :text, :other_option, option:[])
+      values.permit(:question_id, :text, :other_option, :linear_scale, option:[])
     end
 
     def question(values)
       Question.find(values["question_id"])
     end
 
-    def build_response(question, type, text, option_id = nil)
-      @answer.responses.build(question: question, type: type, text: text, option_id: option_id)
+    def build_response(question, type, response, option_id = nil)
+      response_params = { question_id: question.id, response: response }
+      response_params.merge!({option_id: option_id}) unless option_id.nil?
+      QuestionResponseFactory.build(@answer, type, response_params)
     end
 
     def layout_by_action
