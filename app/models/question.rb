@@ -17,6 +17,7 @@
   accepts_nested_attributes_for :tags, reject_if: :all_blank, allow_destroy: true
 
   has_many :ordenators, dependent: :destroy
+  has_one :kpi, dependent: :destroy
 
   validates_presence_of :text, allow_blank: false
   validates_inclusion_of :type, in: :type_values

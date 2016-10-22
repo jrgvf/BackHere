@@ -1,0 +1,42 @@
+<% provide(:title, 'KPIs') %>
+<% provide(:header, 'KPIs') %>
+<% provide(:description, 'Lista de KPIs.') %>
+<% provide(:levels, 'Pós-Venda, KPIs') %>
+
+<div class="box box-danger">
+  <div class="box-header">
+    <h3 class="box-title">Lista de KPIs (<%= @kpis.count %>)</h3>
+    <%= link_to fa_icon("plus", text: content_tag(:span, 'Criar KPI')), new_kpi_path, class: "btn btn-primary btn-flat right" %>
+  </div><!-- /.box-header -->
+  <div class="box-body table-responsive platform-table">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Pergunta</th>
+          <th>Nota de qualificação</th>
+          <th>Nota de detração</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @kpis.each do |kpi| %>
+        <tr>
+          <td><%= kpi.question.text %></td>
+          <td><%= kpi.qualifies %></td>
+          <td><%= kpi.detracts %></td>
+          <td class="center">
+            <div class="btn-group dropup">
+              <button type="button" class="btn btn-primary btn-flat dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ações <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><%= link_to fa_icon("edit", text: "Editar"), edit_polymorphic_path(kpi) %></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div><!-- /.box-body -->
+</div><!-- /.box -->

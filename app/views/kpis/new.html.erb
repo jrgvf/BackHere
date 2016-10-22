@@ -1,0 +1,48 @@
+<% provide(:title, 'KPIs') %>
+<% provide(:header, 'KPIs') %>
+<% provide(:description, 'Criar KPI.') %>
+<% provide(:levels, 'Pós-Venda, KPIs, Criar') %>
+
+<div class="box box-danger"> <!-- add class collapsed-box for collapsed box-->
+  <div class="box-header with-border">
+    <h3 class="box-title">Criar KPI</h3>
+  </div><!-- box-header with-border -->
+
+  <div class="box-body">
+    <div class="col-sm-12">
+      <div class="col-sm-4 form-group">
+        <%= label_tag :question, "Pergunta" %>
+      </div><!-- col-sm-3 form-group -->
+      <div class="col-sm-3 form-group">
+        <%= label_tag :qualifies, "Nota de qualificação" %>
+      </div><!-- col-sm-3 form-group -->
+      <div class="col-sm-3 form-group">
+        <%= label_tag :detracts, "Nota de detração" %>
+      </div><!-- col-sm-3 form-group -->
+    </div><!-- col-sm-12 -->
+    <div class="col-sm-12">
+      <%= form_for(@kpi) do |f| %>
+        <div class="col-sm-4 form-group">
+          <%= f.collection_select(:question_id, @questions, :id, :text, {}, {class: "form-control select2", style: "width: 100%;"}) %>
+        </div><!-- col-sm-3 form-group -->
+        <div class="col-sm-3 form-group">
+          <%= f.select(:qualifies, @kpi.notes_enum, {}, { class: "form-control" }) %>
+        </div><!-- col-sm-3 form-group -->
+        <div class="col-sm-3 form-group">
+          <%= f.select(:detracts, @kpi.notes_enum, {}, { class: "form-control" }) %>
+        </div><!-- col-sm-3 form-group -->
+        <div class="col-sm-2 form-group">
+          <%= button_tag(class: "btn btn-labeled btn-primary") do %>
+            <%= content_tag(:span, class: "btn-label") do %>
+              <%= fa_icon("check") %>
+            <% end %>
+            Salvar
+          <% end %>
+        </div><!-- col-sm-2 form-group -->
+      <% end %>
+    </div><!-- col-sm-12 -->
+    <div class="box-footer">
+      <%= link_to fa_icon("reply", text: content_tag(:span, 'Voltar')), kpis_path, class: 'btn btn-primary' %>
+    </div>
+  </div><!-- box-body -->
+</div><!-- box box-primary -->

@@ -41,6 +41,9 @@ Rails.application.routes.draw do
       get 'filter', to: 'questions#filter'
     end
   end
+
+  resources :kpis, except: [:show, :destroy]
+
   resources :surveys, except: [:show] do
     get 'preview'
   end
